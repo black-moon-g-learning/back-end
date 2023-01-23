@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use ForeignKeyGenerate;
     /**
      * Run the migrations.
      *
@@ -13,13 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+        Schema::create('answers', function (Blueprint $table) {
+            $table->increments('id');
+            $table->text('content');
+            $this->createImageColumn($table);
+            $table->integer('question_id')->unsigned();
+            $table->boolean('is_correct');
+
+            $this->createForeignKey($table,'question_id','questions');
+
             $table->timestamps();
         });
     }
@@ -31,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('answers');
     }
 };
