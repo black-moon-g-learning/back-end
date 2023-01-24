@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    use ForeignKeyGenerate;
     /**
      * Run the migrations.
      *
@@ -17,6 +18,8 @@ return new class extends Migration
             $table->tinyIncrements('id');
             $table->string('name');
             $table->text('description')->nullable();
+
+            $this->createImageColumn($table);
 
             $table->timestamps();
         });

@@ -17,9 +17,10 @@ return new class extends Migration
         Schema::create('answers', function (Blueprint $table) {
             $table->increments('id');
             $table->text('content');
-            $this->createImageColumn($table);
             $table->integer('question_id')->unsigned();
             $table->boolean('is_correct');
+
+            $this->createImageColumn($table);
 
             $this->createForeignKey($table,'question_id','questions');
 
