@@ -18,7 +18,7 @@ class ContinentFactory extends Factory
     {
         return [
             'name'=>$this->faker->name(),
-            'description'=>$this->faker->paragraphs(2),
+            'description'=>$this->faker->paragraphs(2,true),
             'image'=>$this->faker->imageUrl('640','480','animal',true),
             ];
     }

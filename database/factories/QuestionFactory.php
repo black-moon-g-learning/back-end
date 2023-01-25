@@ -21,7 +21,7 @@ class QuestionFactory extends Factory
         $countryIds = $this->getCountryIds();
         $videoIds = $this->getVideosId();
         $typeIds = $this->getArrayIds('types');
-        $levelIds = $this->getArrayIds('levels');
+        $levelIds = $this->getArrayIds('game_levels');
 
         return [
             'content' => $this->faker->sentence(rand(10, 40)),

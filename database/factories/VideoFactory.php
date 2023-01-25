@@ -19,11 +19,11 @@ class VideoFactory extends Factory
     public function definition()
     {
         $countryTopicIds = DB::table('countries_topics')->pluck('id');
-        $userIds = DB::table('users')->where('role_id', '=', 2);
+        $userIds = DB::table('users')->where('role_id', '=', 2)->pluck('id');
 
         return [
             'name' => $this->faker->name(),
-            'description' => $this->faker->paragraphs(2),
+            'description' => $this->faker->paragraphs(2,true),
             'country_topic_id' => $this->faker->randomElement($countryTopicIds),
             'url' => $this->faker->url(),
             'owner_id' => $this->faker->randomElement($userIds)

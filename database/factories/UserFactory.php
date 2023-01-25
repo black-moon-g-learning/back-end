@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 class UserFactory extends Factory
 {
     use GeneralFactory;
+
     /**
      * Define the model's default state.
      *
@@ -20,8 +21,8 @@ class UserFactory extends Factory
     public function definition()
     {
         $genders = ['MALE', 'FEMALE', 'OTHER'];
-        $characterId=DB::table('characters')->inRandomOrder()->first()->id;
-        $targetId=DB::table('targets')->inRandomOrder()->first()->id;
+        $characterId = DB::table('characters')->inRandomOrder()->first()->id;
+        $targetId = DB::table('targets')->inRandomOrder()->first()->id;
 
         return [
             'username' => fake()->name(),
@@ -32,13 +33,14 @@ class UserFactory extends Factory
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'phone' => '091754' . $this->faker->numberBetween(100, 999),
-            'age' => $genders[rand(0, 2)],
-            'country_id'=>$this->getCountryId(),
-            'character_id'=>$characterId,
-            'target_id'=>$targetId,
-            'role_id'=>rand(1,3),
-            'provider_id'=>2,
-            'token'=>Str::random(20),
+            'age' => rand(1, 99),
+            'gender' => $genders[rand(0, 2)],
+            'country_id' => $this->getCountryId(),
+            'character_id' => $characterId,
+            'target_id' => $targetId,
+            'role_id' => rand(1, 3),
+            'provider_id' => 2,
+            'token' => Str::random(20),
             'image' => $this->faker->imageUrl('640', '480', 'animal', true),
         ];
     }

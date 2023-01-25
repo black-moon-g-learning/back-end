@@ -21,7 +21,7 @@ class CountryFactory extends Factory
 
         return [
             'name'=>$this->faker->country(),
-            'description'=>$this->faker->paragraphs(2),
+            'description'=>$this->faker->paragraphs(2,true),
             'continent_id'=>$this->faker->randomElement($continentIDs)
         ];
     }
