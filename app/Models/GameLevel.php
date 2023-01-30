@@ -7,14 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class GameLevel extends Model
 {
-    use HasFactory;
+        use HasFactory;
 
-    protected $table='game_levels';
-    /**
-     * @var string[]
-     */
-    protected $fillable = [
-        'name',
-        'description'
-    ];
+        protected $table = 'game_levels';
+        /**
+         * @var string[]
+         */
+        protected $fillable = [
+                'name',
+                'description',
+                'image'
+        ];
 }

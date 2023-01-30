@@ -9,7 +9,7 @@ class UserPayment extends Model
 {
     use HasFactory;
 
-    protected $table='users_payment';
+    protected $table = 'users_payment';
 
     /**
      * @var string[]
