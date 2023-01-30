@@ -14,11 +14,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('topics', function (Blueprint $table) {
+        Schema::create('users_play_games', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->text('description')->nullable();
-            $this->createImageColumn($table);
+            $table->integer('user_id')->unsigned();
+            $table->integer('country_id')->unsigned();
+            $table->double('percent')->nullable();
+
+            $this->createForeignKey($table,'user_id','users');
+            $this->createForeignKey($table,'country_id','countries');
+
             $table->timestamps();
         });
     }
@@ -30,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topics');
+        Schema::dropIfExists('users_play_games');
     }
 };
