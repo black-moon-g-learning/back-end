@@ -20,8 +20,6 @@ return new class extends Migration
             $table->text('description')->nullable();
             $this->createImageColumn($table);
 
-            $this->createImageColumn($table);
-
             $table->timestamps();
         });
     }
