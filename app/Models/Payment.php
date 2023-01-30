@@ -17,5 +17,4 @@ class Payment extends Model
         'token',
         'secret_key'
     ];
-
 }

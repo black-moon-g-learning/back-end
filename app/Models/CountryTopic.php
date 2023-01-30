@@ -9,7 +9,7 @@ class CountryTopic extends Model
 {
     use HasFactory;
 
-    protected $table='countries_topics';
+    protected $table = 'countries_topics';
 
     /**
      * @var string[]
