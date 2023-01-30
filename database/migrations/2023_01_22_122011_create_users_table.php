@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->enum('gender', ['MALE', 'FEMALE', 'OTHER'])->nullable();
             $table->integer('country_id')->unsigned();
             $table->integer('character_id')->unsigned();
-            $table->integer('goal_id')->unsigned();
+            $table->integer('target_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->tinyInteger('provider_id')->unsigned();
             $table->string('token')->nullable();
