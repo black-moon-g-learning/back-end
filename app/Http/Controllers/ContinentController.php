@@ -36,9 +36,8 @@ class ContinentController extends Controller
     public function getCountries(int $id)
     {
         $countries = $this->continentRepo->getCountries($id);
-        $response = collect(CountryResource::collection($countries));
-
-        return $this->responseSuccessWithData($response->toArray(), 200);
+        
+        return $this->responseSuccessWithData($countries, 200);
     }
 
 }

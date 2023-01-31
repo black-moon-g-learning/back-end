@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Continent;
 
+use App\Http\Resources\CountryResource;
 use App\Models\Continent;
 use App\Repositories\BaseRepository;
 
@@ -19,6 +20,25 @@ class ContinentRepository extends BaseRepository implements IContinentRepository
     {
         $continent = $this->model->find($id);
         $countries = $continent->countries;
-        return  $countries;
+
+        $popularCountries = [];
+        $otherCountries = [];
+        $response = [];
+
+        foreach ($countries as $country) {
+
+            $rank = $country->place ?? 0;
+
+            if ($rank > 5) {
+                array_push($popularCountries, $country);
+            } else {
+                array_push($otherCountries, $country);
+            }
+        }
+
+        $response['popular'] = collect(CountryResource::collection($popularCountries))->toArray();
+        $response['countries'] = collect(CountryResource::collection($otherCountries))->toArray();
+
+        return $response;
     }
 }
