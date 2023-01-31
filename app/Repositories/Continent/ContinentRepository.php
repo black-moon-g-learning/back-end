@@ -15,5 +15,10 @@ class ContinentRepository extends BaseRepository implements IContinentRepository
         return Continent::class;
     }
 
-    
+    public function getCountries(int $id)
+    {
+        $continent = $this->model->find($id);
+        $countries = $continent->countries;
+        return  $countries;
+    }
 }
