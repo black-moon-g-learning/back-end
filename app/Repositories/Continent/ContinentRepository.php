@@ -19,25 +19,22 @@ class ContinentRepository extends BaseRepository implements IContinentRepository
     public function getCountries(int $id)
     {
         $continent = $this->model->find($id);
-        $countries = $continent->countries;
+        $countries = $continent->countries->toArray();
 
-        $popularCountries = [];
-        $otherCountries = [];
-        $response = [];
+        usort($countries, function ($first, $second) {
+            return $first['place']  > $second['place'];
+        });
 
-        foreach ($countries as $country) {
+        $popularCountries = array_slice($countries, 0, 5);
+        $otherCountries = array_slice($countries, 5);
 
-            $rank = $country->place ?? 0;
+        $response['popular'] = collect(
+            CountryResource::collection(collect($popularCountries))
+        )->toArray();
 
-            if ($rank > 5) {
-                array_push($popularCountries, $country);
-            } else {
-                array_push($otherCountries, $country);
-            }
-        }
-
-        $response['popular'] = collect(CountryResource::collection($popularCountries))->toArray();
-        $response['countries'] = collect(CountryResource::collection($otherCountries))->toArray();
+        $response['countries'] = collect(
+            CountryResource::collection(collect($otherCountries))
+        )->toArray();;
 
         return $response;
     }
