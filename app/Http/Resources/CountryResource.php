@@ -19,6 +19,7 @@ class CountryResource extends JsonResource
             'name' => $this['name'],
             'description' => $this['description'],
             'place' => $this['place'],
+            'image' => $this['image']
         ];
     }
 }
