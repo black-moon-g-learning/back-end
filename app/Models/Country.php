@@ -18,35 +18,39 @@ class Country extends Model
         'name',
         'description',
         'continent_id',
-        'place'
+        'place',
+        'ensign'
     ];
 
     /**
      * @return BelongsTo
      */
-    public function continent():BelongsTo{
+    public function continent(): BelongsTo
+    {
         return $this->belongsTo(Continent::class);
     }
 
     /**
      * @return HasMany
      */
-    public function countryTopics():HasMany{
+    public function countryTopics(): HasMany
+    {
         return $this->hasMany(CountryTopic::class);
     }
 
     /**
      * @return BelongsTo
      */
-    public function users():BelongsTo{
+    public function users(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
     /**
      * @return HasMany
      */
-    public function questions():HasMany{
+    public function questions(): HasMany
+    {
         return $this->hasMany(Question::class);
     }
-
 }

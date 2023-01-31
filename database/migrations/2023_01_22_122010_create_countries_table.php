@@ -21,10 +21,10 @@ return new class extends Migration
             $table->integer('continent_id')->unsigned();
             $table->integer('place')->nullable();
 
-            $this->createForeignKey($table,'continent_id','continents');
+            $this->createImageColumn($table);
+            $this->createForeignKey($table, 'continent_id', 'continents');
 
             $table->timestamps();
-
         });
     }
 
