@@ -17,12 +17,13 @@ class CountryFactory extends Factory
      */
     public function definition()
     {
-        $continentIDs=DB::table('continents')->pluck('id');
+        $continentIDs = DB::table('continents')->pluck('id');
 
         return [
-            'name'=>$this->faker->country(),
-            'description'=>$this->faker->paragraphs(2,true),
-            'continent_id'=>$this->faker->randomElement($continentIDs)
+            'name' => $this->faker->country(),
+            'description' => $this->faker->paragraphs(2, true),
+            'continent_id' => $this->faker->randomElement($continentIDs),
+            'place' => $this->faker->unique()->numberBetween(1, 195)
         ];
     }
 }

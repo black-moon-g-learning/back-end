@@ -17,9 +17,9 @@ class ContinentFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->name(),
-            'description'=>$this->faker->paragraphs(2,true),
-            'image'=>$this->faker->imageUrl('640','480','animal',true),
-            ];
+            'name' => $this->faker->firstName(),
+            'description' => $this->faker->paragraphs(2, true),
+            'image' => $this->faker->imageUrl('640', '480', 'animal', true),
+        ];
     }
 }
