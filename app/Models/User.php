@@ -70,42 +70,56 @@ class User extends Authenticatable
     /**
      * @return HasOne
      */
-    public function service():HasOne{
+    public function service(): HasOne
+    {
         return  $this->hasOne(Service::class);
     }
 
     /**
      * @return HasOne
      */
-    public function goal():HasOne{
+    public function goal(): HasOne
+    {
         return $this->hasOne(Goal::class);
     }
 
     /**
      * @return HasOne
      */
-    public function character():HasOne{
+    public function character(): HasOne
+    {
         return $this->hasOne(Character::class);
     }
 
     /**
      * @return HasOne
      */
-    public function country():HasOne{
+    public function country(): HasOne
+    {
         return $this->hasOne(Country::class);
     }
 
     /**
      * @return HasMany
      */
-    public function playGame():HasMany{
+    public function playGame(): HasMany
+    {
         return $this->hasMany(UserPlayGame::class);
     }
 
     /**
      * @return HasOne
      */
-    public function payment():HasOne{
+    public function payment(): HasOne
+    {
         return $this->hasOne(UserPayment::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function video(): HasMany
+    {
+        return $this->hasMany(Video::class);
     }
 }

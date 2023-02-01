@@ -9,7 +9,8 @@ class UserPlayGame extends Model
 {
     use HasFactory;
 
-    protected $table= 'users_play_games';
+    protected $table = 'users_play_games';
+
     /**
      * @var string[]
      */
