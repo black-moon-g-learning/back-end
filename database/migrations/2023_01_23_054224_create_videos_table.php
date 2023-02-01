@@ -19,11 +19,12 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->unsignedInteger('country_topic_id');
-            $table->string('url',500)->nullable();
+            $table->string('url', 500)->nullable();
             $table->unsignedInteger('owner_id');
-
-            $this->createForeignKey($table,'country_topic_id','countries_topics');
-            $this->createForeignKey($table,'owner_id','users');
+            $table->integer('time')->unsigned();
+            
+            $this->createForeignKey($table, 'country_topic_id', 'countries_topics');
+            $this->createForeignKey($table, 'owner_id', 'users');
 
             $table->timestamps();
         });

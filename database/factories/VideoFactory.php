@@ -23,10 +23,11 @@ class VideoFactory extends Factory
 
         return [
             'name' => $this->faker->name(),
-            'description' => $this->faker->paragraphs(2,true),
+            'description' => $this->faker->paragraphs(2, true),
             'country_topic_id' => $this->faker->randomElement($countryTopicIds),
             'url' => $this->faker->url(),
-            'owner_id' => $this->faker->randomElement($userIds)
+            'owner_id' => $this->faker->randomElement($userIds),
+            'time' => rand(5, 300)
         ];
     }
 }
