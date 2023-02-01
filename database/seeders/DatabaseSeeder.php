@@ -37,20 +37,20 @@ class DatabaseSeeder extends Seeder
         Country::factory(100)->create();
 
         Role::factory()->create([
-            'name'=>'admin',
+            'name' => 'admin',
         ]);
         Role::factory()->create([
-            'name'=>'contributor',
+            'name' => 'contributor',
         ]);
         Role::factory()->create([
-            'name'=>'user',
+            'name' => 'user',
         ]);
 
         User::factory(100)->create();
 
         Topic::factory(30)->create();
-        CountryTopic::factory(134)->create();
-        Video::factory(50)->create();
+        CountryTopic::factory(200)->create();
+        Video::factory(300)->create();
         Type::factory(6)->create();
         GameLevel::factory(3)->create();
         Question::factory(67)->create();
