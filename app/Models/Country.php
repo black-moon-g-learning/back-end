@@ -18,7 +18,8 @@ class Country extends Model
         'name',
         'description',
         'continent_id',
-        'place'
+        'place',
+        'ensign'
     ];
 
     /**

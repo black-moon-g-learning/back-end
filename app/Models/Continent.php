@@ -16,14 +16,16 @@ class Continent extends Model
     protected $fillable = [
         'name',
         'description',
-        'image'
+        'image',
+        'quantity_countries',
+        'quantity_regions'
     ];
 
     /**
      * @return HasMany
      */
-    public function countries():HasMany{
+    public function countries(): HasMany
+    {
         return $this->hasMany(Country::class);
     }
-
 }
