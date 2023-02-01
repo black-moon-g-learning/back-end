@@ -49,3 +49,10 @@ if (!function_exists('addSIfMany')) {
         return $number . ' ' . $string . 's' .  ' ago';
     }
 }
+
+if (!function_exists('convertTimeFromDB')) {
+    function convertTimeFromDB(int $time): string
+    {
+        return (int)($time / 60) . ' : ' . (int)($time % 60);
+    }
+}
