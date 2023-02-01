@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Repositories\Continent;
+namespace App\Repositories\Country;
 
 use App\Repositories\RepositoryInterface;
 
-interface IContinentRepository extends RepositoryInterface
+interface ICountryRepository extends RepositoryInterface
 {
     public function getCountries(int $continentId);
 }

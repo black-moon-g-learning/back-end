@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\ContinentResource;
+use App\Http\Resources\CountryResource;
 use App\Repositories\Continent\IContinentRepository;
 use App\Utils\Response;
 
@@ -23,12 +24,19 @@ class ContinentController extends Controller
     /**
      * @return mixed
      */
-    public function index(){
+    public function index()
+    {
 
         $continents = $this->continentRepo->getAll();
         $response = collect(ContinentResource::collection($continents));
 
-        return $this->responseSuccessWithData($response->toArray(),200);
+        return $this->responseSuccessWithData($response->toArray(), 200);
     }
 
+    public function getCountries(int $id)
+    {
+        $countries = $this->continentRepo->getCountries($id);
+
+        return $this->responseSuccessWithData($countries, 200);
+    }
 }
