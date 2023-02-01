@@ -22,6 +22,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Topic\ITopicRepository::class,
             \App\Repositories\Topic\TopicRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\Video\IVideoRepository::class,
+            \App\Repositories\Video\VideoRepository::class
+        );
     }
 
     /**
