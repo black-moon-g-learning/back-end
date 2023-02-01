@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContinentController;
+use App\Http\Controllers\TopicController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/continents', [ContinentController::class, 'index']);
 Route::get('/continent/{id}', [ContinentController::class, 'getCountries']);
+Route::get('/country/{id}/topics', [TopicController::class, 'index']);

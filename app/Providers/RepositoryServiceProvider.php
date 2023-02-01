@@ -15,7 +15,13 @@ class RepositoryServiceProvider extends ServiceProvider
     {
         $this->app->singleton(
             \App\Repositories\Continent\IContinentRepository::class,
-            \App\Repositories\Continent\ContinentRepository::class);
+            \App\Repositories\Continent\ContinentRepository::class
+        );
+
+        $this->app->singleton(
+            \App\Repositories\Topic\ITopicRepository::class,
+            \App\Repositories\Topic\TopicRepository::class
+        );
     }
 
     /**
