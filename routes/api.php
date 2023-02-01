@@ -21,5 +21,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/continents', [ContinentController::class, 'index']);
-Route::get('/continent/{id}', [ContinentController::class, 'getCountries']);
-Route::get('/country/{id}/topics', [TopicController::class, 'index']);
+
+Route::middleware(['idInteger'])->group(function () {
+    Route::get('/continent/{id}', [ContinentController::class, 'getCountries']);
+    Route::get('/country/{id}/topics', [TopicController::class, 'index']);
+});

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TopicResource;
 use App\Repositories\Topic\ITopicRepository;
+use App\Utils\Response;
 use Illuminate\Http\Request;
 
 
 class TopicController extends Controller
 {
+
+    use Response;
 
     protected $topicRepo;
 
@@ -18,6 +22,12 @@ class TopicController extends Controller
 
     public function index(?int $countryId)
     {
-        return $this->topicRepo->getTopics($countryId);
+        $response = collect(
+            TopicResource::collection(
+                $this->topicRepo->getTopics($countryId)
+            )
+        );
+
+        return $this->responseSuccessWithData($response->toArray());
     }
 }
