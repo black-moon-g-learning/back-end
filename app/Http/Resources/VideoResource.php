@@ -21,7 +21,7 @@ class VideoResource extends JsonResource
             'url' => $this->url,
             'author' => getUsername($this->user),
             'publish' => getTime($this->created_at),
-            'time' => $this->time
+            'time' => convertTimeFromDB($this->time)
         ];
     }
 }
