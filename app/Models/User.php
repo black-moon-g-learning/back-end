@@ -114,4 +114,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserPayment::class);
     }
+
+    /**
+     * @return HasMany
+     */
+    public function video(): HasMany
+    {
+        return $this->hasMany(Video::class);
+    }
 }

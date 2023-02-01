@@ -18,4 +18,9 @@ class Video extends Model
         'url',
         'owner_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
 }
