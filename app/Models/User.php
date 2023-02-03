@@ -64,7 +64,7 @@ class User extends Authenticatable
      */
     public function role(): HasOne
     {
-        return $this->hasOne(Role::class);
+        return $this->hasOne(Role::class, 'id');
     }
 
     /**
@@ -72,15 +72,15 @@ class User extends Authenticatable
      */
     public function service(): HasOne
     {
-        return  $this->hasOne(Service::class);
+        return  $this->hasOne(Service::class, 'id');
     }
 
     /**
      * @return HasOne
      */
-    public function goal(): HasOne
+    public function target(): HasOne
     {
-        return $this->hasOne(Goal::class);
+        return $this->hasOne(Target::class, 'id');
     }
 
     /**
@@ -88,7 +88,7 @@ class User extends Authenticatable
      */
     public function character(): HasOne
     {
-        return $this->hasOne(Character::class);
+        return $this->hasOne(Character::class, 'id');
     }
 
     /**
@@ -96,7 +96,7 @@ class User extends Authenticatable
      */
     public function country(): HasOne
     {
-        return $this->hasOne(Country::class);
+        return $this->hasOne(Country::class, 'id');
     }
 
     /**
@@ -104,7 +104,7 @@ class User extends Authenticatable
      */
     public function playGame(): HasMany
     {
-        return $this->hasMany(UserPlayGame::class);
+        return $this->hasMany(UserPlayGame::class, 'id');
     }
 
     /**
@@ -112,7 +112,7 @@ class User extends Authenticatable
      */
     public function payment(): HasOne
     {
-        return $this->hasOne(UserPayment::class);
+        return $this->hasOne(UserPayment::class, 'id');
     }
 
     /**
@@ -120,6 +120,6 @@ class User extends Authenticatable
      */
     public function video(): HasMany
     {
-        return $this->hasMany(Video::class);
+        return $this->hasMany(Video::class, 'id');
     }
 }
