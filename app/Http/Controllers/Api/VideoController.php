@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Resources\VideoResource;
+use App\Http\Controllers\Controller;
 use App\Repositories\Video\IVideoRepository;
 use App\Utils\Response;
 use Illuminate\Http\Request;
@@ -25,7 +26,7 @@ class VideoController extends Controller
                 $this->videoRepo->getVideos($countryTopicId)
             )
         )->toArray();
-        
+
         return $this->responseSuccessWithData($response);
     }
 }
