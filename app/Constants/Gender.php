@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Constants;
+
 final class Gender
 {
     const MALE = 'MALE';

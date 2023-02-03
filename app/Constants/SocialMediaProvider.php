@@ -1,4 +1,7 @@
 <?php
+
+namespace App\Constants;
+
 final class SocialMediaProvider
 {
     const GOOGLE = 1;
