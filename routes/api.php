@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ContinentController;
-use App\Http\Controllers\TopicController;
-use App\Http\Controllers\VideoController;
+use App\Http\Controllers\Api\ContinentController;
+use App\Http\Controllers\Api\TopicController;
+use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('/continents', [ContinentController::class, 'index']);
 
 Route::middleware(['idInteger'])->group(function () {
-    Route::get('/continent/{id}', [ContinentController::class, 'getCountries']);
-    Route::get('/country/{id}/topics', [TopicController::class, 'index']);
-    Route::get('country-topic/{id}/videos', [VideoController::class, 'index']);
+    Route::get('/continents/{id}', [ContinentController::class, 'getCountries']);
+    Route::get('/countries/{id}/topics', [TopicController::class, 'index']);
+    Route::get('countries-topics/{id}/videos', [VideoController::class, 'index']);
 });
