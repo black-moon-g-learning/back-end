@@ -6,7 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
 
     use ForeignKeyGenerate;
     /**
@@ -26,24 +27,23 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->integer('age')->nullable();
             $table->enum('gender', ['MALE', 'FEMALE', 'OTHER'])->nullable();
-            $table->integer('country_id')->unsigned();
-            $table->integer('character_id')->unsigned();
-            $table->integer('target_id')->unsigned();
-            $table->integer('role_id')->unsigned();
-            $table->tinyInteger('provider_id')->unsigned();
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('character_id')->unsigned()->nullable();
+            $table->integer('target_id')->unsigned()->nullable();
+            $table->integer('role_id')->unsigned()->nullable();
+            $table->tinyInteger('provider_id')->unsigned()->nullable();
             $table->string('token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
 
             $this->createImageColumn($table);
 
-            $this->createForeignKey($table,'country_id','countries');
-            $this->createForeignKey($table,'character_id','characters');
-            $this->createForeignKey($table,'role_id','roles');
-            $this->createForeignKey($table,'target_id','targets');
+            $this->createForeignKey($table, 'country_id', 'countries');
+            $this->createForeignKey($table, 'character_id', 'characters');
+            $this->createForeignKey($table, 'role_id', 'roles');
+            $this->createForeignKey($table, 'target_id', 'targets');
 
             $table->rememberToken();
             $table->timestamps();
-
         });
     }
 
