@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\TopicController;
+use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,5 @@ Route::middleware(['idInteger'])->group(function () {
     Route::get('/countries/{id}/topics', [TopicController::class, 'index']);
     Route::get('countries-topics/{id}/videos', [VideoController::class, 'index']);
 });
+
+Route::get('/profile', [UserController::class, 'getProfile']);
