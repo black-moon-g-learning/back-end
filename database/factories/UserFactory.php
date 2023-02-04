@@ -40,7 +40,6 @@ class UserFactory extends Factory
             'target_id' => $targetId,
             'role_id' => rand(1, 3),
             'provider_id' => 2,
-            'token' => Str::random(20),
             'image' => $this->faker->imageUrl('640', '480', 'animal', true),
         ];
     }
@@ -52,7 +51,7 @@ class UserFactory extends Factory
      */
     public function unverified()
     {
-        return $this->state(fn(array $attributes) => [
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
