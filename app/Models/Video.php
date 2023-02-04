@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Utils\FullTextSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    use HasFactory;
+    use HasFactory, FullTextSearch;
     /**
      * @var string[]
      */
@@ -17,6 +18,13 @@ class Video extends Model
         'country_topic_id',
         'url',
         'owner_id'
+    ];
+
+    /**
+     * The columns of the full text index
+     */
+    protected $searchable = [
+        'name'
     ];
 
     public function user()
