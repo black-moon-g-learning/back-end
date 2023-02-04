@@ -21,7 +21,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('phone')->nullable();
@@ -32,7 +32,6 @@ return new class extends Migration
             $table->integer('target_id')->unsigned()->nullable();
             $table->integer('role_id')->unsigned()->nullable();
             $table->tinyInteger('provider_id')->unsigned()->nullable();
-            $table->string('token')->nullable();
             $table->timestamp('email_verified_at')->nullable();
 
             $this->createImageColumn($table);
