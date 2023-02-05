@@ -2,30 +2,30 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Resources\VideoResource;
 use App\Http\Controllers\Controller;
-use App\Repositories\Video\IVideoRepository;
-use App\Utils\Response;
+use App\Services\Video\IVideoService;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
-    use Response;
+    protected IVideoService $videoService;
 
-    protected $videoRepo;
-
-    public function __construct(IVideoRepository $videoRepo)
+    public function __construct(IVideoService $videoService)
     {
-        $this->videoRepo = $videoRepo;
+        $this->videoService = $videoService;
     }
 
-    public function index(int $countryTopicId)
+    public function index(int $countryTopicId, Request $request)
     {
-        $response = collect(
-            VideoResource::collection(
-                $this->videoRepo->getVideos($countryTopicId)
-            )
-        )->toArray();
+        if ($request->has('s')) {
+
+            $search = $request->input('s');
+            $response =  $this->videoService->search($countryTopicId, $search);
+
+            return $this->responseSuccessWithData($response);
+        }
+
+        $response = $this->videoService->index($countryTopicId);
 
         return $this->responseSuccessWithData($response);
     }
