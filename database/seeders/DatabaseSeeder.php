@@ -19,6 +19,7 @@ use App\Models\User;
 use App\Models\UserPlayGame;
 use App\Models\Video;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,8 +34,32 @@ class DatabaseSeeder extends Seeder
         Target::factory(10)->create();
 
         Service::factory(1)->create();
-        Continent::factory(5)->create();
-        Country::factory(100)->create();
+
+        $data = json_decode(Storage::disk('local')->get('data.json'));
+
+        $index = 1;
+
+        foreach ($data as $continent) {
+            Continent::factory()->create([
+                'name' => $continent->name,
+                'description' => fake()->paragraphs(2, true),
+                'image' => fake()->imageUrl('640', '480', 'animal', true),
+                'quantity_countries' => rand(2, 100),
+                'quantity_regions' => rand(1, 8)
+            ]);
+            foreach ($continent->countries as $country) {
+
+                Country::factory()->create([
+                    'name' => $country->name,
+                    'description' => fake()->paragraphs(2, true),
+                    'continent_id' => $index,
+                    'place' => rand(1, 196),
+                    'image' => $country->image
+                ]);
+            }
+            $index++;
+        }
+
 
         Role::factory()->create([
             'name' => 'admin',
