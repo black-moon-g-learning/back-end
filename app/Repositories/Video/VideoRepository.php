@@ -19,4 +19,13 @@ class VideoRepository extends BaseRepository implements IVideoRepository
             ->where('country_topic_id', '=', $countryTopicId)
             ->get();
     }
+
+    public function search(int $countryTopicId, string $search)
+    {
+        return $this
+            ->model
+            ->search($search)
+            ->where('country_topic_id', '=', $countryTopicId)
+            ->get();
+    }
 }
