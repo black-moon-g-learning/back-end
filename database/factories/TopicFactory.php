@@ -17,10 +17,9 @@ class TopicFactory extends Factory
     public function definition()
     {
         return [
-            //
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraphs(2,true),
-            'image' => $this->faker->imageUrl('640', '480', 'animal', true),
+            'image' => 'https://study.com/cimages/videopreview/sample_01012323_173984.jpg',
         ];
     }
 }

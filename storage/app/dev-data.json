@@ -1,0 +1,252 @@
+[
+    {
+        "name": "Asia",
+        "countries": [
+            {
+                "name": "Cambodia",
+                "image": "https:\/\/flagcdn.com\/w320\/kh.png"
+            },
+            {
+                "name": "China",
+                "image": "https:\/\/flagcdn.com\/w320\/cn.png"
+            },
+            {
+                "name": "Georgia",
+                "image": "https:\/\/flagcdn.com\/w320\/ge.png"
+            },
+            {
+                "name": "Hong Kong",
+                "image": "https:\/\/flagcdn.com\/w320\/hk.png"
+            },
+            {
+                "name": "India",
+                "image": "https:\/\/flagcdn.com\/w320\/in.png"
+            },
+            {
+                "name": "Indonesia",
+                "image": "https:\/\/flagcdn.com\/w320\/id.png"
+            },
+            {
+                "name": "Iran (Islamic Republic of)",
+                "image": "https:\/\/flagcdn.com\/w320\/ir.png"
+            },
+            {
+                "name": "Iraq",
+                "image": "https:\/\/flagcdn.com\/w320\/iq.png"
+            },
+            {
+                "name": "Israel",
+                "image": "https:\/\/flagcdn.com\/w320\/il.png"
+            },
+            {
+                "name": "Japan",
+                "image": "https:\/\/flagcdn.com\/w320\/jp.png"
+            },
+            {
+                "name": "Jordan",
+                "image": "https:\/\/flagcdn.com\/w320\/jo.png"
+            },
+            {
+                "name": "Myanmar",
+                "image": "https:\/\/flagcdn.com\/w320\/mm.png"
+            },
+            {
+                "name": "Nepal",
+                "image": "https:\/\/flagcdn.com\/w320\/np.png"
+            },
+            {
+                "name": "Korea (Democratic People's Republic of)",
+                "image": "https:\/\/flagcdn.com\/w320\/kp.png"
+            },
+            {
+                "name": "Oman",
+                "image": "https:\/\/flagcdn.com\/w320\/om.png"
+            },
+            {
+                "name": "Pakistan",
+                "image": "https:\/\/flagcdn.com\/w320\/pk.png"
+            },
+            {
+                "name": "Palestine, State of",
+                "image": "https:\/\/flagcdn.com\/w320\/ps.png"
+            },
+            {
+                "name": "Philippines",
+                "image": "https:\/\/flagcdn.com\/w320\/ph.png"
+            },
+            {
+                "name": "Qatar",
+                "image": "https:\/\/flagcdn.com\/w320\/qa.png"
+            },
+            {
+                "name": "Saudi Arabia",
+                "image": "https:\/\/flagcdn.com\/w320\/sa.png"
+            },
+            {
+                "name": "Singapore",
+                "image": "https:\/\/flagcdn.com\/w320\/sg.png"
+            },
+            {
+                "name": "Korea (Republic of)",
+                "image": "https:\/\/flagcdn.com\/w320\/kr.png"
+            },
+            {
+                "name": "Sri Lanka",
+                "image": "https:\/\/flagcdn.com\/w320\/lk.png"
+            },
+            {
+                "name": "Syrian Arab Republic",
+                "image": "https:\/\/flagcdn.com\/w320\/sy.png"
+            },
+            {
+                "name": "Taiwan",
+                "image": "https:\/\/flagcdn.com\/w320\/tw.png"
+            },
+            {
+                "name": "Tajikistan",
+                "image": "https:\/\/flagcdn.com\/w320\/tj.png"
+            },
+            {
+                "name": "Thailand",
+                "image": "https:\/\/flagcdn.com\/w320\/th.png"
+            },
+            {
+                "name": "Timor-Leste",
+                "image": "https:\/\/flagcdn.com\/w320\/tl.png"
+            },
+            {
+                "name": "Turkey",
+                "image": "https:\/\/flagcdn.com\/w320\/tr.png"
+            },
+            {
+                "name": "Turkmenistan",
+                "image": "https:\/\/flagcdn.com\/w320\/tm.png"
+            },
+            {
+                "name": "United Arab Emirates",
+                "image": "https:\/\/flagcdn.com\/w320\/ae.png"
+            },
+            {
+                "name": "Uzbekistan",
+                "image": "https:\/\/flagcdn.com\/w320\/uz.png"
+            },
+            {
+                "name": "Vietnam",
+                "image": "https:\/\/flagcdn.com\/w320\/vn.png"
+            },
+            {
+                "name": "Yemen",
+                "image": "https:\/\/flagcdn.com\/w320\/ye.png"
+            }
+        ]
+    },
+    {
+        "name": "Europe",
+        "countries": [
+            {
+                "name": "Denmark",
+                "image": "https:\/\/flagcdn.com\/w320\/dk.png"
+            },
+            {
+                "name": "Estonia",
+                "image": "https:\/\/flagcdn.com\/w320\/ee.png"
+            },
+            {
+                "name": "Faroe Islands",
+                "image": "https:\/\/flagcdn.com\/w320\/fo.png"
+            },
+            {
+                "name": "Finland",
+                "image": "https:\/\/flagcdn.com\/w320\/fi.png"
+            },
+            {
+                "name": "France",
+                "image": "https:\/\/flagcdn.com\/w320\/fr.png"
+            },
+            {
+                "name": "Germany",
+                "image": "https:\/\/flagcdn.com\/w320\/de.png"
+            },
+            {
+                "name": "Gibraltar",
+                "image": "https:\/\/flagcdn.com\/w320\/gi.png"
+            },
+            {
+                "name": "Greece",
+                "image": "https:\/\/flagcdn.com\/w320\/gr.png"
+            },
+            {
+                "name": "Guernsey",
+                "image": "https:\/\/flagcdn.com\/w320\/gg.png"
+            },
+            {
+                "name": "Vatican City",
+                "image": "https:\/\/flagcdn.com\/w320\/va.png"
+            },
+            {
+                "name": "Hungary",
+                "image": "https:\/\/flagcdn.com\/w320\/hu.png"
+            },
+            {
+                "name": "Iceland",
+                "image": "https:\/\/flagcdn.com\/w320\/is.png"
+            },
+            {
+                "name": "Ireland",
+                "image": "https:\/\/flagcdn.com\/w320\/ie.png"
+            },
+            {
+                "name": "Isle of Man",
+                "image": "https:\/\/flagcdn.com\/w320\/im.png"
+            },
+            {
+                "name": "Italy",
+                "image": "https:\/\/flagcdn.com\/w320\/it.png"
+            },
+            {
+                "name": "Jersey",
+                "image": "https:\/\/flagcdn.com\/w320\/je.png"
+            },
+            {
+                "name": "Latvia",
+                "image": "https:\/\/flagcdn.com\/w320\/lv.png"
+            },
+            {
+                "name": "Liechtenstein",
+                "image": "https:\/\/flagcdn.com\/w320\/li.png"
+            },
+            {
+                "name": "Lithuania",
+                "image": "https:\/\/flagcdn.com\/w320\/lt.png"
+            },
+            {
+                "name": "Luxembourg",
+                "image": "https:\/\/flagcdn.com\/w320\/lu.png"
+            },
+            {
+                "name": "North Macedonia",
+                "image": "https:\/\/flagcdn.com\/w320\/mk.png"
+            },
+            {
+                "name": "Malta",
+                "image": "https:\/\/flagcdn.com\/w320\/mt.png"
+            },
+            {
+                "name": "Moldova (Republic of)",
+                "image": "https:\/\/flagcdn.com\/w320\/md.png"
+            },
+            {
+                "name": "Monaco",
+                "image": "https:\/\/flagcdn.com\/w320\/mc.png"
+            },
+            {
+                "name": "Portugal",
+                "image": "https:\/\/flagcdn.com\/w320\/pt.png"
+            },
+            {
+                "name": "Republic of Kosovo",
+                "image": "https:\/\/flagcdn.com\/w320\/xk.png"
+            }
+        ]
+    }
+]
