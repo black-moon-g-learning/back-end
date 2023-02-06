@@ -23,7 +23,7 @@ class CountryFactory extends Factory
             'name' => $this->faker->country(),
             'description' => $this->faker->paragraphs(2, true),
             'continent_id' => $this->faker->randomElement($continentIDs),
-            'place' => $this->faker->unique()->numberBetween(1, 195),
+            'place' => $this->faker->numberBetween(1, 195),
             'image' => $this->faker->imageUrl('640', '480', 'country', true)
         ];
     }
