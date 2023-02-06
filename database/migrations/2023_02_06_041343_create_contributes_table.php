@@ -17,14 +17,16 @@ return new class extends Migration
     {
         Schema::create('contributes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('title', 500);
-            $table->text('description');
-            $table->text('image');
-            $table->text('video');
-            $table->integer('country_id')->unsigned();
+            $table->string('title', 500)->nullable();
+            $table->text('description')->nullable();
+            $table->text('image')->nullable();
+            $table->text('video')->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
+            $table->integer('owner_id')->unsigned()->nullable();
 
             $this->createForeignKey($table, 'country_id', 'countries');
-            
+            $this->createForeignKey($table, 'owner_id', 'users');
+
             $table->timestamps();
         });
     }
