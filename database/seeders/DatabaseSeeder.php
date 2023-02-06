@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use App\Models\Answer;
 use App\Models\Character;
 use App\Models\Continent;
+use App\Models\Contribute;
 use App\Models\Country;
 use App\Models\CountryTopic;
 use App\Models\GameLevel;
@@ -62,7 +63,7 @@ class DatabaseSeeder extends Seeder
 
 
         $data = ["Africa", "Oceania", "Americas", "Antarctic"];
-        
+
         foreach ($data as $continent) {
             Continent::factory()->create([
                 'name' => $continent,
@@ -108,5 +109,7 @@ class DatabaseSeeder extends Seeder
         Question::factory(67)->create();
         Answer::factory(140)->create();
         UserPlayGame::factory(131)->create();
+
+        Contribute::factory(200)->create();
     }
 }
