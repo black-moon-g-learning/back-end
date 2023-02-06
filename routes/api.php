@@ -39,3 +39,5 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 
 
 Route::get('/information', [InformationController::class, 'index']);
+
+Route::post('/information', [InformationController::class, 'create']);
