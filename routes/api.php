@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContinentController;
+use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VideoController;
@@ -35,3 +36,6 @@ Route::get('/profile', [UserController::class, 'getProfile']);
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
+
+
+Route::get('/information', [InformationController::class, 'index']);

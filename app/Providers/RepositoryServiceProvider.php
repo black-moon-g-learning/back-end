@@ -33,9 +33,9 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\User\UserRepository::class
         );
 
-        $this->app->bind(
-            \App\Services\Video\IVideoService::class,
-            \App\Services\Video\VideoService::class,
+        $this->app->singleton(
+            \App\Repositories\Information\IInformationRepository::class,
+            \App\Repositories\Information\InformationRepository::class
         );
     }
 
