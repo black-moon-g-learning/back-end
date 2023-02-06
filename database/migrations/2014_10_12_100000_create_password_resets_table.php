@@ -46,7 +46,7 @@ trait ForeignKeyGenerate
      * @param string $tableName
      * @return ForeignKeyDefinition
      */
-    public function createForeignKey(Blueprint $table, string $foreignKey, string $tableName,string $reference = 'id'): ForeignKeyDefinition
+    public function createForeignKey(Blueprint $table, string $foreignKey, string $tableName, string $reference = 'id'): ForeignKeyDefinition
     {
         return $table->foreign($foreignKey)
             ->references($reference)
@@ -61,6 +61,6 @@ trait ForeignKeyGenerate
      */
     public function createImageColumn(Blueprint $table): ColumnDefinition
     {
-        return $table->string('image',$this->urlLength)->nullable();
+        return $table->string('image', $this->urlLength)->nullable();
     }
 }

@@ -35,7 +35,7 @@ class DatabaseSeeder extends Seeder
 
         Service::factory(1)->create();
 
-        $data = json_decode(Storage::disk('local')->get('data.json'));
+        $data = json_decode(Storage::disk('local')->get('dev-data.json'));
 
         $index = 1;
 
@@ -61,6 +61,18 @@ class DatabaseSeeder extends Seeder
         }
 
 
+        $data = ["Africa", "Oceania", "Americas", "Antarctic"];
+        
+        foreach ($data as $continent) {
+            Continent::factory()->create([
+                'name' => $continent,
+                'description' => fake()->paragraphs(2, true),
+                'image' => fake()->imageUrl('640', '480', 'animal', true),
+                'quantity_countries' => rand(2, 100),
+                'quantity_regions' => rand(1, 8)
+            ]);
+        }
+
         Role::factory()->create([
             'name' => 'admin',
         ]);
@@ -73,18 +85,28 @@ class DatabaseSeeder extends Seeder
 
         User::factory(100)->create();
 
-        Topic::factory(30)->create();
-        CountryTopic::factory(200)->create();
-        Video::factory(300)->create();
+        Topic::factory(5)->create();
+
+        for ($j = 1; $j <= Topic::count(); $j++) {
+            for ($i = 1; $i <= Country::count(); $i++) {
+                CountryTopic::factory()->create([
+                    'country_id' => $i,
+                    'topic_id' => $j
+                ]);
+            }
+        }
+
+        for ($i = 1; $i <= CountryTopic::count(); $i++) {
+            Video::factory(5)->create(
+                ['country_topic_id' => $i]
+            );
+        }
+
+
         Type::factory(6)->create();
         GameLevel::factory(3)->create();
         Question::factory(67)->create();
         Answer::factory(140)->create();
         UserPlayGame::factory(131)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

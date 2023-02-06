@@ -25,9 +25,10 @@ class VideoFactory extends Factory
             'name' => $this->faker->name(),
             'description' => $this->faker->paragraphs(2, true),
             'country_topic_id' => $this->faker->randomElement($countryTopicIds),
-            'url' => $this->faker->url(),
+            'url' => 'https://www.youtube.com/watch?v=6NdqgBzFEsM&ab_channel=AseanCity',
             'owner_id' => $this->faker->randomElement($userIds),
-            'time' => rand(5, 300)
+            'time' => rand(5, 300),
+            'image' => 'https://study.com/cimages/videopreview/p3c2j8y73a.jpg'
         ];
     }
 }

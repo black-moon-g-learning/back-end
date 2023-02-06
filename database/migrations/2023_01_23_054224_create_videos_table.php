@@ -22,7 +22,9 @@ return new class extends Migration
             $table->string('url', 500)->nullable();
             $table->unsignedInteger('owner_id');
             $table->integer('time')->unsigned();
-            
+
+            $this->createImageColumn($table);
+
             $this->createForeignKey($table, 'country_topic_id', 'countries_topics');
             $this->createForeignKey($table, 'owner_id', 'users');
 

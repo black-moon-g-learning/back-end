@@ -17,7 +17,8 @@ class VideoSearchResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'url' => $this->url
+            'url' => $this->url,
+            'image' => $this->image
         ];
     }
 }
