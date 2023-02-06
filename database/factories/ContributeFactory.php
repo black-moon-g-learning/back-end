@@ -26,7 +26,8 @@ class ContributeFactory extends Factory
             'image' => 'https://i.ytimg.com/vi/FJH_nn1rMoI/maxresdefault.jpg',
             'video' => 'https://www.youtube.com/watch?v=og_1u8RFmuI&ab_channel=Voogie',
             'country_id' => $this->faker->randomElement($countryIds),
-            'owner_id' => $this->faker->randomElement($userIds)
+            'owner_id' => $this->faker->randomElement($userIds),
+            'status' => rand(1, 3)
         ];
     }
 }
