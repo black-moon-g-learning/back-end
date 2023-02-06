@@ -2,6 +2,7 @@
 
 namespace App\Services\Information;
 
+use App\Http\Resources\InformationResource;
 use App\Repositories\Information\IInformationRepository;
 
 class InformationService implements IInformationService
@@ -15,6 +16,7 @@ class InformationService implements IInformationService
 
     public function index()
     {
-        return $this->informationRepo->paginatePage();
+        $response =  $this->informationRepo->paginatePage();
+        return collect(InformationResource::collection($response))->toArray();
     }
 }
