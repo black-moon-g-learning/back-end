@@ -26,16 +26,16 @@ class Contribute extends Model
      */
     public function country(): HasOne
     {
-        return $this->hasOne(Country::class, 'id');
+        return $this->hasOne(Country::class, 'id',);
     }
 
     /**
-     * owner
+     * user
      *
-     * @return HasOne
+     * @return BelongTo
      */
-    public function owner(): HasOne
+    public function user()
     {
-        return $this->hasOne(User::class, 'id');
+        return $this->belongsTo(User::class, 'owner_id', 'id');
     }
 }

@@ -16,13 +16,12 @@ class InformationController extends Controller
         $this->informationRepo = $informationRepo;
     }
 
-
     /**
      * @return Response|JsonResponse
      */
     public function index()
     {
         $response = $this->informationRepo->index();
-        return $this->responseSuccessWithData($response->toArray());
+        return $this->responseSuccessWithData($response);
     }
 }
