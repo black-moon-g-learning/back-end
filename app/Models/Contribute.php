@@ -15,9 +15,10 @@ class Contribute extends Model
         'description',
         'image',
         'video',
-        'country_id'
+        'country_id',
+        'user_id'
     ];
-    
+
     /**
      * country
      *
@@ -26,5 +27,15 @@ class Contribute extends Model
     public function country(): HasOne
     {
         return $this->hasOne(Country::class, 'id');
+    }
+
+    /**
+     * owner
+     *
+     * @return HasOne
+     */
+    public function owner(): HasOne
+    {
+        return $this->hasOne(User::class, 'id');
     }
 }

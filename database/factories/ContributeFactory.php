@@ -18,12 +18,15 @@ class ContributeFactory extends Factory
     public function definition()
     {
         $countryIds = DB::table('countries')->pluck('id');
+        $userIds = DB::table('users')->pluck('id');
+
         return [
             'title' => $this->faker->text(200),
             'description' => $this->faker->paragraphs(2, true),
             'image' => 'https://i.ytimg.com/vi/FJH_nn1rMoI/maxresdefault.jpg',
             'video' => 'https://www.youtube.com/watch?v=og_1u8RFmuI&ab_channel=Voogie',
-            'country_id' => $this->faker->randomElement($countryIds)
+            'country_id' => $this->faker->randomElement($countryIds),
+            'owner_id' => $this->faker->randomElement($userIds)
         ];
     }
 }
