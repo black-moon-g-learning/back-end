@@ -15,7 +15,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+        $this->app->bind(
+            \App\Services\Video\IVideoService::class,
+            \App\Services\Video\VideoService::class,
+        );
+
+        $this->app->bind(
+            \App\Services\Information\IInformationService::class,
+            \App\Services\Information\InformationService::class,
+        );
     }
 
     /**
