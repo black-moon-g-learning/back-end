@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Information;
 
+use App\Constants\Information;
 use App\Models\Contribute;
 use App\Repositories\BaseRepository;
 
@@ -27,6 +28,6 @@ class InformationRepository extends BaseRepository implements IInformationReposi
      */
     public function paginatePage(int $page = 10)
     {
-        return $this->model->paginate($page);
+        return $this->model->where('status', '=', Information::PUBLISHED)->paginate($page);
     }
 }
