@@ -23,6 +23,7 @@ return new class extends Migration
             $table->text('video')->nullable();
             $table->integer('country_id')->unsigned()->nullable();
             $table->integer('owner_id')->unsigned()->nullable();
+            $table->tinyInteger('status')->nullable();
 
             $this->createForeignKey($table, 'country_id', 'countries');
             $this->createForeignKey($table, 'owner_id', 'users');

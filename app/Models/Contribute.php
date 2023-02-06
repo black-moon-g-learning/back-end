@@ -16,7 +16,8 @@ class Contribute extends Model
         'image',
         'video',
         'country_id',
-        'user_id'
+        'user_id',
+        'status'
     ];
 
     /**
