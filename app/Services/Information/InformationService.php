@@ -6,14 +6,20 @@ use App\Constants\Information;
 use App\Http\Requests\InformationRequest;
 use App\Http\Resources\InformationResource;
 use App\Repositories\Information\IInformationRepository;
+use App\Services\Storage\IStorageService;
 
 class InformationService implements IInformationService
 {
     protected IInformationRepository $informationRepo;
 
-    public function __construct(IInformationRepository $contributeRepo)
-    {
+    protected IStorageService $storageSer;
+
+    public function __construct(
+        IInformationRepository $contributeRepo,
+        IStorageService $storageSer
+    ) {
         $this->informationRepo = $contributeRepo;
+        $this->storageSer = $storageSer;
     }
 
     public function index()
@@ -26,10 +32,32 @@ class InformationService implements IInformationService
     {
         $attribute = $informationRequest->validated();
         $attribute['status'] = Information::PENDING;
-        $attribute['image'] = $informationRequest->file('image')->getClientOriginalName();
+        $attribute['image'] = $informationRequest
+            ->file('image')
+            ->getClientOriginalName();
+
+        $uploaded = $this
+            ->storageSer
+            ->upload(
+                $informationRequest->file('image'),
+                Information::ROOT_FOLDER
+            );
+
+        if ($uploaded['status']) {
+
+            $attribute['image'] = $uploaded['url'];
+
+            $this->informationRepo->create($attribute);
+
+            return [
+                'status' => true,
+                'message' => 'Upload successful, Admin will check this contribute soon'
+            ];
+        }
 
         return [
-            'status' => true,
+            'status' => false,
+            'message' => 'Can not upload this file'
         ];
     }
 }
