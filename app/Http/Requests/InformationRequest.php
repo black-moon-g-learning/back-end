@@ -30,8 +30,12 @@ class InformationRequest extends FormRequest
     {
         return [
             'title' => 'required',
-            'image' => 'required|mimes:png,jpg',
-            'description' => 'required'
+            // max 8 MB
+            'image' => 'mimes:png,jpg|max:8129|file',
+            'description' => 'required',
+            'country_id' => 'exists:countries,id',
+            'owner_id' => 'required|exists:users,id'
+            // 'video' => 'required'
         ];
     }
 

@@ -10,11 +10,11 @@ use Illuminate\Http\JsonResponse;
 
 class InformationController extends Controller
 {
-    protected IInformationService $informationRepo;
+    protected IInformationService $informationSer;
 
-    public function __construct(IInformationService $informationRepo)
+    public function __construct(IInformationService $informationSer)
     {
-        $this->informationRepo = $informationRepo;
+        $this->informationSer = $informationSer;
     }
 
     /**
@@ -22,12 +22,19 @@ class InformationController extends Controller
      */
     public function index()
     {
-        $response = $this->informationRepo->index();
+        $response = $this->informationSer->index();
         return $this->responseSuccessWithData($response);
     }
 
-    public function create(InformationRequest $InfoRequest)
+    /**
+     * create
+     *
+     *  @param  InformationRequest $infoRequest
+     *  @return Response|JsonResponse
+     */
+    public function create(InformationRequest $infoRequest)
     {
-        return 3;
+        $response = $this->informationSer->create($infoRequest);
+        return $this->responseSuccessWithData($response, 201);
     }
 }
