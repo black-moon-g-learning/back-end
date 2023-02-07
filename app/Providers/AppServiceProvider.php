@@ -25,6 +25,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Information\IInformationService::class,
             \App\Services\Information\InformationService::class,
         );
+
+        $this->app->bind(
+            \App\Services\Storage\IStorageService::class,
+            \App\Services\Storage\StorageS3Service::class,
+        );
     }
 
     /**
