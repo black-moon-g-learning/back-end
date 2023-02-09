@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
-    @include('partials.left-side')
+    @include('components.left-side')
 
     <main class="main-content position-relative border-radius-lg ">
         <!-- Navbar -->
