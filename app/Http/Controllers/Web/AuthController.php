@@ -36,12 +36,29 @@ class AuthController extends Controller
         return view('pages.login');
     }
 
+    /**
+     * loginPost
+     *
+     * @param  Request $request
+     * @return void
+     */
     public function loginPost(Request $request)
     {
         $response =  $this->auth->login($request);
         if (!$response['status']) {
             return redirect()->back()->with('errors', $response['errors']);
         }
-        return view('pages.dashboard');
+        return redirect()->route('web.dashboard');
+    }
+    
+    /**
+     * logout
+     *
+     * @return void
+     */
+    public function logout()
+    {
+        $this->auth->logout();
+        return  redirect()->route('web.login.get');
     }
 }

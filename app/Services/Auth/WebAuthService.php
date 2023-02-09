@@ -3,6 +3,7 @@
 namespace App\Services\Auth;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class WebAuthService implements IAuthService
@@ -41,5 +42,11 @@ class WebAuthService implements IAuthService
     public function register(mixed $request): array
     {
         return [];
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Session::flush();
     }
 }
