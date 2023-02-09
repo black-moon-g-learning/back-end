@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,5 +28,6 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('web.logout');
 Route::middleware(['auth', 'role'])->group(
     function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('web.dashboard');
+        Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
     }
 );

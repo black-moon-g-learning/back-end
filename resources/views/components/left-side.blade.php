@@ -6,7 +6,7 @@
         ],
         [
             'name' => 'Continents',
-            'route' => route('web.login.get'),
+            'route' => route('web.continents'),
         ],
     ];
 @endphp

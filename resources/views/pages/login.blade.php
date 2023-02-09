@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.auth-master')
 
 @section('content')
     <main class="main-content  mt-0">
