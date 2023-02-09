@@ -24,7 +24,7 @@ Route::get('/login', [AuthController::class, 'loginGet'])->name('web.login.get')
 Route::post('/login', [AuthController::class, 'loginPost'])->name('web.login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('web.logout');
 
-Route::middleware(['auth'])->group(
+Route::middleware(['auth', 'role'])->group(
     function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('web.dashboard');
     }
