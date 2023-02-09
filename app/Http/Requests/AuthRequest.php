@@ -56,4 +56,5 @@ class AuthRequest extends FormRequest
             $this->responseErrorWithData($errors->toArray(), 422)
         );
     }
+    
 }

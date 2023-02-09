@@ -92,4 +92,9 @@ class AuthService implements IAuthService
 
         return $userInfo;
     }
+
+    public function logout()
+    {
+        return true;
+    }
 }
