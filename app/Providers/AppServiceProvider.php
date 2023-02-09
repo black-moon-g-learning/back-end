@@ -30,6 +30,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Storage\IStorageService::class,
             \App\Services\Storage\StorageS3Service::class,
         );
+
+        $this->app->bind(
+            \App\Services\Auth\IAuthService::class,
+            \App\Services\Auth\WebAuthService::class
+        );
     }
 
     /**
