@@ -13,29 +13,33 @@
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
+                                    @if (isset(Session::get('errors')['account']))
+                                        @include(
+                                            'partials.alert',
+                                            $data = Session::get('errors')['account']
+                                        )
+                                    @endif
                                     <form method="POST" action={{ route('web.login.post') }} role="form">
                                         @csrf
                                         <div class="mb-3">
-                                            <input type="email" name="username" class="form-control form-control-lg"
+                                            <input type="text" name="username" class="form-control form-control-lg"
                                                 placeholder="Email" aria-label="Email">
                                         </div>
                                         @if (isset(Session::get('errors')['username']))
-                                            @foreach (Session::get('errors')['username'] as $error)
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{ $error }}
-                                                </div>
-                                            @endforeach
+                                            @include(
+                                                'partials.alert',
+                                                $data = Session::get('errors')['username']
+                                            )
                                         @endif
                                         <div class="mb-3">
                                             <input type="password" class="form-control form-control-lg"
                                                 placeholder="Password" name="password" aria-label="Password">
                                         </div>
                                         @if (isset(Session::get('errors')['password']))
-                                            @foreach (Session::get('errors')['password'] as $error)
-                                                <div class="alert alert-danger" role="alert">
-                                                    {{ $error }}
-                                                </div>
-                                            @endforeach
+                                            @include(
+                                                'partials.alert',
+                                                $data = Session::get('errors')['password']
+                                            )
                                         @endif
                                         <div class="form-check form-switch">
                                             <input class="form-check-input" type="checkbox" id="rememberMe">

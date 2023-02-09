@@ -42,6 +42,6 @@ class AuthController extends Controller
         if (!$response['status']) {
             return redirect()->back()->with('errors', $response['errors']);
         }
-        return 3;
+        return view('pages.dashboard');
     }
 }

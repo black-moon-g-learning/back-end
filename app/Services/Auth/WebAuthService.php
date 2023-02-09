@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class WebAuthService implements IAuthService
@@ -12,6 +13,7 @@ class WebAuthService implements IAuthService
             'username' => 'required|min:10',
             'password' => 'required'
         ]);
+
         if ($validator->fails()) {
             return [
                 'status' => false,
@@ -19,8 +21,20 @@ class WebAuthService implements IAuthService
             ];
         }
 
+        if (Auth::attempt($validator->validated())) {
+            $request->session()->regenerate();
+            return [
+                'status' => true,
+            ];
+        };
+
         return [
-            'status' => true,
+            'status' => false,
+            'errors' => [
+                'account' => [
+                    'Wrong user name or password'
+                ]
+            ]
         ];
     }
 
