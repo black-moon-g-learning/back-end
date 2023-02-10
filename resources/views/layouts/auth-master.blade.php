@@ -18,20 +18,11 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href={{ asset('css/argon-dashboard.css?v=2.0.4') }} rel="stylesheet" />
-    @yield('customCss')
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
-    <div class="min-height-300 bg-primary position-absolute w-100"></div>
+<body class="g-sidenav-show  bg-gray-100">
 
-    @include('components.left-side')
-    <main class="main-content position-relative border-radius-lg ">
-        @include('components.top')
-        <div class="container-fluid py-4">
-            @yield('content')
-        </div>
-    </main>
-    @include('components.configurator')
+    @yield('content')
 
     <!--   Core JS Files   -->
     <script src={{ asset('js/core/popper.min.js') }}></script>
@@ -131,12 +122,10 @@
             Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
         }
     </script>
-
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
     <script src={{ asset('js/argon-dashboard.min.js?v=2.0.4') }}></script>
-    @yield('customJs')
 </body>
 
 </html>

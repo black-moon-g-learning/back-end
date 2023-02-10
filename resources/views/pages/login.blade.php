@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.auth-master')
 
 @section('content')
     <main class="main-content  mt-0">
@@ -15,12 +15,12 @@
                                 <div class="card-body">
                                     @if (isset(Session::get('errors')['account']))
                                         @include(
-                                            'partials.alert',
+                                            'components.alert',
                                             $data = Session::get('errors')['account']
                                         )
                                     @endif
                                     @if (isset(Session::get('errors')['permission']))
-                                        @include('partials.alert', $data = Session::get('errors'))
+                                        @include('components.alert', $data = Session::get('errors'))
                                     @endif
                                     <form method="POST" action={{ route('web.login.post') }} role="form">
                                         @csrf
@@ -30,7 +30,7 @@
                                         </div>
                                         @if (isset(Session::get('errors')['username']))
                                             @include(
-                                                'partials.alert',
+                                                'components.alert',
                                                 $data = Session::get('errors')['username']
                                             )
                                         @endif
@@ -40,7 +40,7 @@
                                         </div>
                                         @if (isset(Session::get('errors')['password']))
                                             @include(
-                                                'partials.alert',
+                                                'components.alert',
                                                 $data = Session::get('errors')['password']
                                             )
                                         @endif
