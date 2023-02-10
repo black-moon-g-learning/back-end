@@ -2,7 +2,11 @@
 
 @section('content')
     <div class="p-4 bg-info">
-        <form>
+        <form action="{{ route('web.continents.update', $continent->id) }}" method="POST">
+
+            @csrf
+            @method('PUT')
+
             <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Name</label>
                 <input class="form-control" type="text" value="{{ isset($continent) ? $continent->name : '' }}"

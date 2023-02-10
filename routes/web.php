@@ -29,6 +29,7 @@ Route::middleware(['auth', 'role'])->group(
     function () {
         Route::get('/', [DashboardController::class, 'dashboard'])->name('web.dashboard');
         Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
-        Route::get('/continents/{id}', [ContinentController::class, 'edit'])->name('web.continents.edit');
+        Route::get('/continents/{id}/edit', [ContinentController::class, 'edit'])->name('web.continents.edit');
+        Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
     }
 );

@@ -48,7 +48,8 @@
                                                 class="badge badge-sm bg-gradient-success">{{ $continent->quantity_countries }}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <button class="btn bg-gradient-info" id="click"> Edit</button>
+                                            <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"
+                                                id="click"> Edit</button>
                                         </td>
                                         <td class=" px-2">
                                             {{ $continent->description }}
@@ -73,7 +74,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script>
-        $('#click').confirm({
+        function confirm(id) {
+            $.confirm({
+                title: 'Confirm Edit!',
+                content: 'Do you want to edit this row!',
+                buttons: {
+                    confirm: function() {
+                        window.location.href = "{{ config('app.url') }}" + '/continents/' + id + '/edit'
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        };
+        $('#click1').confirm({
             title: 'Confirm!',
             content: 'Simple confirm!',
             buttons: {
