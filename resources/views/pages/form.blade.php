@@ -32,12 +32,12 @@
                 <label for="example-tel-input" class="form-control-label">File</label>
                 <input class="form-control" type="file" onchange="changeImage(event)">
             </div>
-
             <div class="form-group">
                 <label for="example-tel-input" class="form-control-label">Preview</label>
                 <img class="form-control" id="preview-img" class="col-6 img-thumbnail" style="width: 40rem" alt=""
                     src="{{ isset($continent) ? $continent->image : '' }}">
             </div>
+            <input class="btn btn-success" type="submit" value="Submit">
         </form>
         <script>
             const changeImage = (e) => {
