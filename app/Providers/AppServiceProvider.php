@@ -35,6 +35,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Auth\IAuthService::class,
             \App\Services\Auth\WebAuthService::class
         );
+
+        $this->app->bind(
+            \App\Services\Continent\IContinentService::class,
+            \App\Services\Continent\ContinentService::class
+        );
     }
 
     /**
