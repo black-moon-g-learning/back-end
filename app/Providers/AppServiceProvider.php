@@ -31,14 +31,19 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Storage\StorageS3Service::class,
         );
 
-        $this->app->bind(
-            \App\Services\Auth\IAuthService::class,
-            \App\Services\Auth\WebAuthService::class
-        );
+        // $this->app->bind(
+        //     \App\Services\Auth\IAuthService::class,
+        //     \App\Services\Auth\WebAuthService::class
+        // );
 
         $this->app->bind(
             \App\Services\Continent\IContinentService::class,
             \App\Services\Continent\ContinentService::class
+        );
+
+        $this->app->bind(
+            \App\Services\Auth\IAuthService::class,
+            \App\Services\Auth\FirebaseAuthService::class
         );
     }
 

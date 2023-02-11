@@ -32,7 +32,7 @@ Route::middleware(['idInteger'])->group(function () {
     Route::get('countries-topics/{id}/videos', [VideoController::class, 'index']);
 });
 
-Route::get('/profile', [UserController::class, 'getProfile']);
+
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
@@ -41,3 +41,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::get('/information', [InformationController::class, 'index']);
 
 Route::post('/information', [InformationController::class, 'create']);
+
+Route::middleware(['auth:api'])->group(function () {
+    Route::get('/profile', [UserController::class, 'getProfile']);
+});
