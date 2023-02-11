@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Continent\IContinentRepository;
 use App\Services\Continent\IContinentService;
-use Aws\History;
+use Illuminate\Http\Request;
 
 class ContinentController extends Controller
 {
@@ -26,5 +25,15 @@ class ContinentController extends Controller
     {
         $continent = $this->continentSer->edit($id);
         return view('pages.form', compact('continent'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $response = $this->continentSer->update($request, $id);;
+
+        if ($response["status"]) {
+            return redirect()->route('web.continents')->with('response', $response);
+        }
+        return redirect()->back()->with("errors", $response["errors"]);
     }
 }

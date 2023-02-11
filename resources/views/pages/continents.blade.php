@@ -1,6 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
+    @if (Session::has('response'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
+                {{ Session::get('response')['data'] }}
+                !</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
@@ -30,8 +41,8 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="{{ $continent->image }}" class="avatar avatar-sm me-3"
-                                                        alt="user1">
+                                                    <img src="{{ getS3Url($continent->image) }}"
+                                                        class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $continent->name }}
