@@ -16,7 +16,7 @@ class Contribute extends Model
         'image',
         'video',
         'country_id',
-        'user_id',
+        'owner_id',
         'status'
     ];
 
@@ -25,9 +25,9 @@ class Contribute extends Model
      *
      * @return HasOne
      */
-    public function country(): HasOne
+    public function country()
     {
-        return $this->hasOne(Country::class, 'id',);
+        return $this->belongsTo(Country::class, 'country_id', 'id');
     }
 
     /**
