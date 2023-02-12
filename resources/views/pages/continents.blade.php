@@ -1,6 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
+    @if (Session::has('response'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
+                {{ Session::get('response')['data'] }}
+                !</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
@@ -30,8 +41,8 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img src="{{ $continent->image }}" class="avatar avatar-sm me-3"
-                                                        alt="user1">
+                                                    <img src="{{ getS3Url($continent->image) }}"
+                                                        class="avatar avatar-sm me-3" alt="user1">
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">{{ $continent->name }}
@@ -48,7 +59,8 @@
                                                 class="badge badge-sm bg-gradient-success">{{ $continent->quantity_countries }}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <button class="btn bg-gradient-info" id="click"> Edit</button>
+                                            <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"
+                                                id="click"> Edit</button>
                                         </td>
                                         <td class=" px-2">
                                             {{ $continent->description }}
@@ -73,7 +85,21 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script>
-        $('#click').confirm({
+        function confirm(id) {
+            $.confirm({
+                title: 'Confirm Edit!',
+                content: 'Do you want to edit this row!',
+                buttons: {
+                    confirm: function() {
+                        window.location.href = "{{ config('app.url') }}" + '/continents/' + id + '/edit'
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        };
+        $('#click1').confirm({
             title: 'Confirm!',
             content: 'Simple confirm!',
             buttons: {

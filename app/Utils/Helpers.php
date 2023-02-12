@@ -1,5 +1,6 @@
 <?php
 
+use App\Constants\Common;
 use App\Models\User;
 
 if (!function_exists('getUsername')) {
@@ -54,5 +55,15 @@ if (!function_exists('convertTimeFromDB')) {
     function convertTimeFromDB(int $time): string
     {
         return (int)($time / 60) . ' : ' . (int)($time % 60);
+    }
+}
+
+if (!function_exists('getS3Url')) {
+    function getS3Url(string $url): string
+    {
+        if (str_contains($url, 'http')) {
+            return $url;
+        }
+        return Common::S3_ROOT . $url;
     }
 }

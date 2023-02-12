@@ -18,4 +18,14 @@ class StorageS3Service implements IStorageService
             'url' => $url
         ];
     }
+
+    public function exists(string $file): bool
+    {
+        return Storage::disk('s3')->exists($file);
+    }
+
+    public function delete(string $file): bool
+    {
+        return Storage::disk('s3')->delete($file);
+    }
 }
