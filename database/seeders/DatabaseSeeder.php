@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory()->create([
-            'username' => 'admin',
+            'username' => 'admin@gmail.com',
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi',
             'role_id' => ConstantsRole::ADMIN_ROLE
         ]);
