@@ -213,8 +213,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
-        'Information' => App\Constants\Information::class
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        'Information' => App\Constants\Information::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class
     ])->toArray(),
 
 ];
