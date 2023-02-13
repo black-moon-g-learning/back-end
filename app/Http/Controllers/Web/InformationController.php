@@ -17,7 +17,7 @@ class InformationController extends Controller
 
     public function index()
     {
-        // $information = $this->informationSer->getAll();
+        $information = $this->informationSer->getAll();
         return view('pages.information', compact('information'));
     }
 }

@@ -9,4 +9,6 @@ interface IInformationService
     public function index();
 
     public function create(InformationRequest $informationRequest): mixed;
+
+    public function getAll();
 }

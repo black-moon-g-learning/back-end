@@ -92,8 +92,9 @@
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $info->status }}
-                                                    </h6>
+                                                    @include('components.status-info.status', [
+                                                        'data' => $info->status,
+                                                    ])
                                                 </div>
                                             </div>
                                         </td>
@@ -113,7 +114,7 @@
                 </div>
             </div>
         </div>
-            {{$information->links()}}
+        {{ $information->links() }}
     </div>
     @include('components.footer')
 @endsection
