@@ -16,4 +16,12 @@ class UserRepository extends BaseRepository implements IUserRepository
     {
         return $this->model->find($userId)->first();
     }
+
+    public function findByFirebaseUid(string $uid): mixed
+    {
+        return $this
+            ->model
+            ->where('firebase_uid', $uid)
+            ->first();
+    }
 }

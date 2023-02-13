@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use App\Http\Resources\ContinentResource;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,14 +31,24 @@ class AppServiceProvider extends ServiceProvider
         );
 
         $this->app->bind(
-            \App\Services\Auth\IAuthService::class,
-            \App\Services\Auth\WebAuthService::class
-        );
-
-        $this->app->bind(
             \App\Services\Continent\IContinentService::class,
             \App\Services\Continent\ContinentService::class
         );
+
+        $this->app->bind(
+            \App\Services\Auth\IAuthService::class,
+            \App\Services\Auth\FirebaseAuthService::class
+        );
+
+        $this->app
+            ->when([\App\Http\Controllers\Web\AuthController::class])
+            ->needs(\App\Services\Auth\IAuthService::class)
+            ->give(\App\Services\Auth\WebAuthService::class);
+
+        $this->app
+            ->when([\App\Http\Controllers\Api\Auth\AuthController::class])
+            ->needs(\App\Services\Auth\IAuthService::class)
+            ->give(\App\Services\Auth\FirebaseAuthService::class);
     }
 
     /**
