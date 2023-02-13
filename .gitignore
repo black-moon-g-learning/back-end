@@ -17,6 +17,7 @@ yarn-error.log
 /.idea
 /.vscode
 
+# Firebase
+
 firebase-adminsdk.json
 google-services.json
-

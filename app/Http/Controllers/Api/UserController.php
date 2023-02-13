@@ -19,9 +19,8 @@ class UserController extends Controller
         $this->userRepo = $userRepo;
     }
 
-    public function getProfile()
+    public function getProfile(Request $request)
     {
-
-        return new UserResource($this->userRepo->getProfile(3));
+        return response()->json($request->user());
     }
 }

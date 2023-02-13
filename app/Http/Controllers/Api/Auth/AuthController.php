@@ -4,12 +4,14 @@ namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AuthRequest;
-use App\Services\Auth\AuthService;
+
+use App\Services\Auth\IAuthService;
+use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
 
-    protected $auth;
+    protected IAuthService $auth;
 
     /**
      * __construct
@@ -17,11 +19,11 @@ class AuthController extends Controller
      * @param  AuthService $auth
      * @return void
      */
-    public function __construct(AuthService $auth)
+    public function __construct(IAuthService $auth)
     {
+    
         $this->auth = $auth;
     }
-
 
     /**
      * login
@@ -29,7 +31,7 @@ class AuthController extends Controller
      * @param  AuthRequest $request
      * @return void
      */
-    public function login(AuthRequest $request)
+    public function login(Request $request)
     {
         $response = $this->auth->login($request);
 
