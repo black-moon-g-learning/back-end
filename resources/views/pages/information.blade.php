@@ -47,9 +47,9 @@
                                         <td class="justify-content-center">
                                             <div class="d-flex flex-wrap">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <p class="text-break mb-0 text-sm text-truncate">
+                                                    <h6 class="text-break mb-0 text-sm text-truncate">
                                                         {{ handleLongText($info->title) }}
-                                                    </p>
+                                                    </h6>
                                                 </div>
                                             </div>
                                         </td>
@@ -58,13 +58,17 @@
                                                 alt="user1">
                                         </td>
                                         <td class="align-middle">
+                                            <button class="btn btn-primary" onClick="confirm({{ $info->id }})"
+                                                id="click"> Detail</button>
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $info->id }})"
                                                 id="click"> Edit</button>
+                                            <button class="btn btn-secondary" onClick="confirm({{ $info->id }})"
+                                                id="click"> Delete</button>
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <iframe width="420" height="345" src="{{ $info->video }}">
+                                                    <iframe width="300" height="200" src="{{ $info->video }}">
                                                     </iframe>
                                                 </div>
                                             </div>
@@ -96,7 +100,7 @@
                                         <td width="220" class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="test-123 mb-0 text-sm">{{ $info->description }}
+                                                    <h6 class="test-123 mb-0 text-sm"> {{ handleLongText($info->title) }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -109,6 +113,7 @@
                 </div>
             </div>
         </div>
+            {{$information->links()}}
     </div>
     @include('components.footer')
 @endsection
