@@ -30,7 +30,16 @@ class InformationRepository extends BaseRepository implements IInformationReposi
     {
         return $this->model
             ->where('status', '=', Information::PUBLISHED)
+            ->with(['user', 'country'])
             ->orderBy('id', 'desc')
             ->paginate($page);
+    }
+
+    public function getAll()
+    {
+        return $this->model
+            ->with(['user', 'country'])
+            ->orderBy('status', 'desc')
+            ->paginate($this->limit);
     }
 }

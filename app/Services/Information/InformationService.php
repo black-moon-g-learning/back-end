@@ -60,4 +60,10 @@ class InformationService implements IInformationService
             'message' => 'Can not upload this file'
         ];
     }
+
+    public function getAll()
+    {
+        $response =  $this->informationRepo->getAll();
+        return $response;
+    }
 }

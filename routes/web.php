@@ -3,6 +3,7 @@
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\InformationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,5 +32,7 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
         Route::get('/continents/{id}/edit', [ContinentController::class, 'edit'])->name('web.continents.edit');
         Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
+
+        Route::get('/information', [InformationController::class, 'index'])->name('web.information');
     }
 );

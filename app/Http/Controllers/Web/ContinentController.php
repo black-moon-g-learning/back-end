@@ -24,7 +24,7 @@ class ContinentController extends Controller
     public function edit(int $id)
     {
         $continent = $this->continentSer->edit($id);
-        return view('pages.form', compact('continent'));
+        return view('forms.form-continent', compact('continent'));
     }
 
     public function update(Request $request, $id)

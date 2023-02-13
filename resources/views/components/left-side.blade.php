@@ -8,6 +8,10 @@
             'name' => 'Continents',
             'route' => route('web.continents'),
         ],
+        [
+            'name' => 'Have you know?',
+            'route' => route('web.information'),
+        ],
     ];
 @endphp
 
