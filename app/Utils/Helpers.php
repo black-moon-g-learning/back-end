@@ -67,3 +67,13 @@ if (!function_exists('getS3Url')) {
         return Common::S3_ROOT . $url;
     }
 }
+
+if (!function_exists('handleLongText')) {
+    function handleLongText(string $text, int $length = 40)
+    {
+        if (strlen($text) > $length) {
+            return substr($text, 0, $length) . '...';
+        }
+        return $text;
+    }
+}
