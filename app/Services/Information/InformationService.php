@@ -126,7 +126,7 @@ class InformationService implements IInformationService
 
         return [
             'status' => true,
-            'data' => 'Upload successful'
+            'data' => 'Update information successful'
         ];
     }
 }
