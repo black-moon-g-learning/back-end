@@ -55,8 +55,13 @@ class AppServiceProvider extends ServiceProvider
             ->when([\App\Http\Controllers\Api\Auth\AuthController::class])
             ->needs(\App\Services\Auth\IAuthService::class)
             ->give(\App\Services\Auth\FirebaseAuthService::class);
-    }
 
+        $this->app->bind(
+            \App\Services\Question\IQuestionService::class,
+            \App\Services\Question\QuestionService::class
+        );
+    }
+    
     /**
      * Bootstrap any application services.
      *
