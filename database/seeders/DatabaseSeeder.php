@@ -114,6 +114,13 @@ class DatabaseSeeder extends Seeder
         Type::factory(6)->create();
         GameLevel::factory(3)->create();
         Question::factory(200)->create();
+
+        for ($i = 1; $i <= Question::count(); $i++) {
+            Answer::factory(4)->create([
+                'question_id' => $i
+            ]);
+        }
+
         Answer::factory(140)->create();
         UserPlayGame::factory(131)->create();
 
