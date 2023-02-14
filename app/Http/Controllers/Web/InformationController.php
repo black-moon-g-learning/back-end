@@ -20,4 +20,13 @@ class InformationController extends Controller
         $information = $this->informationSer->getAll();
         return view('pages.information', compact('information'));
     }
+
+    public function edit(int $id)
+    {
+        $response =  $this->informationSer->edit($id);
+        $info = $response['info'];
+        $countries = $response['countries'];
+        
+        return view('forms.form-information', compact('info', 'countries'));
+    }
 }
