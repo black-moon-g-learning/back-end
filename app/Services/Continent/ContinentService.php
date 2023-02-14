@@ -47,14 +47,18 @@ class ContinentService implements IContinentService
 
 
         if (isset($continent['file'])) {
+
             $continentDB = $this->continentRepo->find($id);
+
             if ($this->storeSer->exists($continentDB->image)) {
                 $this->storeSer->delete($continentDB->image);
-                $file = $request->file('file');
-                $uploaded = $this->storeSer->upload($file, 'continents');
-                if ($uploaded['status']) {
-                    $continent['image'] = $uploaded['url'];
-                }
+            }
+
+            $file = $request->file('file');
+            $uploaded = $this->storeSer->upload($file, 'continents');
+
+            if ($uploaded['status']) {
+                $continent['image'] = $uploaded['url'];
             }
         }
 
