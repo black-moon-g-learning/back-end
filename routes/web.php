@@ -37,7 +37,7 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::middleware('idInteger')->group(function () {
             Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
-            Route::put('/information/{id}/update', [InformationController::class, 'edit'])->name('web.information.update');
+            Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
         });
     }
 );

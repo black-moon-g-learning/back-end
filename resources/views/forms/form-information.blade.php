@@ -25,13 +25,13 @@
             @method('PUT')
 
             <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Name</label>
+                <label for="example-text-input" class="form-control-label">Title</label>
                 <input class="form-control" name="title" type="text" value="{{ isset($info) ? $info->title : '' }}"
                     id="example-text-input">
             </div>
-            @if (isset(Session::get('errors')['name']))
+            @if (isset(Session::get('errors')['title']))
                 <div class="col-md-4 form-group">
-                    @include('components.alert', $data = Session::get('errors')['name'])
+                    @include('components.alert', $data = Session::get('errors')['title'])
                 </div>
             @endif
             <div class="row">
@@ -41,25 +41,26 @@
                         <input readonly class="form-control" type="text" name="description"
                             value="{{ isset($info) ? $info->user->first_name : '' }}" id="example-search-input">
                     </div>
-                    @if (isset(Session::get('errors')['regions']))
+                    @if (isset(Session::get('errors')['description']))
                         <div class="form-group">
-                            @include('components.alert', $data = Session::get('errors')['regions'])
+                            @include('components.alert', $data = Session::get('errors')['description'])
                         </div>
                     @endif
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Status</label>
-                        <select class="form-control">
+                        <select name="status" class="form-control">
                             @foreach ($infoStatus as $key => $values)
-                                <option {{ $key == $info->status ? 'selected' : ' ' }}>{{ $values['status'] }}
+                                <option value={{ $key }} {{ $key == $info->status ? 'selected' : ' ' }}>
+                                    {{ $values['status'] }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
-                    @if (isset(Session::get('errors')['regions']))
+                    @if (isset(Session::get('errors')['status']))
                         <div class="form-group">
-                            @include('components.alert', $data = Session::get('errors')['regions'])
+                            @include('components.alert', $data = Session::get('errors')['status'])
                         </div>
                     @endif
                 </div>
@@ -67,15 +68,16 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Country</label>
-                        <select multiple class="form-control" id="exampleFormControlSelect2">
+                        <select multiple class="form-control" name="country_id">
                             @foreach ($countries as $country)
-                                <option {{ $country->id == $info->country_id ? 'selected' : ' ' }}>{{ $country->name }}
+                                <option value="{{ $country->id }}"
+                                    {{ $country->id == $info->country_id ? 'selected' : ' ' }}>{{ $country->name }}
                                 </option>
                             @endforeach
                         </select>
-                        @if (isset(Session::get('errors')['countries']))
+                        @if (isset(Session::get('errors')['country_id']))
                             <div class="form-group">
-                                @include('components.alert', $data = Session::get('errors')['countries'])
+                                @include('components.alert', $data = Session::get('errors')['country_id'])
                             </div>
                         @endif
                     </div>

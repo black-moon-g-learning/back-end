@@ -8,6 +8,8 @@ use App\Http\Resources\InformationResource;
 use App\Repositories\Country\ICountryRepository;
 use App\Repositories\Information\IInformationRepository;
 use App\Services\Storage\IStorageService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class InformationService implements IInformationService
 {
@@ -80,6 +82,51 @@ class InformationService implements IInformationService
         return [
             'countries' => $countries,
             'info' => $info
+        ];
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
+            'title' => 'required',
+            'status' => 'nullable|required|integer',
+            'country_id' => 'nullable|required',
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->errors()->toArray()
+            ];
+        }
+
+        $info = $validator->validated();
+
+        if ($request->has('file')) {
+            $uploaded = $this
+                ->storageSer
+                ->upload(
+                    $request->file('file'),
+                    Information::ROOT_FOLDER
+                );
+            if ($uploaded['status']) {
+
+                $info['image'] = $uploaded['url'];
+            } else {
+                return [
+                    'status' => false,
+                    'message' => 'Can not upload this file'
+                ];
+            }
+        }
+
+        $this->informationRepo->update($id, $info);
+
+        return [
+            'status' => true,
+            'data' => 'Upload successful'
         ];
     }
 }
