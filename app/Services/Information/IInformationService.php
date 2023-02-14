@@ -3,6 +3,7 @@
 namespace App\Services\Information;
 
 use App\Http\Requests\InformationRequest;
+use Illuminate\Http\Request;
 
 interface IInformationService
 {
@@ -11,4 +12,8 @@ interface IInformationService
     public function create(InformationRequest $informationRequest): mixed;
 
     public function getAll();
+
+    public function edit(int $id);
+
+    public function update(Request $request, int $id);
 }

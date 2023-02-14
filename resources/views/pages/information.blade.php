@@ -60,8 +60,10 @@
                                         <td class="align-middle">
                                             <button class="btn btn-primary" onClick="confirm({{ $info->id }})"
                                                 id="click"> Detail</button>
-                                            <button class="btn bg-gradient-info" onClick="confirm({{ $info->id }})"
-                                                id="click"> Edit</button>
+                                            <a class="btn bg-gradient-info"
+                                                href={{ route('web.information.edit', $info->id) }}>
+                                                Edit
+                                            </a>
                                             <button class="btn btn-secondary" onClick="confirm({{ $info->id }})"
                                                 id="click"> Delete</button>
                                         </td>
@@ -101,7 +103,8 @@
                                         <td width="220" class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="test-123 mb-0 text-sm"> {{ handleLongText($info->title) }}
+                                                    <h6 class="test-123 mb-0 text-sm">
+                                                        {{ handleLongText($info->title) }}
                                                     </h6>
                                                 </div>
                                             </div>

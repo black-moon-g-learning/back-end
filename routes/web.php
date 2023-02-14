@@ -34,5 +34,10 @@ Route::middleware(['auth', 'role'])->group(
         Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
 
         Route::get('/information', [InformationController::class, 'index'])->name('web.information');
+
+        Route::middleware('idInteger')->group(function () {
+            Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
+            Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
+        });
     }
 );
