@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Question extends Model
 {
@@ -17,4 +18,14 @@ class Question extends Model
         'type_id',
         'level_id'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
+    public function answers(): HasMany
+    {
+        return $this->hasMany(Answer::class);
+    }
 }
