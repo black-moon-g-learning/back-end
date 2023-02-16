@@ -6,5 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface ICountryRepository extends RepositoryInterface
 {
-    public function getCountries(int $continentId);
+    public function getCountries(int $limit = 10);
 }

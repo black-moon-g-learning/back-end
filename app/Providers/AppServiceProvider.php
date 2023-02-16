@@ -46,6 +46,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Auth\FirebaseAuthService::class
         );
 
+        $this->app->bind(
+            \App\Services\Country\ICountryService::class,
+            \App\Services\Country\CountryService::class
+        );
+
         $this->app
             ->when([\App\Http\Controllers\Web\AuthController::class])
             ->needs(\App\Services\Auth\IAuthService::class)
