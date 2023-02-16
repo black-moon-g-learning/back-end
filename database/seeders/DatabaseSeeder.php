@@ -104,7 +104,7 @@ class DatabaseSeeder extends Seeder
             }
         }
 
-        for ($i = 1; $i <= CountryTopic::count(); $i++) {
+        for ($i = 1; $i <= CountryTopic::count() / 3; $i++) {
             Video::factory(5)->create(
                 ['country_topic_id' => $i]
             );
@@ -113,7 +113,14 @@ class DatabaseSeeder extends Seeder
 
         Type::factory(6)->create();
         GameLevel::factory(3)->create();
-        Question::factory(67)->create();
+        Question::factory(200)->create();
+
+        for ($i = 1; $i <= Question::count(); $i++) {
+            Answer::factory(4)->create([
+                'question_id' => $i
+            ]);
+        }
+
         Answer::factory(140)->create();
         UserPlayGame::factory(131)->create();
 

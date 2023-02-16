@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\InformationController;
+use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VideoController;
@@ -30,7 +31,9 @@ Route::get('/continents', [ContinentController::class, 'index']);
 Route::middleware(['idInteger'])->group(function () {
     Route::get('/continents/{id}', [ContinentController::class, 'getCountries']);
     Route::get('/countries/{id}/topics', [TopicController::class, 'index']);
-    Route::get('countries-topics/{id}/videos', [VideoController::class, 'index']);
+    Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index']);
+
+    Route::get('/videos/{id}/questions', [QuestionController::class, 'index']);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');

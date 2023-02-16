@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Repositories\Question;
+
+use App\Repositories\RepositoryInterface;
+use Illuminate\Support\Collection;
+
+interface IQuestionRepository extends RepositoryInterface
+{
+    public function getAllQuestionInVideo(int $videoId): Collection;
+}
