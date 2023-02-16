@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContinentController;
+use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
@@ -32,11 +33,8 @@ Route::middleware(['idInteger'])->group(function () {
     Route::get('countries-topics/{id}/videos', [VideoController::class, 'index']);
 });
 
-
-
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-
 
 Route::get('/information', [InformationController::class, 'index']);
 
@@ -45,3 +43,5 @@ Route::post('/information', [InformationController::class, 'create']);
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [UserController::class, 'getProfile']);
 });
+
+Route::get('/countries', [CountryController::class, 'index']);

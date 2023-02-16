@@ -12,7 +12,8 @@ class CountryRepository extends BaseRepository implements ICountryRepository
         return Country::class;
     }
 
-    public function getCountries(int $continentId)
+    public function getCountries(int $limit = 10)
     {
+        return $this->model->paginate($limit);
     }
 }
