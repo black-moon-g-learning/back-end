@@ -65,8 +65,13 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Question\IQuestionService::class,
             \App\Services\Question\QuestionService::class
         );
+
+        $this->app->bind(
+            \App\Services\Package\IPackageService::class,
+            \App\Services\Package\PackageService::class
+        );
     }
-    
+
     /**
      * Bootstrap any application services.
      *

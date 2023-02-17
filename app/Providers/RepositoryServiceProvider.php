@@ -53,6 +53,10 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Question\QuestionRepository::class,
         );
 
+        $this->app->singleton(
+            \App\Repositories\Package\IPackageRepository::class,
+            \App\Repositories\Package\PackageRepository::class
+        );
     }
 
     /**
