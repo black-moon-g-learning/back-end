@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\InformationController;
+use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TopicController;
@@ -51,3 +52,5 @@ Route::middleware(['auth:api'])->group(function () {
 Route::get('/countries', [CountryController::class, 'index']);
 
 Route::get('/services', [PackageController::class, 'index']);
+
+Route::get('/levels', [LevelController::class, 'index']);
