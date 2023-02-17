@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Nova | Bootstrap app landing</title>
+    <title>G -learning</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="all,follow">
@@ -56,10 +56,10 @@
                     <p class="my-4 text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
                         eirmod.</p>
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item mb-2 mb-lg-0"><a class="btn btn-primary btn-lg px-4" href="#!">
+                        <li class="list-inline-item mb-2 mb-lg-0"><a class="btn btn-success btn-lg px-4" href="#!">
                                 <i class="fab fa-google-play me-3"></i>Google Play</a></li>
-                        <li class="list-inline-item"><a class="btn btn-primary btn-lg px-4" href="#!"> <i
-                                    class="fab fa-app-store me-3"></i>App Store</a></li>
+                        <li class="list-inline-item"><a class="btn btn-success btn-lg px-4" href="#!"> <i
+                                    class="fab fa-app-store me-3"></i>Install now</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 ml-auto">
