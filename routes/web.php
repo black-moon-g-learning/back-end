@@ -18,26 +18,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('pages.dashboard');
+    return view('pages.landing');
 });
 
-Route::get('/register', [AuthController::class, 'register']);
-Route::get('/login', [AuthController::class, 'loginGet'])->name('web.login.get');
-Route::post('/login', [AuthController::class, 'loginPost'])->name('web.login.post');
-Route::get('/logout', [AuthController::class, 'logout'])->name('web.logout');
+Route::group(['prefix' => 'admin'], function () {
 
-Route::middleware(['auth', 'role'])->group(
-    function () {
-        Route::get('/', [DashboardController::class, 'dashboard'])->name('web.dashboard');
-        Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
-        Route::get('/continents/{id}/edit', [ContinentController::class, 'edit'])->name('web.continents.edit');
-        Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
+    Route::get('/register', [AuthController::class, 'register']);
+    Route::get('/login', [AuthController::class, 'loginGet'])->name('web.login.get');
+    Route::post('/login', [AuthController::class, 'loginPost'])->name('web.login.post');
+    Route::get('/logout', [AuthController::class, 'logout'])->name('web.logout');
 
-        Route::get('/information', [InformationController::class, 'index'])->name('web.information');
+    Route::middleware(['auth', 'role'])->group(
+        function () {
+            Route::get('/', [DashboardController::class, 'dashboard'])->name('web.dashboard');
+            Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
+            Route::get('/continents/{id}/edit', [ContinentController::class, 'edit'])->name('web.continents.edit');
+            Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
 
-        Route::middleware('idInteger')->group(function () {
-            Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
-            Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
-        });
-    }
-);
+            Route::get('/information', [InformationController::class, 'index'])->name('web.information');
+
+            Route::middleware('idInteger')->group(function () {
+                Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
+                Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
+            });
+        }
+    );
+});
