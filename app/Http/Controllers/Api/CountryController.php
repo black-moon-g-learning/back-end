@@ -16,8 +16,11 @@ class CountryController extends Controller
         $this->countrySer = $countrySer;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return $this->countrySer->index();;
+        if ($request->has('attribute')) {
+            return $this->countrySer->getAttributeCountries($request->get('attribute'));
+        }
+        return $this->countrySer->index();
     }
 }
