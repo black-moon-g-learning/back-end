@@ -17,4 +17,10 @@ class CountryService implements ICountryService
     {
         return $this->countryRepo->getCountries();
     }
+
+    public function getAttributeCountries(string $attribute)
+    {
+        $field = ['id', $attribute];
+        return $this->countryRepo->getAttributeCountries($field);;
+    }
 }
