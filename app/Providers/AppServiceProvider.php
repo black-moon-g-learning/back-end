@@ -75,6 +75,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Level\ILevelService::class,
             \App\Services\Level\LevelService::class
         );
+
+        $this->app->bind(
+            \App\Services\User\IUserService::class,
+            \App\Services\User\UserService::class
+        );
     }
 
     /**

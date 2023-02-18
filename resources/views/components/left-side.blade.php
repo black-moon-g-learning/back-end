@@ -12,6 +12,10 @@
             'name' => 'Have you know?',
             'route' => route('web.information'),
         ],
+        [
+            'name' => 'Users',
+            'route' => route('web.users'),
+        ],
     ];
 @endphp
 
