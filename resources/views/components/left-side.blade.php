@@ -16,6 +16,10 @@
             'name' => 'Users',
             'route' => route('web.users'),
         ],
+        [
+            'name' => 'Countries',
+            'route' => route('web.countries'),
+        ],
     ];
 @endphp
 

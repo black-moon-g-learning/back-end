@@ -18,9 +18,6 @@
                                         Country</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Place</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Countries</th>
                                     <th class="text-secondary  opacity-7">Action</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Description</th>
@@ -47,13 +44,13 @@
                                             <p class="text-xs font-weight-bold mb-0">
                                                 {{ $country->place }}</p>
                                         </td>
-                    
+
                                         <td class="align-middle">
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $country->id }})"
                                                 id="click"> Edit</button>
                                         </td>
                                         <td class=" px-2">
-                                            {{ $country->description }}
+                                            {{ handleLongText($country->description) }}
                                         </td>
                                     </tr>
                                 @endforeach
