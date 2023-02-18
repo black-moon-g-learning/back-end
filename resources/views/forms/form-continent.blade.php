@@ -30,18 +30,6 @@
                         </div>
                     @endif
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="example-search-input" class="form-control-label">Countries</label>
-                        <input class="form-control" type="number" name="countries"
-                            value="{{ isset($continent) ? $continent->quantity_countries : '' }}">
-                        @if (isset(Session::get('errors')['countries']))
-                            <div class="form-group">
-                                @include('components.alert', $data = Session::get('errors')['countries'])
-                            </div>
-                        @endif
-                    </div>
-                </div>
             </div>
             <div class="form-group">
                 <label for="example-url-input" class="form-control-label">Description</label>

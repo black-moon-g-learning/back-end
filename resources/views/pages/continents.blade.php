@@ -56,7 +56,7 @@
                                         </td>
                                         <td class="text-sm">
                                             <span
-                                                class="badge badge-sm bg-gradient-success">{{ $continent->quantity_countries }}</span>
+                                                class="badge badge-sm bg-gradient-success">{{ $continent->total_countries }}</span>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"
@@ -93,7 +93,7 @@
                 content: 'Do you want to edit this row!',
                 buttons: {
                     confirm: function() {
-                        window.location.href = "{{ config('app.url') }}" + '/continents/' + id + '/edit'
+                        window.location.href = "{{ route('web.continents.edit', $continent->id) }}"
                     },
                     cancel: function() {
                         $.alert('Canceled!');

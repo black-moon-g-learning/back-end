@@ -17,7 +17,6 @@ class Continent extends Model
         'name',
         'description',
         'image',
-        'quantity_countries',
         'quantity_regions'
     ];
 
@@ -27,5 +26,15 @@ class Continent extends Model
     public function countries(): HasMany
     {
         return $this->hasMany(Country::class);
+    }
+    
+    /**
+     * getTotalCountriesAttribute
+     *
+     * @return mixed
+     */
+    public function getTotalCountriesAttribute()
+    {
+        return $this->countries()->count();
     }
 }
