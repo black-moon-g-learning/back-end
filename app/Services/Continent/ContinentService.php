@@ -30,8 +30,7 @@ class ContinentService implements IContinentService
         $validator = Validator::make($request->all(), [
             'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
             'name' => 'required',
-            'regions' => 'required|integer',
-            'countries' => 'required|integer'
+            'regions' => 'required|integer'
         ]);
 
         if ($validator->fails()) {
@@ -42,7 +41,6 @@ class ContinentService implements IContinentService
         }
 
         $continent = $validator->validated();
-        $continent['quantity_countries'] = $continent['countries'];
         $continent['quantity_regions'] = $continent['regions'];
 
 
