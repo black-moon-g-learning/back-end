@@ -2,6 +2,7 @@
 
 namespace App\Repositories\User;
 
+use App\Constants\Role;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 
@@ -23,5 +24,12 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->model
             ->where('firebase_uid', $uid)
             ->first();
+    }
+    public function getUserWithoutAdmin(int $limit = 20): mixed
+    {
+        return $this
+            ->model
+            ->where('role_id', '!=', Role::ADMIN_ROLE)
+            ->paginate($limit);
     }
 }

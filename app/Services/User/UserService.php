@@ -15,7 +15,7 @@ class UserService implements IUserService
 
     public function index()
     {
-        return $this->userRepo->getDataWithPaginate();
+        return $this->userRepo->getUserWithoutAdmin();
     }
 
     public function delete(int $id): array
