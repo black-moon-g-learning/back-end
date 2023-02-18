@@ -4,6 +4,7 @@ use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
+use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,7 +41,11 @@ Route::group(['prefix' => 'admin'], function () {
             Route::middleware('idInteger')->group(function () {
                 Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
                 Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
+
+                Route::delete('users/{id}', [UserController::class, 'delete'])->name('web.users.delete');
             });
+
+            Route::get('/users', [UserController::class, 'index'])->name('web.users');
         }
     );
 });
