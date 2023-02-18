@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
+use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
 use App\Http\Controllers\Web\UserController;
@@ -35,6 +36,8 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/continents', [ContinentController::class, 'index'])->name('web.continents');
             Route::get('/continents/{id}/edit', [ContinentController::class, 'edit'])->name('web.continents.edit');
             Route::put('/continents/{id}/update', [ContinentController::class, 'update'])->name('web.continents.update');
+
+            Route::get('/countries', [CountryController::class, 'index'])->name('web.countries');
 
             Route::get('/information', [InformationController::class, 'index'])->name('web.information');
 

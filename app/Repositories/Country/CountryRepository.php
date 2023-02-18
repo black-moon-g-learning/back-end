@@ -21,4 +21,12 @@ class CountryRepository extends BaseRepository implements ICountryRepository
     {
         return $this->model->paginate($limit, $attribute);
     }
+
+    public function getCountriesInContinent(int $continentId, int $limit = 10)
+    {
+        return $this
+            ->model
+            ->where('continent_id', $continentId)
+            ->paginate($limit);
+    }
 }

@@ -8,6 +8,8 @@ class CountryService implements ICountryService
 {
     protected ICountryRepository $countryRepo;
 
+    protected int $limit = 20;
+
     public function __construct(ICountryRepository $countryRepo)
     {
         $this->countryRepo = $countryRepo;
@@ -22,5 +24,10 @@ class CountryService implements ICountryService
     {
         $field = ['id', $attribute];
         return $this->countryRepo->getAttributeCountries($field);;
+    }
+
+    public function getCountriesInContinent(int $continentId)
+    {
+        return $this->countryRepo->getCountriesInContinent($continentId, $this->limit);
     }
 }
