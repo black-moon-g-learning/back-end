@@ -28,4 +28,20 @@ class CountryController extends Controller
 
         return view('pages.countries', compact('countries', 'continentId'));
     }
+
+    public function edit(int $id)
+    {
+        $country = $this->countrySer->edit($id);
+        return view('forms.country', compact('country'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $response =  $this->countrySer->update($request, $id);
+
+        if ($response["status"]) {
+            return redirect()->route('web.countries')->with('response', $response);
+        }
+        return redirect()->back()->with("errors", $response["errors"]);
+    }
 }

@@ -1,6 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
+    @if (Session::has('response'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
+                {{ Session::get('response')['data'] }}
+                !</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endif
     <div class="row">
         <div class="col-12">
             <div class="card mb-4">
@@ -46,8 +57,8 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <button class="btn bg-gradient-info" onClick="confirm({{ $country->id }})"
-                                                id="click"> Edit</button>
+                                            <a href="{{ route('web.countries.edit', $country->id) }}"
+                                                class="btn bg-gradient-info" id="click"> Edit</a>
                                         </td>
                                         <td class=" px-2">
                                             {{ handleLongText($country->description) }}
