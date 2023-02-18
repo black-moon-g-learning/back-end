@@ -23,6 +23,7 @@ class UserController extends Controller
 
     public function delete(int $id)
     {
-        return $id;
+        $result = $this->userSer->delete($id);
+        return redirect()->back()->with("response", $result);
     }
 }

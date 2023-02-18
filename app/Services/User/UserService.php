@@ -17,4 +17,21 @@ class UserService implements IUserService
     {
         return $this->userRepo->getDataWithPaginate();
     }
+
+    public function delete(int $id): array
+    {
+        $deletedUser = $this->userRepo->delete($id);
+
+        if ($deletedUser) {
+            return [
+                "status" => true,
+                "message" => "Delete successful"
+            ];
+        }
+
+        return [
+            "status" => false,
+            "message" => "Can not delete this user"
+        ];
+    }
 }

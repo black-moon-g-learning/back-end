@@ -2,6 +2,18 @@
 
 @section('content')
     <div class="row">
+        @if (Session::has('response'))
+            <div class="alert  {{ Session::get('response')['status'] ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show"
+                role="alert">
+                <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+                <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
+                    {{ Session::get('response')['message'] }}
+                    !</span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
         <div class="col-12">
             <div class="card mb-4">
                 <div class="card-header pb-0">
