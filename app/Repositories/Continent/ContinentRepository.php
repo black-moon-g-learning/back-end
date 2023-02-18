@@ -38,4 +38,9 @@ class ContinentRepository extends BaseRepository implements IContinentRepository
 
         return $response;
     }
+
+    public function getAll()
+    {
+        return $this->model->withCount('countries')->get();
+    }
 }
