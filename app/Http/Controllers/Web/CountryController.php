@@ -26,6 +26,6 @@ class CountryController extends Controller
 
         $countries = $this->countrySer->getCountriesInContinent($continentId);
 
-        return view('pages.countries', compact('countries'));
+        return view('pages.countries', compact('countries', 'continentId'));
     }
 }

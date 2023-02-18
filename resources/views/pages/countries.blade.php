@@ -60,7 +60,7 @@
                 </div>
             </div>
         </div>
-        {{ $countries->links() }}
+        {{ $countries->appends(['cont' => $continentId ?? 1])->links() }}
     </div>
     @include('components.footer')
 @endsection
