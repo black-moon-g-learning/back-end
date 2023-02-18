@@ -68,10 +68,6 @@ class ContinentService implements IContinentService
             "data" => "Update successful"
         ];
     }
-    public function show()
-    {
-        return 3;
-    }
 
     public function edit(int $id)
     {

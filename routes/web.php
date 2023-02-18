@@ -46,6 +46,9 @@ Route::group(['prefix' => 'admin'], function () {
                 Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
 
                 Route::delete('users/{id}', [UserController::class, 'delete'])->name('web.users.delete');
+
+                Route::get('/countries/{id}', [CountryController::class, 'edit'])->name('web.countries.edit');
+                Route::put('/countries/{id}', [CountryController::class, 'update'])->name('web.countries.update');
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');

@@ -19,7 +19,7 @@ class Country extends Model
         'description',
         'continent_id',
         'place',
-        'ensign'
+        'image'
     ];
 
     protected $hidden = [
