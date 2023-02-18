@@ -28,13 +28,4 @@ class Continent extends Model
         return $this->hasMany(Country::class);
     }
     
-    /**
-     * getTotalCountriesAttribute
-     *
-     * @return mixed
-     */
-    public function getTotalCountriesAttribute()
-    {
-        return $this->countries()->count();
-    }
 }

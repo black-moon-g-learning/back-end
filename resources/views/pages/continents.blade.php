@@ -56,7 +56,7 @@
                                         </td>
                                         <td class="text-sm">
                                             <span
-                                                class="badge badge-sm bg-gradient-success">{{ $continent->total_countries }}</span>
+                                                class="badge badge-sm bg-gradient-success">{{ $continent->countries_count }}</span>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"

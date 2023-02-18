@@ -20,7 +20,7 @@ class ContinentResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'image' => $this->image,
-            'countries' => $this->quantity_countries,
+            'countries' => $this->countries_count,
             'regions' => $this->quantity_regions,
         ];
     }
