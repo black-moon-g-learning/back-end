@@ -61,6 +61,8 @@
                                         <td class="align-middle">
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"
                                                 id="click"> Edit</button>
+                                            <a href="{{ route('web.countries', ['cont' => $continent->id]) }}"
+                                                class="btn bg-gradient-info" id="click"> Countries</a>
                                         </td>
                                         <td class=" px-2">
                                             {{ $continent->description }}
