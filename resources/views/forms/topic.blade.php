@@ -2,10 +2,14 @@
 
 @section('content')
     <div class="p-4 bg-info">
-        <form enctype="multipart/form-data" action="{{ route('web.topics.update', $topic->id) }}" method="POST">
+        <form enctype="multipart/form-data"
+            action="{{ isset($topic) ? route('web.topics.update', $topic->id) : route('web.topics.store') }}" method="POST">
 
             @csrf
-            @method('PUT')
+
+            @isset($topic)
+                @method('PUT')
+            @endisset
 
             <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Name</label>

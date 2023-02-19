@@ -53,14 +53,14 @@ Route::group(['prefix' => 'admin'], function () {
 
                 Route::get('/topics/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
                 Route::put('/topics/{id}', [TopicController::class, 'update'])->name('web.topics.update');
-
                 Route::delete('topics/{id}', [TopicController::class, 'delete'])->name('web.topics.delete');
-                
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');
 
             Route::get('/topics', [TopicController::class, 'index'])->name('web.topics');
+            Route::get('/topic/create', [TopicController::class, 'create'])->name('web.topics.create');
+            Route::post('/topic/store', [TopicController::class, 'store'])->name('web.topics.store');
         }
     );
 });

@@ -42,4 +42,14 @@ class TopicController extends Controller
         $response = $this->topicSer->delete($id);
         return redirect()->route('web.topics')->with('response', $response);
     }
+
+    public function create()
+    {
+        return view('forms.topic');
+    }
+
+    public function store(Request $request)
+    {
+        
+    }
 }
