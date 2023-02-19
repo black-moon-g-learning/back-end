@@ -50,6 +50,11 @@ class TopicController extends Controller
 
     public function store(Request $request)
     {
+        $response = $this->topicSer->store($request);
         
+        if ($response['status']) {
+            return redirect()->route('web.topics')->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
     }
 }

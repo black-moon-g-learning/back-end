@@ -4,7 +4,6 @@ namespace App\Services\Topic;
 
 use App\Repositories\Topic\ITopicRepository;
 use App\Services\Storage\IStorageService;
-use App\Services\Validate\IValidateService;
 use App\Services\Validate\ValidateService;
 use Illuminate\Http\Request;
 
@@ -88,5 +87,33 @@ class TopicService implements ITopicService
             'status' => $deleted,
             'data' => "Can not delete right now"
         ];
+    }
+
+    public function store(Request $request)
+    {
+        $validator = new ValidateService($request->all());
+        $validated = $validator->afterValidated();
+
+        if ($validated['status']) {
+
+            $topic = $validated['data'];
+            if ($validator->getHasFile()) {
+
+                $file = $request->file('file');
+                $uploaded = $this->storeSer->upload($file, 'topics');
+
+                if ($uploaded['status']) {
+                    $topic['image'] = $uploaded['url'];
+                }
+            }
+            $this->topicRepo->create($topic);
+
+            return [
+                'status' => true,
+                'data' => "Create new Topic successful"
+            ];
+        }
+
+        return $validated;
     }
 }
