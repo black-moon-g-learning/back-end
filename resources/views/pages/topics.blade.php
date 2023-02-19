@@ -59,6 +59,15 @@
                                         <td class="align-middle">
                                             <a href="{{ route('web.topics.edit', $topic->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
+
+                                            <form method="POST" action={{ route('web.topics.delete', $topic->id) }}>
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn bg-gradient-info delete-topic" type="submit"
+                                                    id="click1"> Delete</button>
+                                            </form>
                                         </td>
                                         <td class=" px-2">
                                             {{ handleLongText($topic->description) }}
@@ -74,4 +83,31 @@
         {{ $topics->links() }}
     </div>
     @include('components.footer')
+@endsection
+
+
+@section('customCss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+        $('.delete-topic').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm Delete!',
+                content: 'Do you want to delete this row!, video in this topic will be deleted',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
+    </script>
 @endsection

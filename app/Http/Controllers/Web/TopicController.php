@@ -36,4 +36,10 @@ class TopicController extends Controller
         }
         return redirect()->back()->with('errors', $response['data']);
     }
+
+    public function delete(int $id)
+    {
+        $response = $this->topicSer->delete($id);
+        return redirect()->route('web.topics')->with('response', $response);
+    }
 }

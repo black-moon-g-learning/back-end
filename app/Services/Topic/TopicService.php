@@ -65,4 +65,28 @@ class TopicService implements ITopicService
 
         return $validated;
     }
+
+    public function delete(int $id)
+    {
+        $topicDB = $this->topicRepo->find($id);
+
+        if ($this->storeSer->exists($topicDB->image)) {
+            $this->storeSer->delete($topicDB->image);
+        }
+
+        $deleted = $this->topicRepo->delete($id);
+
+        if ($deleted) {
+
+            return [
+                'status' => $deleted,
+                'data' => "Deleted successful!"
+            ];
+        }
+
+        return [
+            'status' => $deleted,
+            'data' => "Can not delete right now"
+        ];
+    }
 }

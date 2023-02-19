@@ -53,6 +53,9 @@ Route::group(['prefix' => 'admin'], function () {
 
                 Route::get('/topics/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
                 Route::put('/topics/{id}', [TopicController::class, 'update'])->name('web.topics.update');
+
+                Route::delete('topics/{id}', [TopicController::class, 'delete'])->name('web.topics.delete');
+                
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');

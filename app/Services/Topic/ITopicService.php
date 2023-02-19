@@ -11,4 +11,6 @@ interface ITopicService
     public function edit(int $id);
 
     public function update(Request $request, int $id);
+
+    public function delete(int $id);
 }
