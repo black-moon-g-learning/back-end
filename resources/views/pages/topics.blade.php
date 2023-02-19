@@ -57,7 +57,7 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{ route('web.countries.edit', $topic->id) }}"
+                                            <a href="{{ route('web.topics.edit', $topic->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
                                         </td>
                                         <td class=" px-2">

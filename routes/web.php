@@ -50,6 +50,9 @@ Route::group(['prefix' => 'admin'], function () {
 
                 Route::get('/countries/{id}', [CountryController::class, 'edit'])->name('web.countries.edit');
                 Route::put('/countries/{id}', [CountryController::class, 'update'])->name('web.countries.update');
+
+                Route::get('/topics/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
+                Route::put('/topics/{id}', [TopicController::class, 'update'])->name('web.topics.update');
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');

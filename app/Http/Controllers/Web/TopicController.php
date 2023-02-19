@@ -20,4 +20,20 @@ class TopicController extends Controller
         $topics = $this->topicSer->index();
         return view('pages.topics', compact('topics'));
     }
+
+    public function edit(int $id)
+    {
+        $topic = $this->topicSer->edit($id);
+        return view('forms.topic', compact('topic'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $response = $this->topicSer->update($request, $id);
+
+        if ($response['status']) {
+            return redirect()->route('web.topics')->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
+    }
 }

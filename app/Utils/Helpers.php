@@ -69,7 +69,7 @@ if (!function_exists('getS3Url')) {
 }
 
 if (!function_exists('handleLongText')) {
-    function handleLongText(string $text, int $length = 40)
+    function handleLongText(?string $text, int $length = 40)
     {
         if (strlen($text) > $length) {
             return substr($text, 0, $length) . '...';
