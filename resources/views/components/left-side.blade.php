@@ -20,6 +20,10 @@
             'name' => 'Countries',
             'route' => route('web.countries'),
         ],
+        [
+            'name' => 'Topics',
+            'route' => route('web.topics'),
+        ],
     ];
 @endphp
 

@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
+use App\Http\Controllers\Web\TopicController;
 use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,9 +50,17 @@ Route::group(['prefix' => 'admin'], function () {
 
                 Route::get('/countries/{id}', [CountryController::class, 'edit'])->name('web.countries.edit');
                 Route::put('/countries/{id}', [CountryController::class, 'update'])->name('web.countries.update');
+
+                Route::get('/topics/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
+                Route::put('/topics/{id}', [TopicController::class, 'update'])->name('web.topics.update');
+                Route::delete('topics/{id}', [TopicController::class, 'delete'])->name('web.topics.delete');
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');
+
+            Route::get('/topics', [TopicController::class, 'index'])->name('web.topics');
+            Route::get('/topic/create', [TopicController::class, 'create'])->name('web.topics.create');
+            Route::post('/topic/store', [TopicController::class, 'store'])->name('web.topics.store');
         }
     );
 });

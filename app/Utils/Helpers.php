@@ -59,9 +59,11 @@ if (!function_exists('convertTimeFromDB')) {
 }
 
 if (!function_exists('getS3Url')) {
-    function getS3Url(string $url): string
+    function getS3Url(?string $url): string
     {
-        if (str_contains($url, 'http')) {
+        if ($url == null) {
+            return "https://www.smartdatajob.com/images/joomlart/demo/default.jpg";
+        } else if (str_contains($url, 'http')) {
             return $url;
         }
         return Common::S3_ROOT . $url;
@@ -69,7 +71,7 @@ if (!function_exists('getS3Url')) {
 }
 
 if (!function_exists('handleLongText')) {
-    function handleLongText(string $text, int $length = 40)
+    function handleLongText(?string $text, int $length = 40)
     {
         if (strlen($text) > $length) {
             return substr($text, 0, $length) . '...';
