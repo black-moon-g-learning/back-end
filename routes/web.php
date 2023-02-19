@@ -5,6 +5,7 @@ use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
+use App\Http\Controllers\Web\TopicController;
 use App\Http\Controllers\Web\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,8 @@ Route::group(['prefix' => 'admin'], function () {
             });
 
             Route::get('/users', [UserController::class, 'index'])->name('web.users');
+
+            Route::get('/topics', [TopicController::class, 'index'])->name('web.topics');
         }
     );
 });

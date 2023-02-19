@@ -80,6 +80,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\User\IUserService::class,
             \App\Services\User\UserService::class
         );
+
+        $this->app->bind(
+            \App\Services\Topic\ITopicService::class,
+            \App\Services\Topic\TopicService::class
+        );
     }
 
     /**

@@ -20,4 +20,8 @@ class TopicRepository extends BaseRepository implements ITopicRepository
             ->where('countries_topics.country_id', $countryId)
             ->get();
     }
+    public function getAllWithCountVideos()
+    {
+        return $this->model->withCount('videos')->paginate();
+    }
 }
