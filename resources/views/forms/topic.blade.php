@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="p-4 bg-info">
+    <div class="p-4 bg-secondary">
         <form enctype="multipart/form-data"
             action="{{ isset($topic) ? route('web.topics.update', $topic->id) : route('web.topics.store') }}" method="POST">
 
