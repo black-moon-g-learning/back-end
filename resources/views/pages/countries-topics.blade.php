@@ -95,7 +95,7 @@
                                             </form>
                                         </td>
                                         <td class=" px-2">
-                                            {{ handleLongText($countryTopic->description) }}
+                                            {{ handleLongText($countryTopic->topic->description) }}
                                         </td>
                                     </tr>
                                 @endforeach
