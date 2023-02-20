@@ -62,6 +62,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Level\ILevelRepository::class,
             \App\Repositories\Level\LevelRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\CountryTopic\ICountryTopicRepository::class,
+            \App\Repositories\CountryTopic\CountryTopicRepository::class
+        );
     }
 
     /**

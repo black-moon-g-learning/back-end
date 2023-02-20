@@ -11,6 +11,4 @@ interface ITopicRepository extends RepositoryInterface
     public function getAllWithCountVideos();
 
     public function editWithCountVideo(int $id);
-
-    public function getTopicsInCountry(int $countryId);
 }

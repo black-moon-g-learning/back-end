@@ -65,14 +65,14 @@
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img style="width: 200px" src="{{ getS3Url($countryTopic->image) }}"
-                                                        alt="user1">
+                                                    <img style="width: 200px"
+                                                        src="{{ getS3Url($countryTopic->topic->image) }}" alt="user1">
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $countryTopic->name }}
+                                                <h6 class="mb-0 text-sm"> {{ $countryTopic->topic->name }}
                                                 </h6>
                                             </div>
                                         </td>

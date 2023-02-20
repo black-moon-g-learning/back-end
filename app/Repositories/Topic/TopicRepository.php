@@ -34,9 +34,4 @@ class TopicRepository extends BaseRepository implements ITopicRepository
     {
         return $this->model->withCount('videos')->find($id);
     }
-
-    public function getTopicsInCountry(int $countryId)
-    {
-        return $this->query($countryId)->paginate(20);
-    }
 }

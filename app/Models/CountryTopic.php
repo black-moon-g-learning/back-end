@@ -20,8 +20,13 @@ class CountryTopic extends Model
         'topic_id',
     ];
 
-    public function topics()
+    public function topic()
     {
-        return $this->hasMany(Topic::class,'id','topic_id');
+        return $this->hasOne(Topic::class, 'id', 'topic_id');
+    }
+
+    public function videos(): HasMany
+    {
+        return $this->hasMany(Video::class, 'country_topic_id', 'id');
     }
 }
