@@ -26,9 +26,15 @@ class CountryTopicController extends Controller
         return view('pages.countries-topics', compact('countryTopics', 'country', 'remainTopics'));
     }
 
-    public function storeTopic(Request $request, $countryId)
+    public function storeTopic(Request $request, int $countryId)
     {
         $countryTopic = $this->countryTopicSer->storeTopic($request, $countryId);
         return redirect()->back()->with('response', $countryTopic);
+    }
+
+    public function delete(int $id)
+    {
+        $result = $this->countryTopicSer->delete($id);
+        return redirect()->back()->with('response', $result);
     }
 }

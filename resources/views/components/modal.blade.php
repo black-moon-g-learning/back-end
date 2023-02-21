@@ -6,14 +6,11 @@
                     <div class="card card-plain">
                         <div class="card-header pb-0 text-left">
                             <h3 class="font-weight-bolder text-info text-gradient">Add new topic</h3>
-                            <p class="mb-0">Enter your email and password to sign in</p>
+                            <p class="mb-0">Press Add to add new topic for country</p>
                         </div>
                         <div class="card-body">
                             <div role="form text-left">
                                 <div class="modal-content">
-
-
-
                                     @if (!empty($remainTopics->toArray()['data']))
                                         <div class="modal-header">
                                             <h6 class="modal-title" id="modal-title-default">Topic</h6>

@@ -55,4 +55,24 @@ class CountryTopicService implements ICountryTopicService
             ];
         }
     }
+
+    public function delete(int $id)
+    {
+        $countryTopicDeleted =  $this->countryTopicRepo->delete($id);
+
+        if ($countryTopicDeleted) {
+
+            return [
+                'status' => true,
+                'data' => 'Delete topic successful'
+            ];
+            
+        } else {
+
+            return [
+                'status' => false,
+                'data' => 'Somethings is wrong, can not delete now'
+            ];
+        }
+    }
 }

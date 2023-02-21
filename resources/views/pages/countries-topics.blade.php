@@ -82,10 +82,8 @@
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{ route('web.topics.edit', $countryTopic->id) }}"
-                                                class="btn bg-gradient-info" id="click"> Edit</a>
-
-                                            <form method="POST" action={{ route('web.topics.delete', $countryTopic->id) }}>
+                                            <form method="POST"
+                                                action={{ route('web.countries-topics.delete', $countryTopic->id) }}>
 
                                                 @csrf
                                                 @method('DELETE')
@@ -109,4 +107,30 @@
     </div>
     @include('components.footer')
     @include('components.modal')
+@endsection
+
+@section('customCss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+        $('.delete-topic').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm Edit!',
+                content: 'Do you want to edit this row!',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
+    </script>
 @endsection
