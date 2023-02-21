@@ -25,4 +25,10 @@ class CountryTopicController extends Controller
         $remainTopics = $result['remainTopics'];
         return view('pages.countries-topics', compact('countryTopics', 'country', 'remainTopics'));
     }
+
+    public function storeTopic(Request $request, $countryId)
+    {
+        $countryTopic = $this->countryTopicSer->storeTopic($request, $countryId);
+        return redirect()->back()->with('response', $countryTopic);
+    }
 }

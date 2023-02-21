@@ -5,6 +5,7 @@ namespace App\Services\CountryTopic;
 use App\Repositories\Country\ICountryRepository;
 use App\Repositories\CountryTopic\ICountryTopicRepository;
 use App\Repositories\Topic\ITopicRepository;
+use Illuminate\Http\Request;
 
 class CountryTopicService implements ICountryTopicService
 {
@@ -32,5 +33,26 @@ class CountryTopicService implements ICountryTopicService
 
         return $result;
     }
+
+    public function storeTopic(Request $request, int $countryId)
+    {
+        $attribute['country_id'] = $countryId;
+        $attribute['topic_id'] = $request->get('topic_id');
+
+        $countryTopic =  $this->countryTopicRepo->create($attribute);
+
+        if ($countryTopic) {
+
+            return [
+                'status' => true,
+                'data' => 'Create new topic successful'
+            ];
+        } else {
+
+            return [
+                'status' => false,
+                'data' => 'Somethings is wrong, can not update now'
+            ];
+        }
+    }
 }
-    

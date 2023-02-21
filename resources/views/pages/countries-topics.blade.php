@@ -2,7 +2,8 @@
 
 @section('content')
     @if (Session::has('response'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert  {{ Session::get('response')['status'] ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show"
+            role="alert">
             <span class="alert-icon"><i class="ni ni-like-2"></i></span>
             <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
                 {{ Session::get('response')['data'] }}
@@ -31,7 +32,7 @@
                 </div>
             </div>
         @endisset
-        @include('components.modal', $remainTopics)
+        @include('components.modal', ['remainTopics' => $remainTopics, 'country' => $country])
         <div class="col-12">
             <div class=" row card mb-4">
                 <div class=" col-6 card-header pb-0">

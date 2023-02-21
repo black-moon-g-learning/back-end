@@ -9,7 +9,7 @@
                             <p class="mb-0">Enter your email and password to sign in</p>
                         </div>
                         <div class="card-body">
-                            <form role="form text-left">
+                            <div role="form text-left">
                                 <div class="modal-content">
 
 
@@ -29,18 +29,24 @@
                                                 <img class="modal-title" style="width:150px"
                                                     src={{ getS3Url($remainTopic['image']) }}
                                                     id="modal-title-default" />
-                                                <button class="modal-title btn btn-primary" id="modal-title-default">
-                                                    Add</button>
+                                                <form method="POST"
+                                                    action="{{ route('web.countries-topics.store', $country->id) }}">
+                                                    @csrf
+                                                    <input type="hidden" name='topic_id'
+                                                        value="{{ $remainTopic['id'] }}" />
+                                                    <button class="modal-title btn btn-primary"
+                                                        id="modal-title-default">
+                                                        Add</button>
+                                                </form>
                                             </div>
                                         @endforeach
                                     @endif
                                 </div>
-                            </form>
+                            </div>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn bg-gradient-secondary"
                                 data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn bg-gradient-primary">Save changes</button>
                         </div>
                     </div>
                 </div>
