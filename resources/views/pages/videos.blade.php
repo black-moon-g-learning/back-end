@@ -56,7 +56,7 @@
 
                                         </td>
                                         <td class="text-sm">
-                                            <button class="btn bg-gradient-info">{{ $video->owner_id }}</button>
+                                            <button class="btn bg-gradient-info">{{ getUserName($video->user) }}</button>
                                         </td>
                                         <td class="align-middle">
                                             <button class="btn bg-gradient-info" onClick="confirm({{ $video->id }})"
