@@ -8,6 +8,7 @@ use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
 use App\Http\Controllers\Web\TopicController;
 use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\VideoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -63,9 +64,11 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/topic/create', [TopicController::class, 'create'])->name('web.topics.create');
             Route::post('/topic/store', [TopicController::class, 'store'])->name('web.topics.store');
 
-            Route::get('countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
-            Route::post('countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
-            Route::delete('countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
+            Route::get('/countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
+            Route::post('/countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
+            Route::delete('/countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
+
+            Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');
         }
     );
 });
