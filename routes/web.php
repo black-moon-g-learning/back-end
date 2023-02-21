@@ -65,6 +65,7 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
             Route::post('countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
+            Route::delete('countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
         }
     );
 });
