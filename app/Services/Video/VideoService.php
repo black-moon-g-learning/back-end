@@ -78,4 +78,9 @@ class VideoService implements IVideoService
     {
         return $this->videoRepo->getVideos($countryTopicId);
     }
+
+    public function find(int $videoId): mixed
+    {
+        return $this->videoRepo->find($videoId);
+    }
 }

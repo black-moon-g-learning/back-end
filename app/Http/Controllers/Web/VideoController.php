@@ -20,4 +20,10 @@ class VideoController extends Controller
         $videos =  $this->videoSer->indexWeb($countryTopicId);
         return view('pages.videos', compact('videos'));
     }
+
+    public function edit(int $videoId)
+    {
+        $video = $this->videoSer->find($videoId);
+        return view('forms.video', compact('video'));
+    }
 }

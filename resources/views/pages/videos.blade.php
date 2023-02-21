@@ -59,11 +59,9 @@
                                             <button class="btn bg-gradient-info">{{ getUserName($video->user) }}</button>
                                         </td>
                                         <td class="align-middle">
-                                            <button class="btn bg-gradient-info" onClick="confirm({{ $video->id }})"
+                                            <a href="{{ route('web.videos.edit', $video->id) }}" class="btn bg-gradient-info"
                                                 id="click">
-                                                Edit</button>
-                                            <a href="{{ route('web.countries', ['cont' => $video->id]) }}"
-                                                class="btn bg-gradient-info" id="click"> Countries</a>
+                                                Edit</a>
                                         </td>
                                         <td class=" px-2">
                                             {{ convertTimeFromDB($video->time) }}
