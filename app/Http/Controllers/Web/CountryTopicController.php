@@ -22,7 +22,7 @@ class CountryTopicController extends Controller
 
         $countryTopics = $result['topics'];
         $country =  $result['country'];
-        
-        return view('pages.countries-topics', compact('countryTopics', 'country'));
+        $remainTopics = $result['remainTopics'];
+        return view('pages.countries-topics', compact('countryTopics', 'country', 'remainTopics'));
     }
 }

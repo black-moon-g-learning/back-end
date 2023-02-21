@@ -34,4 +34,9 @@ class TopicRepository extends BaseRepository implements ITopicRepository
     {
         return $this->model->withCount('videos')->find($id);
     }
+
+    public function getTopicsNotInWhere(array $topicIds)
+    {
+        return $this->model->whereNotIn('id', $topicIds)->paginate(20);
+    }
 }

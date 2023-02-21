@@ -13,7 +13,6 @@
         </div>
     @endif
     <div class="row">
-
         @isset($country)
             <div class="card">
                 <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
@@ -32,16 +31,16 @@
                 </div>
             </div>
         @endisset
-
-
+        @include('components.modal', $remainTopics)
         <div class="col-12">
             <div class=" row card mb-4">
                 <div class=" col-6 card-header pb-0">
                     <h6>Topics table</h6>
                 </div>
                 <div class="col-6 card-header pb-0">
-                    <a href="{{ route('web.topics.create') }}" class="btn bg-success badge-primary" id="click">
-                        Create new topic</a>
+                    <button data-bs-toggle="modal" data-bs-target="#modal-form" class="btn bg-success badge-primary"
+                        id="click">
+                        Create new topic</button>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -108,4 +107,5 @@
         {{ $countryTopics->links() }}
     </div>
     @include('components.footer')
+    @include('components.modal')
 @endsection
