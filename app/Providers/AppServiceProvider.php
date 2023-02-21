@@ -86,10 +86,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Topic\TopicService::class
         );
 
-        // $this->app->bind(
-        //     \App\Services\Validate\IValidateService::class,
-        //     \App\Services\Validate\ValidateService::class
-        // );
+        $this->app->bind(
+            \App\Services\CountryTopic\ICountryTopicService::class,
+            \App\Services\CountryTopic\CountryTopicService::class
+        );
     }
 
     /**

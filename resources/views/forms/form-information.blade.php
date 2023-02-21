@@ -18,7 +18,7 @@
         ];
     @endphp
 
-    <div class="p-4 bg-info">
+    <div class="p-4 bg-secondary">
         <form enctype="multipart/form-data" action="{{ route('web.information.update', $info->id) }}" method="POST">
 
             @csrf

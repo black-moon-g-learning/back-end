@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="p-4 bg-info">
+    <div class="p-4 bg bg-secondary">
         <form enctype="multipart/form-data" action="{{ route('web.countries.update', $country->id) }}" method="POST">
 
             @csrf

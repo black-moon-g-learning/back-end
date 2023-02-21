@@ -2,7 +2,8 @@
 
 @section('content')
     @if (Session::has('response'))
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <div class="alert  {{ Session::get('response')['status'] ? 'alert-success' : 'alert-danger' }} alert-dismissible fade show"
+            role="alert">
             <span class="alert-icon"><i class="ni ni-like-2"></i></span>
             <span class="alert-text"><strong>{{ Session::get('response')['status'] ? 'Success' : 'Fail' }}! </strong>
                 {{ Session::get('response')['data'] }}
@@ -13,10 +14,34 @@
         </div>
     @endif
     <div class="row">
+        @isset($country)
+            <div class="card">
+                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                    <a href="javascript:;" class="d-block">
+                        <img style="width: 200px" src="{{ getS3Url($country->image) }}" class="img-fluid border-radius-lg">
+                    </a>
+                </div>
+
+                <div class="card-body pt-2">
+                    <a href="javascript:;" class="card-title h5 d-block text-darker">
+                        {{ $country->name }}
+                    </a>
+                    <p class="card-description mb-4">
+                        List topics in this country
+                    </p>
+                </div>
+            </div>
+        @endisset
+        @include('components.modal', ['remainTopics' => $remainTopics, 'country' => $country])
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>Country table</h6>
+            <div class=" row card mb-4">
+                <div class=" col-6 card-header pb-0">
+                    <h6>Topics table</h6>
+                </div>
+                <div class="col-6 card-header pb-0">
+                    <button data-bs-toggle="modal" data-bs-target="#modal-form" class="btn bg-success badge-primary"
+                        id="click">
+                        Create new topic</button>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -26,47 +51,51 @@
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Image</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Country</th>
+                                        Topic</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Place</th>
+                                        Total videos</th>
                                     <th class="text-secondary  opacity-7">Action</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Description</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($countries as $country)
+                                @foreach ($countryTopics as $countryTopic)
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
                                                 <div>
-                                                    <img style="width: 200px" src="{{ getS3Url($country->image) }}"
-                                                        alt="user1">
+                                                    <img style="width: 200px"
+                                                        src="{{ getS3Url($countryTopic->topic->image) }}" alt="user1">
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $country->name }}
+                                                <h6 class="mb-0 text-sm"> {{ $countryTopic->topic->name }}
                                                 </h6>
                                             </div>
                                         </td>
                                         <td class="justify-content-center">
                                             <p class="text-xs font-weight-bold mb-0">
-                                                {{ $country->place }}</p>
+                                                {{ $countryTopic->videos_count }}</p>
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{ route('web.countries.edit', $country->id) }}"
+                                            <a href="{{ route('web.topics.edit', $countryTopic->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
-                                            <a href="{{ route('web.countries-topics', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> List topic</a>
+
+                                            <form method="POST" action={{ route('web.topics.delete', $countryTopic->id) }}>
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn bg-gradient-info delete-topic" type="submit"
+                                                    id="click1"> Delete</button>
+                                            </form>
                                         </td>
                                         <td class=" px-2">
-                                            {{-- {{ handleLongText($country->description) }}
-                                             --}}
-                                             <p class="text-truncate text-break text-center text-md-left" style="max-width: 200px; font-size: 18px; color: #333;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-
+                                            {{ handleLongText($countryTopic->topic->description) }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -76,7 +105,8 @@
                 </div>
             </div>
         </div>
-        {{ $countries->appends(['cont' => $continentId ?? 1])->links() }}
+        {{ $countryTopics->links() }}
     </div>
     @include('components.footer')
+    @include('components.modal')
 @endsection
