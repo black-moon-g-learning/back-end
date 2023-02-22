@@ -1,9 +1,15 @@
 @extends('layouts.master')
 
 @section('content')
+    <style>
+        .card-footer,
+        .progress {
+            display: none;
+        }
+    </style>
     <div class="p-4 bg-secondary">
         <form enctype="multipart/form-data"
-            action="{{ isset($video) ? route('web.videos.edit', $video->id) : route('web.topics.store') }}" method="POST">
+            action="{{ isset($video) ? route('web.videos.update', $video->id) : route('web.topics.store') }}" method="POST">
 
             @csrf
 
@@ -11,16 +17,21 @@
                 @method('PUT')
             @endisset
 
-            <div class="form-group">
-                <label for="example-text-input" class="form-control-label">Name</label>
-                <input class="form-control" name="name" type="text" value="{{ isset($video) ? $video->name : '' }}"
-                    id="example-text-input">
-            </div>
-            @if (isset(Session::get('errors')['name']))
-                <div class="col-md-4 form-group">
-                    @include('components.alert', $data = Session::get('errors')['name'])
+            <input name="country_topic_id" type="hidden" value="{{ isset($video) ? $video->country_topic_id : '' }}" />
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label for="example-text-input" class="form-control-label">Name</label>
+                    <input class="form-control" name="name" type="text"
+                        value="{{ isset($video) ? $video->name : '' }}" id="example-text-input">
+                    @if (isset(Session::get('errors')['name']))
+                        <div class=" form-group">
+                            @include('components.alert', $data = Session::get('errors')['name'])
+                        </div>
+                    @endif
                 </div>
-            @endif
+
+            </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
@@ -35,8 +46,13 @@
                     @endif
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Duration</label>
-                        <input class="form-control" type="text" name="total video"
-                            value="{{ isset($video) ? convertTimeFromDB($video->time) : '' }}" id="example-search-input">
+                        <input class="form-control" type="number" name="time"
+                            value="{{ isset($video) ? $video->time : '' }}" id="example-search-input">
+                        @if (isset(Session::get('errors')['time']))
+                            <div class="form-group">
+                                @include('components.alert', $data = Session::get('errors')['time'])
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -49,7 +65,7 @@
                     <label for="example-tel-input" class="form-control-label">Image</label>
                     <input class="form-control" name="file" type="file" onchange="changeImage(event)">
                     @if (isset(Session::get('errors')['file']))
-                        <div class="col-md-4 form-group">
+                        <div class="form-group">
                             @include('components.alert', $data = Session::get('errors')['file'])
                         </div>
                     @endif
@@ -61,22 +77,53 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="form-group col-6">
-                    <label for="example-tel-input" class="form-control-label">Video</label>
-                    <input class="form-control" name="file" type="file" onchange="changeImage(event)">
-                    @if (isset(Session::get('errors')['file']))
-                        <div class="col-md-4 form-group">
-                            @include('components.alert', $data = Session::get('errors')['file'])
-                        </div>
-                    @endif
+            @if (!isset($video))
+                <div class="row">
+                    <div class="form-group col-6">
+                        <label for="example-tel-input" class="form-control-label">Video</label>
+                        <input class="form-control" name="file" type="file" onchange="changeImage(event)">
+                        @if (isset(Session::get('errors')['file']))
+                            <div class="col-md-4 form-group">
+                                @include('components.alert', $data = Session::get('errors')['file'])
+                            </div>
+                        @endif
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="example-tel-input" class="form-control-label">Preview</label>
+                        <img class="form-control" id="preview-img" class="col-6 img-thumbnail" style="width: 30rem"
+                            alt="" src="{{ isset($video) ? getS3Url($video->image) : '' }}">
+                    </div>
                 </div>
-                <div class="form-group col-6">
-                    <label for="example-tel-input" class="form-control-label">Preview</label>
-                    <img class="form-control" id="preview-img" class="col-6 img-thumbnail" style="width: 30rem"
-                        alt="" src="{{ isset($video) ? getS3Url($video->image) : '' }}">
+
+                {{-- 
+                    <div class="container pt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h5>Upload File</h5>
+                    </div>
+
+                    <div class="card-body">
+                        <div id="upload-container" class="text-center">
+                            <button id="browseFile" class="btn btn-primary">Brows File</button>
+                        </div>
+                        <div class="progress mt-3" style="height: 25px">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
+                                aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%; height: 100%">
+                                75%</div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer p-4">
+                        <video id="videoPreview" src="" controls style="width: 100%; height: auto"></video>
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>   
+                 --}}
+            @endif
             <input class="btn btn-success" type="submit" value="Submit">
         </form>
         <script>
@@ -88,5 +135,72 @@
                 }
             }
         </script>
+
     </div>
+
+
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <!-- Resumable JS -->
+    <script src="https://cdn.jsdelivr.net/npm/resumablejs@1.1.0/resumable.min.js"></script>
+
+    <script type="text/javascript">
+        let browseFile = $('#browseFile');
+        let resumable = new Resumable({
+            target: '{{ route('web.videos.update', isset($video) ? $video->id : 1) }}',
+            query: {
+                _token: '{{ csrf_token() }}'
+            }, // CSRF token
+            fileType: ['mp4'],
+            headers: {
+                'Accept': 'application/json'
+            },
+            testChunks: false,
+            throttleProgressCallbacks: 1,
+        });
+
+        resumable.assignBrowse(browseFile[0]);
+
+        resumable.on('fileAdded', function() { // trigger when file picked
+            showProgress();
+            resumable.upload() // to actually start uploading.
+        });
+
+        resumable.on('fileProgress', function(file) { // trigger when file progress update
+            updateProgress(Math.floor(file.progress() * 100));
+        });
+
+        resumable.on('fileSuccess', function(file, response) { // trigger when file upload complete
+            response = JSON.parse(response)
+            $('#videoPreview').attr('src', response.path);
+            $('.card-footer').show();
+            alert('upload video successful');
+        });
+
+        resumable.on('fileError', function(file, response) { // trigger when there is any error
+            alert('file uploading error.')
+        });
+
+
+        let progress = $('.progress');
+
+        function showProgress() {
+            progress.find('.progress-bar').css('width', '0%');
+            progress.find('.progress-bar').html('0%');
+            progress.find('.progress-bar').removeClass('bg-success');
+            progress.show();
+        }
+
+        function updateProgress(value) {
+            progress.find('.progress-bar').css('width', `${value}%`)
+            progress.find('.progress-bar').html(`${value}%`)
+        }
+
+        function hideProgress() {
+            progress.hide();
+        }
+    </script>
 @endsection

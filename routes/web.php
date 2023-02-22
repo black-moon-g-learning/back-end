@@ -71,7 +71,7 @@ Route::group(['prefix' => 'admin'], function () {
             Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');
 
             Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
-            Route::get('/videos/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
+            Route::put('/videos/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
         }
     );
 });

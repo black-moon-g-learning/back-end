@@ -5,10 +5,15 @@ namespace App\Services\Video;
 use App\Http\Resources\VideoResource;
 use App\Http\Resources\VideoSearchResource;
 use App\Repositories\Video\IVideoRepository;
+use App\Services\Storage\IStorageService;
+use App\Services\Validate\VideoValidateService;
+use Illuminate\Http\Request;
 
 class VideoService implements IVideoService
 {
     protected IVideoRepository  $videoRepo;
+
+    protected IStorageService $storeSer;
 
     /**
      * __construct
@@ -16,9 +21,12 @@ class VideoService implements IVideoService
      * @param  IVideoRepository $videoRepo
      * @return void
      */
-    public function __construct(IVideoRepository $videoRepo)
-    {
+    public function __construct(
+        IVideoRepository $videoRepo,
+        IStorageService $storeSer
+    ) {
         $this->videoRepo = $videoRepo;
+        $this->storeSer = $storeSer;
     }
 
     /**
@@ -82,5 +90,37 @@ class VideoService implements IVideoService
     public function find(int $videoId): mixed
     {
         return $this->videoRepo->find($videoId);
+    }
+
+    public function update(Request $request, int $videoId): array
+    {
+        $validator = new VideoValidateService($request->all());
+        $validated = $validator->afterValidated();
+        if ($validated['status']) {
+
+            $video = $validated['data'];
+            $videoDB = $this->videoRepo->find($videoId);
+
+            if ($validator->getHasFile()) {
+
+                if ($this->storeSer->exists($videoDB->image)) {
+                    $this->storeSer->delete($videoDB->image);
+                }
+
+                $file = $request->file('file');
+                $uploaded = $this->storeSer->upload($file, 'videos');
+
+                if ($uploaded['status']) {
+                    $video['image'] = $uploaded['url'];
+                }
+            }
+            $this->videoRepo->update($videoId, $video);
+
+            return [
+                'status' => true,
+                'data' => "Update Video successful"
+            ];
+        }
+        return $validated;
     }
 }
