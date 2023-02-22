@@ -47,6 +47,8 @@ Route::post('/information', [InformationController::class, 'create']);
 
 Route::middleware(['auth:api'])->group(function () {
     Route::get('/profile', [UserController::class, 'getProfile']);
+    Route::put('/profile', [UserController::class, 'update']);
+    Route::patch('/profile', [UserController::class, 'update']);
 });
 
 Route::get('/countries', [CountryController::class, 'index']);

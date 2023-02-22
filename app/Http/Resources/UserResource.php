@@ -24,13 +24,11 @@ class UserResource extends JsonResource
             'phone' => $this->phone,
             'age' => $this->age,
             'gender' => $this->gender,
-            'country' => $this->country->name,
-            'character' => $this->character->name,
-            'target' => $this->target->name,
-            'role' => $this->role->name,
+            'character' => $this->character->name ?? null,
+            'target' => $this->target->name ?? null,
+            'role' => $this->role->name ?? null,
             'provider' => $this->provider,
-            'token' => $this->token,
-            'image' => $this->image
+            'image' => getS3Url($this->image)
         ];
     }
 }
