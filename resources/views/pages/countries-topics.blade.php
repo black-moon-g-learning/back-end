@@ -82,6 +82,9 @@
                                         </td>
 
                                         <td class="align-middle">
+                                            <a href="{{ route('web.countries-topics.videos', $countryTopic->id) }}"
+                                                class="btn bg-gradient-info" type="submit" id="click1">
+                                                List videos</a>
                                             <form method="POST"
                                                 action={{ route('web.countries-topics.delete', $countryTopic->id) }}>
 
@@ -91,6 +94,7 @@
                                                 <button class="btn bg-gradient-info delete-topic" type="submit"
                                                     id="click1"> Delete</button>
                                             </form>
+
                                         </td>
                                         <td class=" px-2">
                                             {{ handleLongText($countryTopic->topic->description) }}

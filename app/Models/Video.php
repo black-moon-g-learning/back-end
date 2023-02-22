@@ -17,7 +17,8 @@ class Video extends Model
         'description',
         'country_topic_id',
         'url',
-        'owner_id'
+        'owner_id',
+        'image'
     ];
 
     /**
