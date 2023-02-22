@@ -79,3 +79,15 @@ if (!function_exists('handleLongText')) {
         return $text;
     }
 }
+
+if (!function_exists('handleShowVideoLink')) {
+    function handleShowVideoLink(?string $url)
+    {
+        if (str_contains($url, 'videos/')) {
+            $link = Common::S3_ROOT . $url;
+        } else {
+            $link = Common::YOUTUBE_EMBED . $url;
+        }
+        return $link;
+    }
+}
