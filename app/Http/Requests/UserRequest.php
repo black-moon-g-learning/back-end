@@ -46,7 +46,7 @@ class UserRequest extends FormRequest
     public function fieldFile()
     {
         return [
-            'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file'
+            'file' => 'required|mimes:jpeg,png,jpg,gif|max:8129|file'
         ];
     }
 

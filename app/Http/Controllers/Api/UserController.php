@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
-use App\Repositories\User\IUserRepository;
+use App\Http\Resources\UserResource;
 use App\Services\User\IUserService;
 use App\Utils\Response;
 use Illuminate\Http\Request;
@@ -22,7 +22,7 @@ class UserController extends Controller
 
     public function getProfile(Request $request)
     {
-        return response()->json($request->user());
+        return response()->json(new UserResource($request->user()));
     }
 
     public function update(UserRequest $request)
