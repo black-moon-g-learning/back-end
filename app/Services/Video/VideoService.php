@@ -8,6 +8,7 @@ use App\Repositories\Video\IVideoRepository;
 use App\Services\Storage\IStorageService;
 use App\Services\Validate\VideoValidateService;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
 class VideoService implements IVideoService
@@ -136,6 +137,7 @@ class VideoService implements IVideoService
             $video = $validated['data'];
 
             if ($validator->getHasFile()) {
+                $video['image'] =  $this->uploadFile($request->file('file'));
             }
             $video['url'] = $video['youtube_url'];
             $video['owner_id'] = $owner->id;
@@ -148,5 +150,15 @@ class VideoService implements IVideoService
             ];
         }
         return  $validated;
+    }
+
+    public function uploadFile(UploadedFile $file)
+    {
+        $uploaded = $this->storeSer->upload($file, 'videos');
+
+        if ($uploaded['status']) {
+            return $uploaded['url'];
+        }
+        return null;
     }
 }
