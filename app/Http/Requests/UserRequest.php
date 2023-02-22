@@ -29,6 +29,11 @@ class UserRequest extends FormRequest
      */
     public function rules()
     {
+        return request()->isMethod('PUT') ? $this->fieldInfo() : $this->fieldFile();
+    }
+
+    public function fieldInfo()
+    {
         return [
             'first_name' => 'required',
             'age' => 'numeric|min:1|max:100|nullable',
@@ -37,7 +42,14 @@ class UserRequest extends FormRequest
             'gender' => ['nullable', Rule::in([Gender::FEMALE, Gender::MALE, Gender::OTHER])]
         ];
     }
-    
+
+    public function fieldFile()
+    {
+        return [
+            'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file'
+        ];
+    }
+
     protected function failedValidation(Validator $validator)
     {
         $errors = $validator->errors();
