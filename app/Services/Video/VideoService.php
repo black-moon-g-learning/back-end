@@ -8,6 +8,7 @@ use App\Repositories\Video\IVideoRepository;
 use App\Services\Storage\IStorageService;
 use App\Services\Validate\VideoValidateService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideoService implements IVideoService
 {
@@ -122,5 +123,30 @@ class VideoService implements IVideoService
             ];
         }
         return $validated;
+    }
+
+    public function store(Request $request): array
+    {
+        $validator = new VideoValidateService($request->all());
+        $validated = $validator->afterValidated();
+        $owner =  Auth::user();
+
+
+        if ($validated['status']) {
+            $video = $validated['data'];
+
+            if ($validator->getHasFile()) {
+            }
+            $video['url'] = $video['youtube_url'];
+            $video['owner_id'] = $owner->id;
+
+            $this->videoRepo->create($video);
+
+            return [
+                'status' => true,
+                'data' => "Create new Video successful"
+            ];
+        }
+        return  $validated;
     }
 }

@@ -10,6 +10,8 @@ class VideoValidateService extends ValidateService
             parent::setFieldValidate(),
             [
                 'time' => 'required|integer|min:1',
+                'youtube_url' => 'nullable|string|min:2',
+                'country_topic_id' => 'nullable'
             ]
         );
     }

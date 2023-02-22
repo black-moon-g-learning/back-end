@@ -21,7 +21,7 @@ class VideoController extends Controller
     public function index(int $countryTopicId)
     {
         $videos =  $this->videoSer->indexWeb($countryTopicId);
-        return view('pages.videos', compact('videos'));
+        return view('pages.videos', compact('videos', 'countryTopicId'));
     }
 
     public function edit(int $videoId)
@@ -57,6 +57,22 @@ class VideoController extends Controller
         // }
 
         $response = $this->videoSer->update($request, $videoId);
+
+        if ($response['status']) {
+            return redirect()->route('web.countries-topics.videos', $request->get('country_topic_id'))->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
+    }
+
+    public function create(Request $request)
+    {
+        $countryTopicId = $request->query('ct-id');
+        return view('forms.video', compact('countryTopicId'));
+    }
+
+    public function store(Request $request)
+    {
+        $response = $this->videoSer->store($request);
 
         if ($response['status']) {
             return redirect()->route('web.countries-topics.videos', $request->get('country_topic_id'))->with('response', $response);

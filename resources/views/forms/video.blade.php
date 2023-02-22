@@ -9,7 +9,7 @@
     </style>
     <div class="p-4 bg-secondary">
         <form enctype="multipart/form-data"
-            action="{{ isset($video) ? route('web.videos.update', $video->id) : route('web.topics.store') }}" method="POST">
+            action="{{ isset($video) ? route('web.videos.update', $video->id) : route('web.videos.store') }}" method="POST">
 
             @csrf
 
@@ -17,7 +17,8 @@
                 @method('PUT')
             @endisset
 
-            <input name="country_topic_id" type="hidden" value="{{ isset($video) ? $video->country_topic_id : '' }}" />
+            <input name="country_topic_id" type="hidden"
+                value="{{ isset($video) ? $video->country_topic_id : $countryTopicId }}" />
 
             <div class="row">
                 <div class="form-group col-6">
@@ -36,7 +37,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Author</label>
-                        <input class="form-control" type="text" name="total video"
+                        <input readonly class="form-control" type="text" name="total video"
                             value="{{ isset($video) ? getUsername($video->user) : '' }}" id="example-search-input">
                     </div>
                     @if (isset(Session::get('errors')['regions']))
@@ -81,17 +82,28 @@
                 <div class="row">
                     <div class="form-group col-6">
                         <label for="example-tel-input" class="form-control-label">Video</label>
-                        <input class="form-control" name="file" type="file" onchange="changeImage(event)">
+                        <input class="form-control" id="file" name="file" type="file"
+                            onchange="changeImage(event)">
                         @if (isset(Session::get('errors')['file']))
                             <div class="col-md-4 form-group">
                                 @include('components.alert', $data = Session::get('errors')['file'])
                             </div>
                         @endif
                     </div>
+
+
+
                     <div class="form-group col-6">
                         <label for="example-tel-input" class="form-control-label">Preview</label>
                         <img class="form-control" id="preview-img" class="col-6 img-thumbnail" style="width: 30rem"
                             alt="" src="{{ isset($video) ? getS3Url($video->image) : '' }}">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <input class="form-control" id="youtube_url" name="youtube_url" type="text"
+                            onchange="changeImage(event)">
                     </div>
                 </div>
 
@@ -124,7 +136,12 @@
     </div>   
                  --}}
             @endif
-            <input class="btn btn-success" type="submit" value="Submit">
+            <br />
+            <div class="form-group ">
+                <div class="col-6">
+                    <input class="btn btn-success" type="submit" value="Submit">
+                </div>
+            </div>
         </form>
         <script>
             const changeImage = (e) => {
@@ -202,5 +219,15 @@
         function hideProgress() {
             progress.hide();
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#file").click(function() {
+                $("#youtube_url").remove();
+            });
+            $("#youtube_url").focus(function() {
+                $('#file').remove()
+            })
+        });
     </script>
 @endsection

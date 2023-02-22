@@ -18,7 +18,8 @@ class Video extends Model
         'country_topic_id',
         'url',
         'owner_id',
-        'image'
+        'image',
+        'time'
     ];
 
     /**
