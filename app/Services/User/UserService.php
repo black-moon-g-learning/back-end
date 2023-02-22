@@ -3,6 +3,8 @@
 namespace App\Services\User;
 
 use App\Repositories\User\IUserRepository;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserService implements IUserService
 {
@@ -32,6 +34,28 @@ class UserService implements IUserService
         return [
             "status" => false,
             "message" => "Can not delete this user"
+        ];
+    }
+
+    public function update(Request $request): array
+    {
+        $user = Auth::user();
+        $userInfo = $request->all();
+        $userInfo['username'] = $userInfo['email'];
+        
+        $result =  $this->userRepo->update($user->id, $userInfo);
+
+        if ($result) {
+
+            return [
+                'status' => true,
+                'message' => "Update successful"
+            ];
+        }
+
+        return [
+            'status' => false,
+            'message' => "Can not update now"
         ];
     }
 }
