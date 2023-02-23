@@ -60,8 +60,8 @@ class UserService implements IUserService
         $user = Auth::user();
         $userInfo = $request->all();
 
-        if ($request->hasFile('file')) {
-            return $this->updateWithFile($request->file('file'), $user);
+        if ($request->hasFile('image')) {
+            return $this->updateWithFile($request->file('image'), $user);
         }
 
         $result = $this->updateWithoutFile($userInfo, $user);
@@ -93,6 +93,8 @@ class UserService implements IUserService
     public function updateWithoutFile(array $userInfo, User $user): bool
     {
         $userInfo['username'] = $userInfo['email'];
+        $userInfo['first_name'] = $userInfo['firstName'];
+        
         $user = $this->userRepo->update($user->id, $userInfo);
 
         if ($user) {
