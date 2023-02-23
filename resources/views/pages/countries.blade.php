@@ -60,12 +60,17 @@
                                             <a href="{{ route('web.countries.edit', $country->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
                                             <a href="{{ route('web.countries-topics', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> List topic</a>
+                                                class="btn bg-gradient-info" id="click"> List topics</a>
+                                            <a href="{{ route('web.countries-topics', $country->id) }}"
+                                                class="btn bg-gradient-info" id="click"> List questions</a>
                                         </td>
                                         <td class=" px-2">
                                             {{-- {{ handleLongText($country->description) }}
                                              --}}
-                                             <p class="text-truncate text-break text-center text-md-left" style="max-width: 200px; font-size: 18px; color: #333;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                            <p class="text-truncate text-break text-center text-md-left"
+                                                style="max-width: 200px; font-size: 18px; color: #333;">Lorem ipsum dolor
+                                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                                labore et dolore magna aliqua.</p>
 
                                         </td>
                                     </tr>
