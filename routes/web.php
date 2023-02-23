@@ -72,6 +72,8 @@ Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
             Route::put('/videos/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
+            Route::get('videos/create', [VideoController::class, 'create'])->name('web.videos.create');
+            Route::post('videos/store', [VideoController::class, 'store'])->name('web.videos.store');
         }
     );
 });

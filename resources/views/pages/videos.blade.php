@@ -18,8 +18,11 @@
                 <div class="card-header pb-0">
                     <h6>Videos table</h6>
                 </div>
+
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
+                        <a href="{{ route('web.videos.create', ['ct-id' => $countryTopicId ?? null]) }}"
+                            class="btn bg-gradient-info">Create new video</a>
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -51,7 +54,7 @@
                                         </td>
                                         <td class="justify-content-center">
                                             <iframe width="300" height="250"
-                                                src="https://www.youtube.com/embed/6NdqgBzFEsM" frameborder="0"
+                                                src="{{ handleShowVideoLink($video->url) }}" frameborder="0"
                                                 allowfullscreen></iframe>
 
                                         </td>
@@ -59,8 +62,8 @@
                                             <button class="btn bg-gradient-info">{{ getUserName($video->user) }}</button>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('web.videos.edit', $video->id) }}" class="btn bg-gradient-info"
-                                                id="click">
+                                            <a href="{{ route('web.videos.edit', $video->id) }}"
+                                                class="btn bg-gradient-info" id="click">
                                                 Edit</a>
                                         </td>
                                         <td class=" px-2">

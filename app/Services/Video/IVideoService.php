@@ -3,6 +3,7 @@
 namespace App\Services\Video;
 
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 interface IVideoService
 {
@@ -17,4 +18,6 @@ interface IVideoService
     public function find(int $videoId): mixed;
 
     public function update(Request $request, int $videoId): array;
+
+    public function store(Request $request): array;
 }

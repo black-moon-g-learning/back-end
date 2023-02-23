@@ -35,7 +35,7 @@ class UserRequest extends FormRequest
     public function fieldInfo()
     {
         return [
-            'first_name' => 'required',
+            'firstName' => 'required',
             'age' => 'numeric|min:1|max:100|nullable',
             'email' => 'nullable|email',
             'phone' => 'nullable|regex:/^([0-9\s\-\+\(\)]*)$/|min:10',
@@ -46,7 +46,7 @@ class UserRequest extends FormRequest
     public function fieldFile()
     {
         return [
-            'file' => 'required|mimes:jpeg,png,jpg,gif|max:8129|file'
+            'image' => 'required|mimes:jpeg,png,jpg,gif|max:8129|file'
         ];
     }
 
