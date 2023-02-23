@@ -19,4 +19,9 @@ class LevelService implements ILevelService
         $response = $this->levelRepo->getAll()->toArray();
         return $response;
     }
+
+    public function indexAdmin(): mixed
+    {
+        return $this->levelRepo->getAll();
+    }
 }

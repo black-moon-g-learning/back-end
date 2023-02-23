@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\CountryTopicController;
 use App\Http\Controllers\Web\DashboardController;
 use App\Http\Controllers\Web\InformationController;
+use App\Http\Controllers\Web\LevelController;
 use App\Http\Controllers\Web\TopicController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\VideoController;
@@ -74,5 +75,7 @@ Route::middleware(['auth', 'role'])->group(
         Route::post('videos/store', [VideoController::class, 'store'])->name('web.videos.store');
 
         Route::post('/videos/upload', [VideoController::class, 'uploadVideo'])->name('web.videos.upload');
+
+        Route::get('levels', [LevelController::class, 'index'])->name('web.levels');
     }
 );

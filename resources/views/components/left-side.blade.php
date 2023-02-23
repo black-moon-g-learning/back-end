@@ -24,6 +24,10 @@
             'name' => 'Topics',
             'route' => route('web.topics'),
         ],
+        [
+            'name' => 'Level',
+            'route' => route('web.levels'),
+        ],
     ];
 @endphp
 
