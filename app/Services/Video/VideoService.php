@@ -141,7 +141,7 @@ class VideoService implements IVideoService
             if ($validator->getHasFile()) {
                 $video['image'] =  $this->uploadFile($request->file('file'));
             }
-            $video['url'] = $video['youtube_url'];
+            $video['url'] = $video['video_url'];
             $video['owner_id'] = $owner->id;
 
             $this->videoRepo->create($video);

@@ -85,6 +85,11 @@
                         <label for="example-tel-input" class="form-control-label">Video</label>
                         <input class="form-control" id="youtube_url" name="video_url" type="text"
                             onchange="changeImage(event)">
+                        @if (isset(Session::get('errors')['video_url']))
+                            <div class="form-group">
+                                @include('components.alert', $data = Session::get('errors')['video_url'])
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-group col-6">
