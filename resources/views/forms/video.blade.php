@@ -80,41 +80,19 @@
 
             @if (!isset($video))
                 <div class="row">
-                    <div class="form-group col-6">
-                        <label for="example-tel-input" class="form-control-label">Video</label>
-                        <input class="form-control" id="file" name="file" type="file"
-                            onchange="changeImage(event)">
-                        @if (isset(Session::get('errors')['file']))
-                            <div class="col-md-4 form-group">
-                                @include('components.alert', $data = Session::get('errors')['file'])
-                            </div>
-                        @endif
-                    </div>
-
-
-
-                    <div class="form-group col-6">
-                        <label for="example-tel-input" class="form-control-label">Preview</label>
-                        <img class="form-control" id="preview-img" class="col-6 img-thumbnail" style="width: 30rem"
-                            alt="" src="{{ isset($video) ? getS3Url($video->image) : '' }}">
-                    </div>
-                </div>
-
-                <div class="row">
                     <div class="col-6">
+                        <label for="example-tel-input" class="form-control-label">Video</label>
                         <input class="form-control" id="youtube_url" name="youtube_url" type="text"
                             onchange="changeImage(event)">
                     </div>
                 </div>
-
-
-                <div class="form-group">
+                <div class="form-group col-6">
                     <div class=" text-center">
                         <h5>Upload File</h5>
                     </div>
 
                     <div id="upload-container" class="text-center">
-                        <button id="browseFile" class="btn btn-primary">Brows File</button>
+                        <button type="button" id="browseFile" class="btn btn-primary">Browse File</button>
                     </div>
                     <div class="progress mt-3" style="height: 25px">
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
@@ -123,7 +101,10 @@
                     </div>
 
                     <div class="card-footer p-4">
-                        <video id="videoPreview" src="" controls style="width: 100%; height: auto"></video>
+                        <video width="320" height="240" controls>
+                            <source id="videoPreview" src="" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
                     </div>
                 </div>
             @endif
@@ -134,19 +115,19 @@
                 </div>
             </div>
         </form>
-        <script>
-            const changeImage = (e) => {
-                var preImage = document.getElementById("preview-img")
-                preImage.src = URL.createObjectURL(e.target.files[0])
-                preImage.onload = () => {
-                    URL.revokeObjectURL(output.src)
-                }
-            }
-        </script>
 
     </div>
+    <script>
+        const changeImage = (e) => {
+            var preImage = document.getElementById("preview-img")
+            preImage.src = URL.createObjectURL(e.target.files[0])
+            preImage.onload = () => {
+                URL.revokeObjectURL(output.src)
+            }
+        }
+    </script>
 
-
+    </div>
 @endsection
 
 @section('customJs')
@@ -158,7 +139,7 @@
     <script type="text/javascript">
         let browseFile = $('#browseFile');
         let resumable = new Resumable({
-            target: '{{ route('web.videos.update', isset($video) ? $video->id : 1) }}',
+            target: "{{ route('web.videos.upload') }}",
             query: {
                 _token: '{{ csrf_token() }}'
             }, // CSRF token
@@ -183,9 +164,16 @@
 
         resumable.on('fileSuccess', function(file, response) { // trigger when file upload complete
             response = JSON.parse(response)
-            $('#videoPreview').attr('src', response.path);
-            $('.card-footer').show();
-            alert('upload video successful');
+            if (response.status) {
+                $('#videoPreview').attr('src', 'http://g-learning.vn/storage/' + response.path);
+                $('.card-footer').show();
+                $("#youtube_url").attr('value', response.path);
+                $("#youtube_url").attr('readonly', true);
+                alert('upload video successful');
+            } else {
+                alert('can not video!');
+            }
+
         });
 
         resumable.on('fileError', function(file, response) { // trigger when there is any error
@@ -210,15 +198,5 @@
         function hideProgress() {
             progress.hide();
         }
-    </script>
-    <script>
-        $(document).ready(function() {
-            $("#file").click(function() {
-                $("#youtube_url").remove();
-            });
-            $("#youtube_url").focus(function() {
-                $('#file').remove()
-            })
-        });
     </script>
 @endsection
