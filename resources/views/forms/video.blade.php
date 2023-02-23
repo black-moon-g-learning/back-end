@@ -38,7 +38,8 @@
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Author</label>
                         <input readonly class="form-control" type="text" name="total video"
-                            value="{{ isset($video) ? getUsername($video->user) : '' }}" id="example-search-input">
+                            value="{{ (isset($video) ? getUsername($video->user) : isset($user)) ? getUsername($user) : '' }}"
+                            id="example-search-input">
                     </div>
                     @if (isset(Session::get('errors')['regions']))
                         <div class="form-group">
@@ -82,7 +83,7 @@
                 <div class="row">
                     <div class="col-6">
                         <label for="example-tel-input" class="form-control-label">Video</label>
-                        <input class="form-control" id="youtube_url" name="youtube_url" type="text"
+                        <input class="form-control" id="youtube_url" name="video_url" type="text"
                             onchange="changeImage(event)">
                     </div>
                 </div>
@@ -98,13 +99,6 @@
                         <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"
                             aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%; height: 100%">
                             75%</div>
-                    </div>
-
-                    <div class="card-footer p-4">
-                        <video width="320" height="240" controls>
-                            <source id="videoPreview" src="" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
                     </div>
                 </div>
             @endif
@@ -165,9 +159,8 @@
         resumable.on('fileSuccess', function(file, response) { // trigger when file upload complete
             response = JSON.parse(response)
             if (response.status) {
-                $('#videoPreview').attr('src', 'http://g-learning.vn/storage/' + response.path);
                 $('.card-footer').show();
-                $("#youtube_url").attr('value', response.path);
+                $("#youtube_url").val(response.path);
                 $("#youtube_url").attr('readonly', true);
                 alert('upload video successful');
             } else {

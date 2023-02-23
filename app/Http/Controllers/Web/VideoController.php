@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\Video\IVideoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -40,7 +41,8 @@ class VideoController extends Controller
     public function create(Request $request)
     {
         $countryTopicId = $request->query('ct-id');
-        return view('forms.video', compact('countryTopicId'));
+        $user = Auth::user();
+        return view('forms.video', compact('countryTopicId', 'user'));
     }
 
     public function store(Request $request)
