@@ -10,6 +10,8 @@ use App\Services\Validate\VideoValidateService;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
+use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
 
 class VideoService implements IVideoService
 {
@@ -139,7 +141,7 @@ class VideoService implements IVideoService
             if ($validator->getHasFile()) {
                 $video['image'] =  $this->uploadFile($request->file('file'));
             }
-            $video['url'] = $video['youtube_url'];
+            $video['url'] = $video['video_url'];
             $video['owner_id'] = $owner->id;
 
             $this->videoRepo->create($video);
@@ -160,5 +162,30 @@ class VideoService implements IVideoService
             return $uploaded['url'];
         }
         return null;
+    }
+
+    public function uploadVideo(Request $request): array
+    {
+        $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
+
+        if (!$receiver->isUploaded()) {
+            // file not uploaded
+        }
+
+        $fileReceived = $receiver->receive(); // receive file
+        if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
+            $file = $fileReceived->getFile(); // get file
+            $extension = $file->getClientOriginalExtension();
+            $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName()); //file name without extenstion
+            $fileName .= '_' . md5(time()) . '.' . $extension; // a unique file name
+
+            $uploaded = $this->storeSer->uploadLargeFile($file, $fileName);
+
+            return $uploaded;
+        }
+        return [
+            'status' => false,
+            'path' =>  null,
+        ];
     }
 }

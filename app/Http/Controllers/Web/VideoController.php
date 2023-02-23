@@ -5,9 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Controllers\Controller;
 use App\Services\Video\IVideoService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Pion\Laravel\ChunkUpload\Handler\HandlerFactory;
-use Pion\Laravel\ChunkUpload\Receiver\FileReceiver;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
@@ -32,30 +30,6 @@ class VideoController extends Controller
 
     public function update(Request $request, int $videoId)
     {
-        // $receiver = new FileReceiver('file', $request, HandlerFactory::classFromRequest($request));
-
-        // if (!$receiver->isUploaded()) {
-        //     // file not uploaded
-        // }
-
-        // $fileReceived = $receiver->receive(); // receive file
-        // if ($fileReceived->isFinished()) { // file uploading is complete / all chunks are uploaded
-        //     $file = $fileReceived->getFile(); // get file
-        //     $extension = $file->getClientOriginalExtension();
-        //     $fileName = str_replace('.' . $extension, '', $file->getClientOriginalName()); //file name without extenstion
-        //     $fileName .= '_' . md5(time()) . '.' . $extension; // a unique file name
-
-        //     $disk = Storage::disk('s3');
-        //     $path = $disk->put('videos' . '/' . $fileName, file_get_contents($file));
-
-        //     // delete chunked file
-        //     unlink($file->getPathname());
-        //     return [
-        //         'path' =>  $path,
-        //         'filename' => $fileName
-        //     ];
-        // }
-
         $response = $this->videoSer->update($request, $videoId);
 
         if ($response['status']) {
@@ -67,7 +41,8 @@ class VideoController extends Controller
     public function create(Request $request)
     {
         $countryTopicId = $request->query('ct-id');
-        return view('forms.video', compact('countryTopicId'));
+        $user = Auth::user();
+        return view('forms.video', compact('countryTopicId', 'user'));
     }
 
     public function store(Request $request)
@@ -78,5 +53,10 @@ class VideoController extends Controller
             return redirect()->route('web.countries-topics.videos', $request->get('country_topic_id'))->with('response', $response);
         }
         return redirect()->back()->with('errors', $response['data']);
+    }
+
+    public function uploadVideo(Request $request)
+    {
+        return $this->videoSer->uploadVideo($request);
     }
 }

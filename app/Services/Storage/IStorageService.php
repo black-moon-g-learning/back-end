@@ -11,4 +11,6 @@ interface IStorageService
     public function exists(string $file): bool;
 
     public function delete(string $file): bool;
+
+    public function uploadLargeFile(UploadedFile $file, string $fileName): array;
 }
