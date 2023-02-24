@@ -51,4 +51,10 @@ class LevelController extends Controller
         }
         return redirect()->back()->with('errors', $response['data']);
     }
+
+    public function delete(int $id)
+    {
+        $result = $this->levelSer->delete($id);
+        return redirect()->back()->with("response", $result);
+    }
 }

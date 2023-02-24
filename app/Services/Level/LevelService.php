@@ -88,7 +88,7 @@ class LevelService implements ILevelService
             if ($validator->getHasFile()) {
                 $level['image'] =  $this->uploadFile($request->file('file'));
             }
-            
+
             $this->levelRepo->create($level);
 
             return [
@@ -97,5 +97,28 @@ class LevelService implements ILevelService
             ];
         }
         return  $validated;
+    }
+
+    public function delete(int $id)
+    {
+        $levelDB = $this->levelRepo->find($id);
+
+        if ($this->storeSer->exists($levelDB->image)) {
+            $this->storeSer->delete($levelDB->image);
+        }
+
+        $deletedLevel = $this->levelRepo->delete($id);
+
+        if ($deletedLevel) {
+            return [
+                "status" => true,
+                "data" => "Delete successful"
+            ];
+        }
+
+        return [
+            "status" => false,
+            "data" => "Can not delete this level"
+        ];
     }
 }

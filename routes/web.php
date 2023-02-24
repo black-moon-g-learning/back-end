@@ -81,5 +81,6 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/levels/{id}/edit', [LevelController::class, 'edit'])->name('web.levels.edit');
         Route::put('/levels/{id}/update', [LevelController::class, 'update'])->name('web.levels.update');
         Route::post('/levels/store', [LevelController::class, 'store'])->name('web.levels.store');
+        Route::delete('/levels/{id}', [LevelController::class, 'delete'])->name('web.levels.delete');
     }
 );

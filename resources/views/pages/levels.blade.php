@@ -49,8 +49,12 @@
                                             <a href="{{ route('web.levels.edit', $level->id) }}"
                                                 class="btn bg-gradient-info" id="click">
                                                 Edit</a>
-                                            <a href="#" class="btn bg-gradient-info" id="click">
-                                                Delete</a>
+                                            <form method="POST" action="{{ route('web.levels.delete', $level->id) }}">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn bg-gradient-info delete-level">
+                                                    Delete</button>
+                                            </form>
                                         </td>
                                         <td class="align-middle">
                                             <p>{{ handleLongText($level->description) }}</p>
@@ -65,4 +69,30 @@
         </div>
     </div>
     @include('components.footer')
+@endsection
+
+@section('customCss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+        $('.delete-level').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm Delete!',
+                content: 'Do you want to delete this row!',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
+    </script>
 @endsection

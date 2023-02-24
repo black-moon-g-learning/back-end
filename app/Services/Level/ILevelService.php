@@ -15,4 +15,6 @@ interface ILevelService
     public function update(Request $request, int $id): array;
 
     public function store(Request $request): mixed;
+
+    public function delete(int $id);
 }
