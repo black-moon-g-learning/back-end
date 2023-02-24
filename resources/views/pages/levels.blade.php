@@ -38,7 +38,6 @@
                                 @foreach ($levels as $level)
                                     <tr>
                                         <td>
-                                            <div class="d-flex px-2 py-1 flex-column justify-content-center">
                                                 <img src="{{ getS3Url($level->image) }}" style="width:200px"
                                                     class="image-thumb" alt="user1">
                                             </div>
@@ -48,7 +47,8 @@
                                             </h6>
                                         </td>
                                         <td class="justify-content-center">
-                                            <a href="#" class="btn bg-gradient-info" id="click">
+                                            <a href="{{ route('web.levels.edit', $level->id) }}" class="btn bg-gradient-info"
+                                                id="click">
                                                 Edit</a>
                                             <a href="#" class="btn bg-gradient-info" id="click">
                                                 Delete</a>

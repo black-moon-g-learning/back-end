@@ -77,5 +77,7 @@ Route::middleware(['auth', 'role'])->group(
         Route::post('/videos/upload', [VideoController::class, 'uploadVideo'])->name('web.videos.upload');
 
         Route::get('levels', [LevelController::class, 'index'])->name('web.levels');
+        Route::get('levels/{id}', [LevelController::class, 'edit'])->name('web.levels.edit');
+        Route::put('levels/{id}', [LevelController::class, 'update'])->name('web.levels.update');
     }
 );
