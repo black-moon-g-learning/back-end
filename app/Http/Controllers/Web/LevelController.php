@@ -42,7 +42,13 @@ class LevelController extends Controller
         return redirect()->back()->with('errors', $response['data']);
     }
 
-    public function store()
+    public function store(Request $request)
     {
+        $response = $this->levelSer->store($request);
+
+        if ($response['status']) {
+            return redirect()->route('web.levels')->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
     }
 }

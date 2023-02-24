@@ -71,13 +71,15 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
         Route::put('/videos/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
-        Route::get('videos/create', [VideoController::class, 'create'])->name('web.videos.create');
-        Route::post('videos/store', [VideoController::class, 'store'])->name('web.videos.store');
+        Route::get('/videos/create', [VideoController::class, 'create'])->name('web.videos.create');
+        Route::post('/videos/store', [VideoController::class, 'store'])->name('web.videos.store');
 
         Route::post('/videos/upload', [VideoController::class, 'uploadVideo'])->name('web.videos.upload');
 
-        Route::get('levels', [LevelController::class, 'index'])->name('web.levels');
-        Route::get('levels/{id}', [LevelController::class, 'edit'])->name('web.levels.edit');
-        Route::put('levels/{id}', [LevelController::class, 'update'])->name('web.levels.update');
+        Route::get('/levels', [LevelController::class, 'index'])->name('web.levels');
+        Route::get('/levels/create', [LevelController::class, 'create'])->name('web.levels.create');
+        Route::get('/levels/{id}/edit', [LevelController::class, 'edit'])->name('web.levels.edit');
+        Route::put('/levels/{id}/update', [LevelController::class, 'update'])->name('web.levels.update');
+        Route::post('/levels/store', [LevelController::class, 'store'])->name('web.levels.store');
     }
 );

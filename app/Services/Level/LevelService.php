@@ -53,7 +53,7 @@ class LevelService implements ILevelService
                 if ($this->storeSer->exists($levelDB->image)) {
                     $this->storeSer->delete($levelDB->image);
                 }
-                
+
                 $file = $request->file('file');
                 $level['image'] =  $this->uploadFile($file);
             }
@@ -75,5 +75,27 @@ class LevelService implements ILevelService
             return $uploaded['url'];
         }
         return null;
+    }
+
+    public function store(Request $request): mixed
+    {
+        $validator = new ValidateService($request->all());
+        $validated = $validator->afterValidated();
+
+        if ($validated['status']) {
+            $level = $validated['data'];
+
+            if ($validator->getHasFile()) {
+                $level['image'] =  $this->uploadFile($request->file('file'));
+            }
+            
+            $this->levelRepo->create($level);
+
+            return [
+                'status' => true,
+                'data' => "Create new level successful"
+            ];
+        }
+        return  $validated;
     }
 }

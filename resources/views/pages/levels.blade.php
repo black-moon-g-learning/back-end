@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <a href="{{ route('web.levels') }}" class="btn bg-gradient-info">Create new Level</a>
+                        <a href="{{ route('web.levels.create') }}" class="btn bg-gradient-info">Create new Level</a>
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
@@ -38,17 +38,16 @@
                                 @foreach ($levels as $level)
                                     <tr>
                                         <td>
-                                                <img src="{{ getS3Url($level->image) }}" style="width:200px"
-                                                    class="image-thumb" alt="user1">
-                                            </div>
+                                            <img src="{{ getS3Url($level->image) }}" style="width:200px" class="image-thumb"
+                                                alt="user1">
                                         </td>
                                         <td>
                                             <h6 class="mb-0 text-sm">{{ $level->name }}
                                             </h6>
                                         </td>
                                         <td class="justify-content-center">
-                                            <a href="{{ route('web.levels.edit', $level->id) }}" class="btn bg-gradient-info"
-                                                id="click">
+                                            <a href="{{ route('web.levels.edit', $level->id) }}"
+                                                class="btn bg-gradient-info" id="click">
                                                 Edit</a>
                                             <a href="#" class="btn bg-gradient-info" id="click">
                                                 Delete</a>
