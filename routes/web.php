@@ -65,6 +65,9 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
         Route::post('/countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
+
+        Route::get('/countries/{id}/levels', [LevelController::class, 'indexCountriesGameLevels'])->name('web.countries.levels');
+
         Route::delete('/countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
 
         Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');

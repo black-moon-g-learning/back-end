@@ -46,15 +46,21 @@
                                             </h6>
                                         </td>
                                         <td class="justify-content-center">
-                                            <a href="{{ route('web.levels.edit', $level->id) }}"
-                                                class="btn bg-gradient-info" id="click">
-                                                Edit</a>
-                                            <form method="POST" action="{{ route('web.levels.delete', $level->id) }}">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn bg-gradient-info delete-level">
-                                                    Delete</button>
-                                            </form>
+                                            @if (isset($countryId))
+                                                <a href="#" class="btn bg-gradient-info" id="click">
+                                                    List</a>
+                                            @else
+                                                <a href="{{ route('web.levels.edit', $level->id) }}"
+                                                    class="btn bg-gradient-info" id="click">
+                                                    Edit</a>
+                                                <form method="POST" action="{{ route('web.levels.delete', $level->id) }}">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn bg-gradient-info delete-level">
+                                                        Delete</button>
+                                                </form>
+                                            @endif
+
                                         </td>
                                         <td class="align-middle">
                                             <p>{{ handleLongText($level->description) }}</p>
