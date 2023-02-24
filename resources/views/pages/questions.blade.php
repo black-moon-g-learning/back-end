@@ -14,57 +14,53 @@
     @endif
     <div class="row">
         <div class="col-12">
-            <div class="card mb-4">
-                <div class="card-header pb-0">
-                    <h6>levels table</h6>
+            <div class=" row card mb-4">
+                <div class=" col-6 card-header pb-0">
+                    <h6>questions table</h6>
+                </div>
+                <div class="col-6 card-header pb-0">
+                    <a href="{{ route('web.topics.create') }}" class="btn bg-success badge-primary" id="click">
+                        Create new question</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
-                        <a href="{{ route('web.levels.create') }}" class="btn bg-gradient-info">Create new Level</a>
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                        Image</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
-                                        Level</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                        Question</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                        Answer</th>
+                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Description</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($levels as $level)
+                                @foreach ($questions as $question)
                                     <tr>
                                         <td>
-                                            <img src="{{ getS3Url($level->image) }}" style="width:200px" class="image-thumb"
-                                                alt="user1">
+                                            <div style="width:200px" class="d-flex px-2 py-1">
+                                                <p>{{ handleLongText($question->content) }}</p>
+                                            </div>
                                         </td>
                                         <td>
-                                            <h6 class="mb-0 text-sm">{{ $level->name }}
-                                            </h6>
-                                        </td>
-                                        <td class="justify-content-center">
-                                            @if (isset($countryId))
-                                                <a href="{{ route('web.questions', $countryId) }}"
-                                                    class="btn bg-gradient-info" id="click">
-                                                    List</a>
-                                            @else
-                                                <a href="{{ route('web.levels.edit', $level->id) }}"
-                                                    class="btn bg-gradient-info" id="click">
-                                                    Edit</a>
-                                                <form method="POST" action="{{ route('web.levels.delete', $level->id) }}">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn bg-gradient-info delete-level">
-                                                        Delete</button>
-                                                </form>
-                                            @endif
-
+                                            <div class="d-flex flex-column justify-content-center">
+                                                {{ handleLongText($question->correctAnswer->content) }}
+                                            </div>
                                         </td>
                                         <td class="align-middle">
-                                            <p>{{ handleLongText($level->description) }}</p>
+                                            <a href="{{ route('web.topics.edit', $question->id) }}"
+                                                class="btn bg-gradient-info" id="click"> Edit</a>
+
+                                            <form method="POST" action={{ route('web.topics.delete', $question->id) }}>
+
+                                                @csrf
+                                                @method('DELETE')
+
+                                                <button class="btn bg-gradient-info delete-question" type="submit"
+                                                    id="click1"> Delete</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -74,9 +70,11 @@
                 </div>
             </div>
         </div>
+        {{ $questions->links() }}
     </div>
     @include('components.footer')
 @endsection
+
 
 @section('customCss')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
@@ -86,11 +84,11 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script>
-        $('.delete-level').click(function(e) {
+        $('.delete-question').click(function(e) {
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
                 title: 'Confirm Delete!',
-                content: 'Do you want to delete this row!',
+                content: 'Do you want to delete this row!, video in this question will be deleted',
                 buttons: {
                     confirm: function() {
                         $(e.target).closest('form').submit();

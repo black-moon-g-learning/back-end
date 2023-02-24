@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\CountryController;
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
         Route::post('/countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
+        Route::get('/countries/{id}/questions', [QuestionController::class, 'index'])->name('web.questions');
 
         Route::get('/countries/{id}/levels', [LevelController::class, 'indexCountriesGameLevels'])->name('web.countries.levels');
 

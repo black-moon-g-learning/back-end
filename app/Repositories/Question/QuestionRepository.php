@@ -21,4 +21,13 @@ class QuestionRepository extends BaseRepository implements IQuestionRepository
             ->with('answers')
             ->get();
     }
+    public function getQuestionsInCountryAdmin(int $countryId): mixed
+    {
+        return $this->model->with([
+            'correctAnswer' => function ($query) {
+                $query->where('is_correct', 1);
+            }
+        ])
+            ->where('country_id', $countryId)->paginate(20);
+    }
 }
