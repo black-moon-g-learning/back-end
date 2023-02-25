@@ -19,7 +19,7 @@
                     <h6>questions table</h6>
                 </div>
                 <div class="col-6 card-header pb-0">
-                    <a href="{{ route('web.topics.create') }}" class="btn bg-success badge-primary" id="click">
+                    <a href="{{ route('web.questions.create') }}" class="btn bg-success badge-primary" id="click">
                         Create new question</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -50,7 +50,7 @@
                                             </div>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('web.topics.edit', $question->id) }}"
+                                            <a href="{{ route('web.questions.edit', $question->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
 
                                             <form method="POST" action={{ route('web.topics.delete', $question->id) }}>

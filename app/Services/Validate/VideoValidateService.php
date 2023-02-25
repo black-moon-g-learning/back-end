@@ -2,7 +2,7 @@
 
 namespace App\Services\Validate;
 
-class VideoValidateService extends ValidateService
+class VideoValidateService extends ValidateService implements IValidateService
 {
     public function setFieldValidate(): array
     {

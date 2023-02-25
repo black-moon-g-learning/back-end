@@ -30,4 +30,9 @@ class QuestionRepository extends BaseRepository implements IQuestionRepository
         ])
             ->where('country_id', $countryId)->paginate(20);
     }
+
+    public function getAQuestionWithAnswers(int $id): mixed
+    {
+        return $this->model->with('answers')->find($id);
+    }
 }
