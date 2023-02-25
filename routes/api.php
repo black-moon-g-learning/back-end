@@ -36,6 +36,8 @@ Route::middleware(['idInteger'])->group(function () {
     Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index']);
 
     Route::get('/videos/{id}/questions', [QuestionController::class, 'index']);
+
+    Route::get('/countries/{id}/questions', [QuestionController::class, 'getQuestionsInACountry']);
 });
 
 Route::post('/login', [AuthController::class, 'login'])->name('login');

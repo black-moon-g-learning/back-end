@@ -27,6 +27,11 @@ class QuestionService implements IQuestionService
         return $this->questionRepo->getAllQuestionInVideo($videoId);
     }
 
+    public function getAllQuestionInCountry(int $countryId): Collection
+    {
+        return $this->questionRepo->getAllQuestionInCountry($countryId);
+    }
+
     public function indexAdmin(int $countryId): mixed
     {
         return $this->questionRepo->getQuestionsInCountryAdmin($countryId);

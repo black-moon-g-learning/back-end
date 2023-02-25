@@ -9,6 +9,8 @@ interface IQuestionService
 {
     public function getAllQuestionInVideo(int $videoId): Collection;
 
+    public function getAllQuestionInCountry(int $countryId): Collection;
+
     public function indexAdmin(int $countryId): mixed;
 
     public function update(Request $request, int $id): mixed;

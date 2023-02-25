@@ -21,6 +21,16 @@ class QuestionRepository extends BaseRepository implements IQuestionRepository
             ->with('answers')
             ->get();
     }
+
+    public function getAllQuestionInCountry(int $countryId): Collection
+    {
+        return $this
+            ->model
+            ->where('country_id', $countryId)
+            ->with('answers')
+            ->get();
+    }
+
     public function getQuestionsInCountryAdmin(int $countryId): mixed
     {
         return $this->model->with([

@@ -20,4 +20,10 @@ class QuestionController extends Controller
         $response = $this->questionSer->getAllQuestionInVideo($videoId);
         return $this->responseSuccessWithData($response->toArray());;
     }
+
+    public function getQuestionsInACountry(int $countryId)
+    {
+        $response = $this->questionSer->getAllQuestionInCountry($countryId);
+        return $this->responseSuccessWithData($response->toArray());
+    }
 }
