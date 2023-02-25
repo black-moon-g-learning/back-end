@@ -16,4 +16,6 @@ interface IQuestionService
     public function update(Request $request, int $id): mixed;
 
     public function edit(int $id): mixed;
+
+    public function store(Request $request): mixed;
 }

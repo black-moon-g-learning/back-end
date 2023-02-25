@@ -18,7 +18,7 @@ class QuestionController extends Controller
     public function index(int $countryId)
     {
         $questions = $this->questionSer->indexAdmin($countryId);
-        return view('pages.questions', compact('questions'));
+        return view('pages.questions', compact('questions', 'countryId'));
     }
 
     public function update(Request $request, int $id)
@@ -37,5 +37,23 @@ class QuestionController extends Controller
     {
         $question = $this->questionSer->edit($id);
         return view('forms.question', compact('question'));
+    }
+
+    public function create(Request $request)
+    {
+        $countryId = $request->get('country-id');
+        return view('forms.question', compact('countryId'));
+    }
+
+    public function store(Request $request)
+    {
+        $response = $this->questionSer->store($request);
+        if ($response['status']) {
+            if ($response['countryId']) {
+                return redirect()->route('web.questions', $response['countryId'])->with('response', $response);
+            }
+            return redirect()->route('web.continents')->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
     }
 }
