@@ -57,4 +57,10 @@ class LevelController extends Controller
         $result = $this->levelSer->delete($id);
         return redirect()->back()->with("response", $result);
     }
+
+    public function indexCountriesGameLevels(int $countryId)
+    {
+        $levels = $this->levelSer->indexAdmin();
+        return view('pages.levels', compact('levels', 'countryId'));
+    }
 }

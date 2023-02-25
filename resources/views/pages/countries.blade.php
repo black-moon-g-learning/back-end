@@ -61,8 +61,8 @@
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
                                             <a href="{{ route('web.countries-topics', $country->id) }}"
                                                 class="btn bg-gradient-info" id="click"> List topics</a>
-                                            <a href="{{ route('web.countries-topics', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> List questions</a>
+                                            <a href="{{ route('web.countries.levels', $country->id) }}"
+                                                class="btn bg-gradient-info" id="click"> Level</a>
                                         </td>
                                         <td class=" px-2">
                                             {{-- {{ handleLongText($country->description) }}

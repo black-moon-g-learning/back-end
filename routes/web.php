@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\CountryController;
@@ -65,6 +66,10 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/countries/{id}/topics', [CountryTopicController::class, 'index'])->name('web.countries-topics');
         Route::post('/countries/{id}/topics', [CountryTopicController::class, 'storeTopic'])->name('web.countries-topics.store');
+        Route::get('/countries/{id}/questions', [QuestionController::class, 'index'])->name('web.questions');
+
+        Route::get('/countries/{id}/levels', [LevelController::class, 'indexCountriesGameLevels'])->name('web.countries.levels');
+
         Route::delete('/countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
 
         Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');
@@ -82,5 +87,9 @@ Route::middleware(['auth', 'role'])->group(
         Route::put('/levels/{id}/update', [LevelController::class, 'update'])->name('web.levels.update');
         Route::post('/levels/store', [LevelController::class, 'store'])->name('web.levels.store');
         Route::delete('/levels/{id}', [LevelController::class, 'delete'])->name('web.levels.delete');
+
+        Route::get('/questions/create', [QuestionController::class, 'create'])->name('web.questions.create');
+        Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('web.questions.edit');
+        Route::put('/questions/{id}/update', [QuestionController::class, 'update'])->name('web.questions.update');
     }
 );
