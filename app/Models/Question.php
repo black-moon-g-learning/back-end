@@ -22,7 +22,8 @@ class Question extends Model
 
     protected $hidden = [
         'created_at',
-        'updated_at'
+        'updated_at',
+        'image'
     ];
 
     public function answers(): HasMany
@@ -30,7 +31,8 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function correctAnswer():HasOne{
+    public function correctAnswer(): HasOne
+    {
         return $this->hasOne(Answer::class);
     }
 }
