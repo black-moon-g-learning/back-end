@@ -78,7 +78,7 @@
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $info->country->name }}
+                                                    <h6 class="mb-0 text-sm">{{ $info->country->name ?? 'Unknown' }}
                                                     </h6>
                                                 </div>
                                             </div>
@@ -86,7 +86,7 @@
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $info->user->first_name }}
+                                                    <h6 class="mb-0 text-sm">{{ getUsername($info->user) }}
                                                     </h6>
                                                 </div>
                                             </div>
