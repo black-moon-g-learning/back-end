@@ -23,7 +23,7 @@
 @section('content')
     <div class="p-4 bg-secondary">
         <form method="POST"
-            action="{{ isset($question) ? route('web.questions.update', $question->id) : route('web.questions.create') }}">
+            action="{{ isset($question) ? route('web.questions.update', $question->id) : route('web.questions.store', ['country-id' => $countryId]) }}">
 
             @csrf
             @isset($question)
@@ -44,30 +44,34 @@
                     @endif
                 </div>
             </div>
+            <input type="hidden" name="correct_answer" value="" class="hidden-correct" />
             <div class="row">
-
                 @php
                     $index = 0;
                 @endphp
-                @foreach ($question->answers as $answer)
-                    @if ($answer->is_correct == 1)
-                        <input type="hidden" name="correct_answer" value="{{ $answer->id }}" class="hidden-correct" />
-                    @endif
+                @foreach ($formAnswers as $formAnswer)
+                    @isset($question->answers)
+                        @php
+                            $answer = $question->answers->get($index);
+                        @endphp
+                    @endisset
                     <div class="col-md-6">
                         <div class="form-group">
-                            <div id="{{ $answer->id }}"
-                                class="{{ $formAnswers[$index]['character'] }} input-group input-answer mb-4 alert  {{ $answer->is_correct ? 'alert-warning' : 'alert-secondary' }}">
-                                <span
-                                    class="input-group-text {{ $formAnswers[$index]['bg'] }}">{{ $formAnswers[$index]['character'] }}</span>
-                                <input value="{{ $answer->content }}" name="answers[{{ $answer->id }}]"
-                                    class="form-control" placeholder="Anwser" type="text">
+                            <div id="{{ $answer->id ?? $formAnswer['character'] }}"
+                                class="{{ $formAnswer['character'] }} input-group input-answer mb-4 alert  {{ isset($answer) && $answer->is_correct == 1 ? 'alert-warning' : 'alert-secondary' }}">
+                                <span class="input-group-text {{ $formAnswer['bg'] }}">{{ $formAnswer['character'] }}</span>
+                                <input value="{{ $answer->content ?? '' }}"
+                                    name="answers[{{ $answer->id ?? $formAnswer['character'] }}]" class="form-control"
+                                    placeholder="Anwser" type="text">
                             </div>
                         </div>
-                        @if (isset(Session::get('errors')['answers.' . $answer->id]))
+                        @if (isset(Session::get('errors')['answers.' . ($answer->id ?? $formAnswer['character'])]))
                             <div class=" form-group">
                                 @include(
                                     'components.alert',
-                                    $data = Session::get('errors')['answers.' . $answer->id]
+                                    $data = Session::get('errors')[
+                                        'answers.' . ($answer->id ?? $formAnswer['character'])
+                                    ]
                                 )
                             </div>
                         @endif
@@ -76,6 +80,7 @@
                         $index++;
                     @endphp
                 @endforeach
+
             </div>
             <div class="row">
                 <div class="form-group col-1">
@@ -84,9 +89,15 @@
                         @php
                             $index = 0;
                         @endphp
-                        @foreach ($question->answers as $answer)
-                            <option {{ $answer->is_correct ? 'selected' : '' }} class=" {{ $formAnswers[$index]['bg'] }}">
-                                {{ $formAnswers[$index]['character'] }}
+                        @foreach ($formAnswers as $formAnswer)
+                            @isset($question->answers)
+                                @php
+                                    $answer = $question->answers->get($index);
+                                @endphp
+                            @endisset
+                            <option {{ isset($answer->is_correct) && $answer->is_correct ? 'selected' : '' }}
+                                class=" {{ $formAnswer['bg'] }}">
+                                {{ $formAnswer['character'] }}
                             </option>
                             @php
                                 $index++;
@@ -109,12 +120,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
 
     <script type="text/javascript">
+        $('.hidden-correct').val($('.input-answer.alert-warning').attr('id'));
+
         $('#correct').change(function() {
             $('.input-answer').removeClass('alert-warning');
             $('.input-answer').addClass('alert-secondary');
 
             $(`.${$(this).val()}`).addClass('alert-warning');
-
             $('.hidden-correct').val($('.input-answer.alert-warning').attr('id'));
         });
     </script>

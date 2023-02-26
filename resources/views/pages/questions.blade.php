@@ -19,7 +19,8 @@
                     <h6>questions table</h6>
                 </div>
                 <div class="col-6 card-header pb-0">
-                    <a href="{{ route('web.questions.create') }}" class="btn bg-success badge-primary" id="click">
+                    <a href="{{ route('web.questions.create', ['country-id' => $countryId]) }}"
+                        class="btn bg-success badge-primary" id="click">
                         Create new question</a>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
@@ -37,33 +38,36 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($questions as $question)
-                                    <tr>
-                                        <td>
-                                            <div style="width:200px" class="d-flex px-2 py-1">
-                                                <p>{{ handleLongText($question->content) }}</p>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                {{ handleLongText($question->correctAnswer->content) }}
-                                            </div>
-                                        </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('web.questions.edit', $question->id) }}"
-                                                class="btn bg-gradient-info" id="click"> Edit</a>
+                                @isset($questions)
+                                    @foreach ($questions as $question)
+                                        <tr>
+                                            <td>
+                                                <div style="width:200px" class="d-flex px-2 py-1">
+                                                    <p>{{ handleLongText($question->content) }}</p>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    {{ handleLongText($question->answers->first()->content ?? 'No correct answer') }}
+                                                </div>
+                                            </td>
+                                            <td class="align-middle">
+                                                <a href="{{ route('web.questions.edit', $question->id) }}"
+                                                    class="btn bg-gradient-info" id="click"> Edit</a>
 
-                                            <form method="POST" action={{ route('web.topics.delete', $question->id) }}>
+                                                <form method="POST"
+                                                    action={{ route('web.questions.delete', ['id' => $question->id, 'country-id' => $question->country_id]) }}>
 
-                                                @csrf
-                                                @method('DELETE')
+                                                    @csrf
+                                                    @method('DELETE')
 
-                                                <button class="btn bg-gradient-info delete-question" type="submit"
-                                                    id="click1"> Delete</button>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                                                    <button class="btn bg-gradient-info delete-question" type="submit"
+                                                        id="click1"> Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endisset
                             </tbody>
                         </table>
                     </div>
@@ -88,7 +92,7 @@
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
                 title: 'Confirm Delete!',
-                content: 'Do you want to delete this row!, video in this question will be deleted',
+                content: 'Do you want to delete this row!, Anwsers in this question will be deleted',
                 buttons: {
                     confirm: function() {
                         $(e.target).closest('form').submit();

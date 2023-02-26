@@ -88,4 +88,74 @@ class QuestionService implements IQuestionService
         }
         return true;
     }
+
+    public function createAnswer(array $answers, string $correctAnswerCharacter, int $questionId): bool
+    {
+        foreach ($answers as $character => $content) {
+
+            $answer['content'] = $content;
+            $answer['question_id'] = $questionId;
+
+            if ($character == $correctAnswerCharacter) {
+                $answer['is_correct'] = 1;
+            } else {
+                $answer['is_correct'] = 0;
+            }
+
+            if (!$this->answerRepo->create($answer)) {
+                return false;
+            };
+        }
+        return true;
+    }
+
+    public function store(Request $request): mixed
+    {
+        $validator = new QuizValidateService($request->all());
+        $validated = $validator->afterValidated();
+
+        if ($validated['status']) {
+
+            $question['content'] = $validated['data']['question'];
+            $question['country_id'] = $request->get('country-id');
+
+            $answers = $validated['data']['answers'];
+            $correctAnswerId = $validated['data']['correct_answer'];
+
+            $createdQuestion = $this->questionRepo->create($question);
+
+            $createdAnswer =  $this->createAnswer($answers, $correctAnswerId, $createdQuestion->id);
+
+            if ($createdQuestion &&  $createdAnswer) {
+                return [
+                    'status' => true,
+                    'data' => 'update Question successful',
+                    'countryId' => $createdQuestion->country_id
+                ];
+            }
+            return [
+                'status' => false,
+                'data' => 'Can not update now',
+            ];
+        }
+        return $validated;
+    }
+
+    public function delete(Request $request, int $id): mixed
+    {
+        $deletedQuestion = $this->questionRepo->delete($id);
+        $countryId = $request->get('country-id');
+
+        if ($deletedQuestion) {
+            return [
+                'status' => true,
+                'data' => 'Delete Question successful',
+                'countryId' => $countryId
+            ];
+        }
+        return [
+            'status' => false,
+            'data' => 'Can not delete now',
+        ];
+    }
 }

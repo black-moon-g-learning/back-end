@@ -89,7 +89,9 @@ Route::middleware(['auth', 'role'])->group(
         Route::delete('/levels/{id}', [LevelController::class, 'delete'])->name('web.levels.delete');
 
         Route::get('/questions/create', [QuestionController::class, 'create'])->name('web.questions.create');
+        Route::post('/questions/store', [QuestionController::class, 'store'])->name('web.questions.store');
         Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('web.questions.edit');
         Route::put('/questions/{id}/update', [QuestionController::class, 'update'])->name('web.questions.update');
+        Route::delete('/questions/{id}', [QuestionController::class, 'delete'])->name('web.questions.delete');
     }
 );
