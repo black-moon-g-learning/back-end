@@ -18,4 +18,6 @@ interface IQuestionService
     public function edit(int $id): mixed;
 
     public function store(Request $request): mixed;
+
+    public function delete(Request $request, int $id): mixed;
 }

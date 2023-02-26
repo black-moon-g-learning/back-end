@@ -55,7 +55,8 @@
                                                 <a href="{{ route('web.questions.edit', $question->id) }}"
                                                     class="btn bg-gradient-info" id="click"> Edit</a>
 
-                                                <form method="POST" action={{ route('web.topics.delete', $question->id) }}>
+                                                <form method="POST"
+                                                    action={{ route('web.questions.delete', ['id' => $question->id, 'country-id' => $question->country_id]) }}>
 
                                                     @csrf
                                                     @method('DELETE')
@@ -91,7 +92,7 @@
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
                 title: 'Confirm Delete!',
-                content: 'Do you want to delete this row!, video in this question will be deleted',
+                content: 'Do you want to delete this row!, Anwsers in this question will be deleted',
                 buttons: {
                     confirm: function() {
                         $(e.target).closest('form').submit();

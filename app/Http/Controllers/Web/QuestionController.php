@@ -56,4 +56,16 @@ class QuestionController extends Controller
         }
         return redirect()->back()->with('errors', $response['data']);
     }
+
+    public function delete(Request $request, int $id)
+    {
+        $response = $this->questionSer->delete($request, $id);
+        if ($response['status']) {
+            if ($response['countryId']) {
+                return redirect()->route('web.questions', $response['countryId'])->with('response', $response);
+            }
+            return redirect()->route('web.continents')->with('response', $response);
+        }
+        return redirect()->back()->with('errors', $response['data']);
+    }
 }

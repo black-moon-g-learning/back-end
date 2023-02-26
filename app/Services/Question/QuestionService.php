@@ -140,4 +140,22 @@ class QuestionService implements IQuestionService
         }
         return $validated;
     }
+
+    public function delete(Request $request, int $id): mixed
+    {
+        $deletedQuestion = $this->questionRepo->delete($id);
+        $countryId = $request->get('country-id');
+
+        if ($deletedQuestion) {
+            return [
+                'status' => true,
+                'data' => 'Delete Question successful',
+                'countryId' => $countryId
+            ];
+        }
+        return [
+            'status' => false,
+            'data' => 'Can not delete now',
+        ];
+    }
 }
