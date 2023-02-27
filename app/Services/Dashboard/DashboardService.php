@@ -22,23 +22,13 @@ class DashboardService implements IDashboardService
         $this->videoRepo = $videoRepo;
         $this->infoRepo = $infoRepo;
 
-        $this->index();
+        $this->loadComponents();
     }
 
     public function index()
     {
-        view()->composer('components.card', function ($view) {
-
-            $totalUsers = $this->totalUsers();
-            $totalVideos = $this->totalVideos();
-            $totalInfos = $this->totalInfos();
-
-            $view->with([
-                'totalUsers' => $totalUsers,
-                'totalVideos' => $totalVideos,
-                'totalInfos' => $totalInfos
-            ]);
-        });
+        $response['usersContributed'] = $this->getUserContributed();
+        return $response;
     }
 
     public function totalUsers()
@@ -54,5 +44,26 @@ class DashboardService implements IDashboardService
     public function totalInfos()
     {
         return $this->infoRepo->countInfo();
+    }
+
+    public function getUserContributed()
+    {
+        return $this->infoRepo->getUserContribute();
+    }
+
+    public function loadComponents()
+    {
+        view()->composer('components.card', function ($view) {
+
+            $totalUsers = $this->totalUsers();
+            $totalVideos = $this->totalVideos();
+            $totalInfos = $this->totalInfos();
+
+            $view->with([
+                'totalUsers' => $totalUsers,
+                'totalVideos' => $totalVideos,
+                'totalInfos' => $totalInfos
+            ]);
+        });
     }
 }

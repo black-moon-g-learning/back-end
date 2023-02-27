@@ -16,6 +16,7 @@ class DashboardController extends Controller
     }
     public function dashboard()
     {
-        return view('pages.dashboard');
+        $response = $this->dashboardSer->index();
+        return view('pages.dashboard', compact('response'));
     }
 }
