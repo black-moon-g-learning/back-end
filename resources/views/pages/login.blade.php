@@ -9,6 +9,9 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
+                                    <h1 class="mt-5 text-black font-weight-bolder position-relative">G - learning</h1>
+                                    <p class="text-black position-relative">The best app for kid to learn GEOGRAPHY.</p>
+                                    <p>----------------------------------</p>
                                     <h4 class="font-weight-bolder">Log In</h4>
                                     <p class="mb-0">Enter your email and password to log in</p>
                                 </div>
@@ -66,11 +69,9 @@
                         <div
                             class="col-6 d-lg-flex d-none h-100 my-auto pe-0 position-absolute top-0 end-0 text-center justify-content-center flex-column">
                             <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
-                                style="background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmvxk95u8vpB-rBhQcKr_04j-rxiPxxw4Vjg&usqp=CAU');
+                                style="background-image: url('{{ asset('/img/login-1.png') }}');
           background-size: cover;">
                                 <span class="mask opacity-6"></span>
-                                <h2 class="mt-5 text-white font-weight-bolder position-relative">"G - learning"</h2>
-                                <p class="text-white position-relative">The best app for kid to learn GEOGRAPHY.</p>
                             </div>
                         </div>
                     </div>
