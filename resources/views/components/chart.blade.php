@@ -23,3 +23,8 @@
                            style="background-image: url('../assets/img/carousel-1.jpg');
   background-size: cover;">
                        </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
