@@ -42,4 +42,12 @@ class InformationRepository extends BaseRepository implements IInformationReposi
             ->orderBy('status', 'desc')
             ->paginate($this->limit);
     }
+
+    public function countInfo()
+    {
+        return $this
+            ->model
+            ->where('status', Information::PUBLISHED)
+            ->count();
+    }
 }
