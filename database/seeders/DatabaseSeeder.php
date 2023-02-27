@@ -38,7 +38,7 @@ class DatabaseSeeder extends Seeder
 
         Service::factory(1)->create();
 
-        $data = json_decode(Storage::disk('local')->get('dev-data.json'));
+        $data = json_decode(Storage::disk('local')->get('data.json'));
 
         $index = 1;
 
@@ -50,31 +50,33 @@ class DatabaseSeeder extends Seeder
                 'quantity_countries' => rand(2, 100),
                 'quantity_regions' => rand(1, 8)
             ]);
-            foreach ($continent->countries as $country) {
+            if (in_array($index, [1, 2])) {
+                foreach ($continent->countries as $country) {
 
-                Country::factory()->create([
-                    'name' => $country->name,
-                    'description' => fake()->paragraphs(2, true),
-                    'continent_id' => $index,
-                    'place' => rand(1, 196),
-                    'image' => $country->image
-                ]);
+                    Country::factory()->create([
+                        'name' => $country->name,
+                        'description' => fake()->paragraphs(2, true),
+                        'continent_id' => $index,
+                        'place' => rand(1, 196),
+                        'image' => $country->image
+                    ]);
+                }
             }
             $index++;
         }
 
 
-        $data = ["Africa", "Oceania", "Americas", "Antarctic"];
+        // $data = ["Africa", "Oceania", "Americas", "Antarctic"];
 
-        foreach ($data as $continent) {
-            Continent::factory()->create([
-                'name' => $continent,
-                'description' => fake()->paragraphs(2, true),
-                'image' => fake()->imageUrl('640', '480', 'animal', true),
-                'quantity_countries' => rand(2, 100),
-                'quantity_regions' => rand(1, 8)
-            ]);
-        }
+        // foreach ($data as $continent) {
+        //     Continent::factory()->create([
+        //         'name' => $continent,
+        //         'description' => fake()->paragraphs(2, true),
+        //         'image' => fake()->imageUrl('640', '480', 'animal', true),
+        //         'quantity_countries' => rand(2, 100),
+        //         'quantity_regions' => rand(1, 8)
+        //     ]);
+        // }
 
         Role::factory()->create([
             'name' => 'admin',
