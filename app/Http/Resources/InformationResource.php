@@ -19,7 +19,7 @@ class InformationResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'image' => $this->image,
-            'country' => $this->country->name,
+            'country' => $this->country->name ?? 'Unknown',
             'author' => getUsername($this->user),
             'public' => getTime($this->created_at)
         ];
