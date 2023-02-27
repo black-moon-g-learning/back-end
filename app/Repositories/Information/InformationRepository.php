@@ -42,4 +42,26 @@ class InformationRepository extends BaseRepository implements IInformationReposi
             ->orderBy('status', 'desc')
             ->paginate($this->limit);
     }
+
+    public function countInfo()
+    {
+        return $this
+            ->model
+            ->where('status', Information::PUBLISHED)
+            ->count();
+    }
+
+    public function getUserContribute()
+    {
+        return $this->model
+            ->join('users', 'users.id', '=', 'contributes.owner_id')
+            ->selectRaw('users.first_name
+                ,COUNT(owner_id) as totals
+                ,SUM(status=' . Information::PENDING . ')  AS pending
+                ,SUM(status=' . Information::PUBLISHED . ') AS published
+                ,SUM(status=' . Information::FUTURE . ') AS future')
+            ->groupBy('owner_id')
+            ->orderBy('totals', 'desc')
+            ->paginate(10);
+    }
 }

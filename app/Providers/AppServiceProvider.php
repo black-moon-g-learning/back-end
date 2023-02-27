@@ -90,6 +90,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\CountryTopic\ICountryTopicService::class,
             \App\Services\CountryTopic\CountryTopicService::class
         );
+
+        $this->app->bind(
+            \App\Services\Dashboard\IDashboardService::class,
+            \App\Services\Dashboard\DashboardService::class
+        );
     }
 
     /**

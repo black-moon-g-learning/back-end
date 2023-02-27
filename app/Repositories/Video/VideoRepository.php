@@ -29,4 +29,9 @@ class VideoRepository extends BaseRepository implements IVideoRepository
             ->where('country_topic_id', '=', $countryTopicId)
             ->get();
     }
+
+    public function countVideos()
+    {
+        return $this->model->count();
+    }
 }

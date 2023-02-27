@@ -32,4 +32,8 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->where('role_id', '!=', Role::ADMIN_ROLE)
             ->paginate($limit);
     }
+    public function countUsers()
+    {
+        return $this->model->where('role_id', '!=', Role::ADMIN_ROLE)->count();
+    }
 }
