@@ -5,6 +5,7 @@ namespace App\Services\Country;
 use App\Repositories\Country\ICountryRepository;
 use App\Services\Storage\IStorageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CountryService implements ICountryService
@@ -25,7 +26,20 @@ class CountryService implements ICountryService
 
     public function index()
     {
-        return $this->countryRepo->getCountries();
+        $user = Auth::user();
+
+        $countries = $this->countryRepo->getCountries($user->id);
+        $countries->setCollection($countries->getCollection()->transform(function ($item) {
+
+            $total = $item->usersPlayGame->total_questions ?? 1;
+            $correct = $item->usersPlayGame->total_correct_answers ?? 0;
+
+            $percent = calPercent($correct, $total);
+
+            $item->setField($percent);
+            return $item;
+        }));
+        return $countries;
     }
 
     public function getAttributeCountries(string $attribute)

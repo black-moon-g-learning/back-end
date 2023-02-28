@@ -91,3 +91,15 @@ if (!function_exists('handleShowVideoLink')) {
         return $link;
     }
 }
+
+if (!function_exists('calPercent')) {
+
+    function calPercent(int $first, int $second)
+    {
+        if ($second == 0) {
+            return 0;
+        } else {
+            return round($first / $second * 33.3, 2);
+        }
+    }
+}

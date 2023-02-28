@@ -58,4 +58,15 @@ class Country extends Model
     {
         return $this->hasMany(Question::class);
     }
+
+    public function usersPlayGame()
+    {
+        return $this->hasOne(GamesHistory::class);
+    }
+
+
+    public function setField($id)
+    {
+        $this->user_play = $id;
+    }
 }
