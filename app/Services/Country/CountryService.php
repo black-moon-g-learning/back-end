@@ -49,8 +49,10 @@ class CountryService implements ICountryService
 
     public function getAttributeCountries(string $attribute)
     {
+        $unlimited = 1000;
+
         $field = ['id', $attribute];
-        return $this->countryRepo->getAttributeCountries($field);;
+        return $this->countryRepo->getAttributeCountries($field, $unlimited);
     }
 
     public function getCountriesInContinent(int $continentId)
@@ -118,7 +120,7 @@ class CountryService implements ICountryService
     public function setupDataForHistory(Request $request)
     {
         $user = Auth::user();
-        
+
         $gameHistory['owner_id'] = $user->id ?? 1;
         $gameHistory['country_id'] = $request->get('country_id') ?? 1;
         $gameHistory['level_id'] = $request->get('level_id') ?? 1;
