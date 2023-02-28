@@ -21,7 +21,9 @@ class CountryRepository extends BaseRepository implements ICountryRepository
 
     public function getAttributeCountries(array $attribute, int $limit = 10)
     {
-        return $this->model->paginate($limit, $attribute);
+        return $this->model
+            ->paginate($limit, $attribute)
+            ->appends(['attribute' => $attribute[1]]);
     }
 
     public function getCountriesInContinent(int $continentId, int $limit = 10)

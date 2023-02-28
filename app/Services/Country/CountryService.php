@@ -50,9 +50,9 @@ class CountryService implements ICountryService
     public function getAttributeCountries(string $attribute)
     {
         $unlimited = 1000;
-        
+
         $field = ['id', $attribute];
-        return $this->countryRepo->getAttributeCountries($field, $unlimited);;
+        return $this->countryRepo->getAttributeCountries($field, $unlimited);
     }
 
     public function getCountriesInContinent(int $continentId)
