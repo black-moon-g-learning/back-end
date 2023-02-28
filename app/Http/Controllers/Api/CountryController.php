@@ -23,4 +23,10 @@ class CountryController extends Controller
         }
         return $this->countrySer->index();
     }
+
+    public function storeUserPlayGame(Request $request)
+    {
+        $this->countrySer->storeUserPlayGame($request);
+        return $this->responseSuccessWithData(['status' => 'success']);
+    }
 }

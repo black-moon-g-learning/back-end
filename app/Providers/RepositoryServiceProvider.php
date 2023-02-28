@@ -72,6 +72,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\Answer\IAnswerRepository::class,
             \App\Repositories\Answer\AnswerRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\GameHistory\IGameHistoryRepository::class,
+            \App\Repositories\GameHistory\GameHistoryRepository::class,
+        );
     }
 
     /**
