@@ -52,6 +52,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/profile', [UserController::class, 'update']);
     Route::patch('/profile', [UserController::class, 'update']);
     Route::get('/countries', [CountryController::class, 'index']);
+    Route::post('/countries/user-play-game', [CountryController::class, 'storeUserPlayGame']);
 });
 
 
