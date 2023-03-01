@@ -55,8 +55,10 @@ class QuestionController extends Controller
     {
         $response = $this->questionSer->store($request);
         if ($response['status']) {
-            if ($response['countryId']) {
+            if (isset($response['countryId'])) {
                 return redirect()->route('web.questions', $response['countryId'])->with('response', $response);
+            } else if (isset($response['videoId'])) {
+                return redirect()->route('web.reviews', $response['videoId'])->with('response', $response);
             }
             return redirect()->route('web.continents')->with('response', $response);
         }
