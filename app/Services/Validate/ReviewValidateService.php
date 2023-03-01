@@ -8,11 +8,11 @@ class ReviewValidateService extends ValidateService implements IValidateService
 {
     public function setFieldValidate(): array
     {
+        $isNullable = request()->method() === 'POST' ? 'required' : 'nullable';
+        
         return [
             'question' => 'required',
-            'answers.*' => request()->method() === 'POST'
-                ? 'required'
-                : 'nullable' . '|mimes:jpeg,png,jpg,gif|max:8129|file',
+            'answers.*' =>  $isNullable . '|mimes:jpeg,png,jpg,gif|max:8129|file',
             'correct_answer' => 'required'
         ];
     }
