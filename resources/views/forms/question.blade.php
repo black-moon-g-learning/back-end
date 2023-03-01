@@ -19,7 +19,6 @@
     ];
 @endphp
 @extends('layouts.master')
-
 @section('content')
     <div class="p-4 bg-secondary">
         <form method="POST" enctype="multipart/form-data"

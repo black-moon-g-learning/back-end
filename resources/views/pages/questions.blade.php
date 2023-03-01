@@ -54,7 +54,10 @@
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{ route('web.questions.edit', $question->id) }}"
+                                                <a href="{{ route(
+                                                    'web.questions.edit',
+                                                    isset($videoId) ? ['id' => $question->id, 'video-id' => $videoId] : $question->id,
+                                                ) }}"
                                                     class="btn bg-gradient-info" id="click"> Edit</a>
 
                                                 <form method="POST"

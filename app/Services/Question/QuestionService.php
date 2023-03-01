@@ -45,30 +45,10 @@ class QuestionService implements IQuestionService
 
     public function update(Request $request, int $id): mixed
     {
-        $validator = new QuizValidateService($request->all());
-        $validated = $validator->afterValidated();
-
-        if ($validated['status']) {
-
-            $question['content'] = $validated['data']['question'];
-            $answers = $validated['data']['answers'];
-            $correctAnswerId = $validated['data']['correct_answer'];
-
-            $updatedQuestion = $this->questionRepo->update($id, $question);
-            $updatedAnswer =  $this->updateForAnswer($answers, $correctAnswerId);
-            if ($updatedQuestion &&  $updatedAnswer) {
-                return [
-                    'status' => true,
-                    'data' => 'update Question successful',
-                    'countryId' => $updatedQuestion->country_id
-                ];
-            }
-            return [
-                'status' => false,
-                'data' => 'Can not update now',
-            ];
+        if ($request->get('video-id')) {
+            return $this->updateReview($request, $id);
         }
-        return $validated;
+        return $this->updateQuestion($request, $id);
     }
 
     public function edit(int $id): mixed
@@ -151,12 +131,11 @@ class QuestionService implements IQuestionService
             $question['content'] = $validated['data']['question'];
             $question['video_id'] = $request->get('video-id');
 
-            $answers = $validated['data']['answers'];
             $correctAnswerId = $validated['data']['correct_answer'];
 
             $createdQuestion = $this->questionRepo->create($question);
 
-            $createdAnswer =  $this->createAnswerImage($answers, $correctAnswerId, $createdQuestion->id, $request);
+            $createdAnswer =  $this->createAnswerImage($correctAnswerId, $createdQuestion->id, $request);
 
             if ($createdQuestion &&  $createdAnswer) {
                 return [
@@ -206,7 +185,7 @@ class QuestionService implements IQuestionService
         return $validated;
     }
 
-    public function createAnswerImage(array $answers, string $correctAnswerCharacter, int $questionId, Request $request): bool
+    public function createAnswerImage(string $correctAnswerCharacter, int $questionId, Request $request): bool
     {
 
         $index = 0;
@@ -231,6 +210,93 @@ class QuestionService implements IQuestionService
                 return false;
             }
             $index++;
+        }
+        return true;
+    }
+
+    public function updateQuestion(Request $request, int $id)
+    {
+        $validator = new QuizValidateService($request->all());
+        $validated = $validator->afterValidated();
+
+        if ($validated['status']) {
+
+            $question['content'] = $validated['data']['question'];
+            $answers = $validated['data']['answers'];
+            $correctAnswerId = $validated['data']['correct_answer'];
+
+            $updatedQuestion = $this->questionRepo->update($id, $question);
+            $updatedAnswer =  $this->updateForAnswer($answers, $correctAnswerId);
+            if ($updatedQuestion &&  $updatedAnswer) {
+                return [
+                    'status' => true,
+                    'data' => 'update Question successful',
+                    'countryId' => $updatedQuestion->country_id
+                ];
+            }
+            return [
+                'status' => false,
+                'data' => 'Can not update now',
+            ];
+        }
+        return $validated;
+    }
+
+    public function updateReview(Request $request, int $id)
+    {
+        $validator = new ReviewValidateService($request->all());
+        $validated = $validator->afterValidated();
+        
+        if ($validated['status']) {
+
+            $question['content'] = $validated['data']['question'];
+            $correctAnswerId = $validated['data']['correct_answer'];
+
+            $updatedQuestion = $this->questionRepo->update($id, $question);
+            $updatedAnswer =  $this->updateForAnswerReview($request, $correctAnswerId);
+            if ($updatedQuestion &&  $updatedAnswer) {
+                return [
+                    'status' => true,
+                    'data' => 'update Question successful',
+                    'videoId' => $updatedQuestion->video_id
+                ];
+            }
+            return [
+                'status' => false,
+                'data' => 'Can not update now',
+            ];
+        }
+        return $validated;
+    }
+
+    public function updateForAnswerReview(Request $request, int $correctAnswerId)
+    {
+
+        foreach ($request->file('answers') as $id => $file) {
+
+            $answerDB = $this->answerRepo->find($id);
+
+            if ($this->storeSer->exists($answerDB->image)) {
+                $this->storeSer->delete($answerDB->image);
+            }
+
+            $uploaded = $this->storeSer->upload($file, 'reviews');
+
+            if ($uploaded['status']) {
+                $answer['image'] = $uploaded['url'];
+
+                if ($id == $correctAnswerId) {
+                    $answer['is_correct'] = 1;
+                } else {
+                    $answer['is_correct'] = 0;
+                }
+
+                if (!$this->answerRepo->update($id, $answer)) {
+                    return false;
+                };
+            } else {
+                return false;
+            }
         }
         return true;
     }

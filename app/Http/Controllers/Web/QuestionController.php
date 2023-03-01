@@ -24,18 +24,25 @@ class QuestionController extends Controller
     public function update(Request $request, int $id)
     {
         $response =  $this->questionSer->update($request, $id);
+
         if ($response['status']) {
-            if ($response['countryId']) {
+            if (isset($response['countryId'])) {
                 return redirect()->route('web.questions', $response['countryId'])->with('response', $response);
+            } else if (isset($response['videoId'])) {
+                return redirect()->route('web.reviews', $response['videoId'])->with('response', $response);
             }
             return redirect()->route('web.continents')->with('response', $response);
         }
         return redirect()->back()->with('errors', $response['data']);
     }
 
-    public function edit(int $id)
+    public function edit(Request $request, int $id)
     {
         $question = $this->questionSer->edit($id);
+        if ($request->has('video-id')) {
+            $videoId = $request->get('video-id');
+            return view('forms.question', compact('question', 'videoId'));
+        }
         return view('forms.question', compact('question'));
     }
 
