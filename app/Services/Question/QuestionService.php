@@ -162,12 +162,12 @@ class QuestionService implements IQuestionService
                 return [
                     'status' => true,
                     'data' => 'create Question successful',
-                    'countryId' => $createdQuestion->country_id
+                    'videoId' => $createdQuestion->video_id
                 ];
             }
             return [
                 'status' => false,
-                'data' => 'Can not update now',
+                'data' => 'Can not create now',
             ];
         }
         return $validated;
@@ -231,7 +231,6 @@ class QuestionService implements IQuestionService
                 return false;
             }
             $index++;
-
         }
         return true;
     }
