@@ -11,4 +11,6 @@ interface ICountryRepository extends RepositoryInterface
     public function getAttributeCountries(array $attribute, int $limit = 10);
 
     public function getCountriesInContinent(int $continentId, int $limit = 10);
+
+    public function searchCountries(int $continentId, string $textSearch);
 }
