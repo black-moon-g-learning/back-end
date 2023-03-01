@@ -2,8 +2,6 @@
 
 namespace App\Services\Validate;
 
-use Illuminate\Support\Facades\Validator;
-
 class QuizValidateService extends ValidateService implements IValidateService
 {
     public function setFieldValidate(): array

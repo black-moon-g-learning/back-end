@@ -65,6 +65,9 @@
                                             <a href="{{ route('web.videos.edit', $video->id) }}"
                                                 class="btn bg-gradient-info" id="click">
                                                 Edit</a>
+                                            <a href="{{ route('web.reviews', $video->id) }}" class="btn bg-gradient-info"
+                                                id="click">
+                                                Review</a>
                                         </td>
                                         <td class=" px-2">
                                             {{ convertTimeFromDB($video->time) }}

@@ -22,8 +22,13 @@
 
 @section('content')
     <div class="p-4 bg-secondary">
-        <form method="POST"
-            action="{{ isset($question) ? route('web.questions.update', $question->id) : route('web.questions.store', ['country-id' => $countryId]) }}">
+        <form method="POST" enctype="multipart/form-data"
+            action="{{ isset($question)
+                ? route(
+                    'web.questions.update',
+                    isset($countryId) ? ['id' => $question->id] : ['id' => $question->id, 'video-id' => $videoId],
+                )
+                : route('web.questions.store', isset($countryId) ? ['country-id' => $countryId] : ['video-id' => $videoId]) }}">
 
             @csrf
             @isset($question)
@@ -60,11 +65,25 @@
                             <div id="{{ $answer->id ?? $formAnswer['character'] }}"
                                 class="{{ $formAnswer['character'] }} input-group input-answer mb-4 alert  {{ isset($answer) && $answer->is_correct == 1 ? 'alert-warning' : 'alert-secondary' }}">
                                 <span class="input-group-text {{ $formAnswer['bg'] }}">{{ $formAnswer['character'] }}</span>
-                                <input value="{{ $answer->content ?? '' }}"
-                                    name="answers[{{ $answer->id ?? $formAnswer['character'] }}]" class="form-control"
-                                    placeholder="Anwser" type="text">
+                                @if (isset($countryId))
+                                    <input value="{{ $answer->content ?? '' }}"
+                                        name="answers[{{ $answer->id ?? $formAnswer['character'] }}]" class="form-control"
+                                        placeholder="Anwser" type="text">
+                                @else
+                                    <input name="answers[{{ $answer->id ?? $formAnswer['character'] }}]"
+                                        class="form-control" onchange="changeImage(event,{{ $index }})"
+                                        placeholder="Anwser" type="file">
+                                @endif
                             </div>
                         </div>
+                        @if (!isset($countryId))
+                            <div class="form-group">
+                                <label for="example-tel-input" class="form-control-label">Preview</label>
+                                <img class="form-control" id="preview-img-{{ $index }}" class="col-6 img-thumbnail"
+                                    style="width: 30rem" alt=""
+                                    src="{{ isset($answer) ? getS3Url($answer->image) : '' }}">
+                            </div>
+                        @endif
                         @if (isset(Session::get('errors')['answers.' . ($answer->id ?? $formAnswer['character'])]))
                             <div class=" form-group">
                                 @include(
@@ -129,5 +148,14 @@
             $(`.${$(this).val()}`).addClass('alert-warning');
             $('.hidden-correct').val($('.input-answer.alert-warning').attr('id'));
         });
+    </script>
+    <script>
+        const changeImage = (e, id) => {
+            var preImage = document.getElementById("preview-img-" + id)
+            preImage.src = URL.createObjectURL(e.target.files[0])
+            preImage.onload = () => {
+                URL.revokeObjectURL(output.src)
+            }
+        }
     </script>
 @endsection
