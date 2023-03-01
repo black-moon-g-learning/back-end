@@ -156,7 +156,7 @@ class QuestionService implements IQuestionService
 
             $createdQuestion = $this->questionRepo->create($question);
 
-            $createdAnswer =  $this->createAnswerImage($answers, $correctAnswerId, $createdQuestion->id, $request);
+            $createdAnswer =  $this->createAnswerImage($correctAnswerId, $createdQuestion->id, $request);
 
             if ($createdQuestion &&  $createdAnswer) {
                 return [
@@ -206,7 +206,7 @@ class QuestionService implements IQuestionService
         return $validated;
     }
 
-    public function createAnswerImage(array $answers, string $correctAnswerCharacter, int $questionId, Request $request): bool
+    public function createAnswerImage(string $correctAnswerCharacter, int $questionId, Request $request): bool
     {
 
         $index = 0;
