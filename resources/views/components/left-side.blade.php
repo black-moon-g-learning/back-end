@@ -45,8 +45,18 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
+            @php
+                $index = 0;
+            @endphp
             @foreach ($tabs as $tab)
-                @include('components.tab', $tab)
+                @include('components.tab', [
+                    'name' => $tab['name'],
+                    'route' => $tab['route'],
+                    'id' => $index,
+                ])
+                @php
+                    $index++;
+                @endphp
             @endforeach
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
