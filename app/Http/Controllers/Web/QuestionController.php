@@ -42,7 +42,13 @@ class QuestionController extends Controller
     public function create(Request $request)
     {
         $countryId = $request->get('country-id');
-        return view('forms.question', compact('countryId'));
+
+        if ($countryId) {
+            return view('forms.question', compact('countryId'));
+        }
+
+        $videoId = $request->get('video-id');
+        return view('forms.question', compact('videoId'));
     }
 
     public function store(Request $request)
@@ -67,5 +73,13 @@ class QuestionController extends Controller
             return redirect()->route('web.continents')->with('response', $response);
         }
         return redirect()->back()->with('errors', $response['data']);
+    }
+
+
+
+    public function indexReview(int $videoId)
+    {
+        $questions = $this->questionSer->getAllQuestionInVideo($videoId);
+        return view('pages.questions', compact('questions', 'videoId'));
     }
 }

@@ -19,7 +19,9 @@
                     <h6>questions table</h6>
                 </div>
                 <div class="col-6 card-header pb-0">
-                    <a href="{{ route('web.questions.create', ['country-id' => $countryId]) }}"
+                    <a href="{{ isset($countryId)
+                        ? route('web.questions.create', ['country-id' => $countryId])
+                        : route('web.questions.create', ['video-id' => $videoId]) }}"
                         class="btn bg-success badge-primary" id="click">
                         Create new question</a>
                 </div>
@@ -74,7 +76,7 @@
                 </div>
             </div>
         </div>
-        {{ $questions->links() }}
+        {{ isset($countryId) ? $questions->links() : '' }}
     </div>
     @include('components.footer')
 @endsection
