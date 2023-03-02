@@ -16,9 +16,10 @@ class UserPayment extends Model
      * @var string[]
      */
     protected $fillable = [
-        'name',
         'user_id',
-        'payment_id',
+        'order_id',
+        'process',
+        'payment',
         'service_id'
     ];
 
