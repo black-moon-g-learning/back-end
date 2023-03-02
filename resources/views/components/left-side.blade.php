@@ -28,6 +28,10 @@
             'name' => 'Level',
             'route' => route('web.levels'),
         ],
+        [
+            'name' => ' Service',
+            'route' => route('web.services'),
+        ],
     ];
 @endphp
 
