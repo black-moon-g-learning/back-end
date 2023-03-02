@@ -25,9 +25,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.landing');
-});
 
 Route::get('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'loginGet'])->name('web.login.get');

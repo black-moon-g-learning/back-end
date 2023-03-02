@@ -95,6 +95,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Dashboard\IDashboardService::class,
             \App\Services\Dashboard\DashboardService::class
         );
+
+        $this->app->bind(
+            \App\Services\Payment\IPaymentService::class,
+            \App\Services\Payment\VNPayPaymentService::class
+        );
     }
 
     /**
