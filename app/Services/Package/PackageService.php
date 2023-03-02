@@ -14,9 +14,19 @@ class PackageService implements IPackageService
         $this->packageRepo = $packageRepo;
     }
 
+    public function getAllData()
+    {
+        return $this->packageRepo->getAll();
+    }
+
     public function index()
     {
-        $response = $this->packageRepo->getAll();
+        $response = $this->getAllData();
         return collect(ServiceResource::collection($response))->toArray();
+    }
+
+    public function indexAdmin()
+    {
+        return $this->getAllData();
     }
 }

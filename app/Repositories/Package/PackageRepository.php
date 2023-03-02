@@ -11,4 +11,9 @@ class PackageRepository extends BaseRepository implements IPackageRepository
     {
         return Service::class;
     }
+
+    public function getFirstRow()
+    {
+        return $this->model->first();
+    }
 }

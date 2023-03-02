@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
 
     use ForeignKeyGenerate;
 
@@ -18,13 +19,14 @@ return new class extends Migration {
         Schema::create('users_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('payment_id')->unsigned();
+            $table->string('order_id')->nullable();
+            $table->enum('process', ['SUCCESS', 'DOING', 'FAIL'])->nullable();
+            $table->string('payment')->nullable();
             $table->tinyInteger('service_id')->unsigned();
             $table->timestamps();
 
-            $this->createForeignKey($table,'user_id','users');
-            $this->createForeignKey($table,'payment_id','payments');
-            $this->createForeignKey($table,'service_id','services');
+            $this->createForeignKey($table, 'user_id', 'users');
+            $this->createForeignKey($table, 'service_id', 'services');
         });
     }
 

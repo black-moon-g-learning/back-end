@@ -13,7 +13,6 @@ use App\Models\Country;
 use App\Models\CountryTopic;
 use App\Models\GameLevel;
 use App\Models\Question;
-use App\Models\Role;
 use App\Models\Service;
 use App\Models\Target;
 use App\Models\Topic;
@@ -78,15 +77,6 @@ class DatabaseSeeder extends Seeder
         //     ]);
         // }
 
-        Role::factory()->create([
-            'name' => 'admin',
-        ]);
-        Role::factory()->create([
-            'name' => 'contributor',
-        ]);
-        Role::factory()->create([
-            'name' => 'user',
-        ]);
 
         User::factory()->create([
             'username' => 'admin@gmail.com',
@@ -126,6 +116,6 @@ class DatabaseSeeder extends Seeder
         Answer::factory(140)->create();
         UserPlayGame::factory(131)->create();
 
-        Contribute::factory(200)->create();
+        Contribute::factory(20)->create();
     }
 }

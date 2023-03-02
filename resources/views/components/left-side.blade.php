@@ -28,6 +28,14 @@
             'name' => 'Level',
             'route' => route('web.levels'),
         ],
+        [
+            'name' => ' Service',
+            'route' => route('web.services'),
+        ],
+        [
+            'name' => 'Payment history',
+            'route' => route('web.users-payment'),
+        ],
     ];
 @endphp
 

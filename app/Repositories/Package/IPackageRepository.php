@@ -6,5 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface IPackageRepository extends RepositoryInterface
 {
-
+    public function getFirstRow();
 }

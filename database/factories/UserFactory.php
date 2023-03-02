@@ -38,7 +38,7 @@ class UserFactory extends Factory
             'country_id' => $this->getCountryId(),
             'character_id' => $characterId,
             'target_id' => $targetId,
-            'role_id' => rand(1, 3),
+            'role_id' => rand(1, 2),
             'provider_id' => 2,
             'image' => $this->faker->imageUrl('640', '480', 'animal', true),
         ];
