@@ -33,12 +33,12 @@ return new class extends Migration
             $table->integer('role_id')->unsigned()->nullable();
             $table->tinyInteger('provider_id')->unsigned()->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('expired')->nullable();
 
             $this->createImageColumn($table);
 
             $this->createForeignKey($table, 'country_id', 'countries');
             $this->createForeignKey($table, 'character_id', 'characters');
-            $this->createForeignKey($table, 'role_id', 'roles');
             $this->createForeignKey($table, 'target_id', 'targets');
 
             $table->rememberToken();
