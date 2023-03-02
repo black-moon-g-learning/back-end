@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
@@ -97,5 +98,7 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/services', [PackageController::class, 'index'])->name('web.services');
         Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
+
+        Route::get('/test-payment', [PaymentController::class, 'getUrlPaymentTest']);
     }
 );

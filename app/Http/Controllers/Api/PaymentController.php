@@ -23,9 +23,18 @@ class PaymentController extends Controller
 
     public function checkIsPayMentSuccess(Request $request)
     {
-        $returnData['RspCode'] = '00';
-        $returnData['Message'] = 'Confirm Success';
+        $returnData = $this->paymentSer->checkIsPayMentSuccess($request);
 
         return response()->json($returnData, 200);
+    }
+
+    public function returnUrlPayment()
+    {
+    }
+
+    public function getUrlPaymentTest(Request $request)
+    {
+        $paymentUrl = $this->paymentSer->getUrl($request);
+        return $this->responseSuccessWithData(['url' => $paymentUrl]);
     }
 }

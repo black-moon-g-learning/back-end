@@ -16,4 +16,12 @@ class UserPaymentRepository extends BaseRepository implements IUserPaymentReposi
     {
         return $this->model->with(['user', 'service'])->get();
     }
+
+    public function findPaymentByOrderId(string $orderId)
+    {
+        return $this
+            ->model
+            ->where('order_id', $orderId)
+            ->first();
+    }
 }

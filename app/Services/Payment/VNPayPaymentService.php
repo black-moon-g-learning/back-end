@@ -2,18 +2,35 @@
 
 namespace App\Services\Payment;
 
+use App\Constants\Process;
+use App\Repositories\Package\IPackageRepository;
+use App\Services\UserPayment\IUserPaymentService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class VNPayPaymentService implements IPaymentService
 {
+    protected IUserPaymentService $userPaymentSer;
+
+    protected IPackageRepository $packageRepo;
+
+    public function __construct(
+        IUserPaymentService $userPaymentSer,
+        IPackageRepository $packageRepo
+    ) {
+        $this->userPaymentSer = $userPaymentSer;
+        $this->packageRepo = $packageRepo;
+    }
+
     public function getUrl(Request $request): string
     {
         $user = Auth::user();
+        $package = $this->packageRepo->getFirstRow();
 
         $vnp_TxnRef = date('YmdHis') .  $user->id; //Mã giao dịch. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
         $vnp_OrderInfo = "payment for G-LEARNING service";
-        $vnp_Amount = 9999900;
+        $vnp_Amount = $package->price * 100;
         $vnp_Locale = 'vn';
         // $vnp_BankCode = $request->bank_code;
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
@@ -50,7 +67,7 @@ class VNPayPaymentService implements IPaymentService
             $query .= urlencode($key) . "=" . urlencode($value) . '&';
         }
 
-        $vnp_Url = env('VNP_URL') . config('payment.PAYMENT_URL') . "?" . $query;
+        $vnp_Url =  config('payment.PAYMENT_URL') . "?" . $query;
         if (config('payment.SECRET_KEY')) {
             // $vnpSecureHash = md5($vnp_HashSecret . $hashData);
             //$vnpSecureHash = hash('sha256', env('VNP_HASHSECRECT'). $hashData);
@@ -59,6 +76,96 @@ class VNPayPaymentService implements IPaymentService
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
 
+        $this->userPaymentSer->create($vnp_TxnRef, $user->id, $package->id);
+
         return $vnp_Url;
+    }
+
+    public function checkIsPayMentSuccess(Request $request)
+    {
+        $inputData = array();
+        $returnData = array();
+
+        foreach ($_GET as $key => $value) {
+            if (substr($key, 0, 4) == "vnp_") {
+                $inputData[$key] = $value;
+            }
+        }
+
+        $vnp_SecureHash = $inputData['vnp_SecureHash'];
+        unset($inputData['vnp_SecureHash']);
+        ksort($inputData);
+        $i = 0;
+        $hashData = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+        }
+
+        $secureHash = hash_hmac('sha512', $hashData, config('payment.SECRET_KEY'));
+        $vnpTranId = $inputData['vnp_TransactionNo']; //Mã giao dịch tại VNPAY
+        $vnp_BankCode = $inputData['vnp_BankCode']; //Ngân hàng thanh toán
+        $vnp_Amount = $inputData['vnp_Amount'] / 100; // Số tiền thanh toán VNPAY phản hồi
+
+        $Status = 0; // Là trạng thái thanh toán của giao dịch chưa có IPN lưu tại hệ thống của merchant chiều khởi tạo URL thanh toán.
+        $orderId = $inputData['vnp_TxnRef'];
+
+
+
+        try {
+            //Check Orderid    
+            //Kiểm tra checksum của dữ liệu
+            if ($secureHash == $vnp_SecureHash) {
+                //Lấy thông tin đơn hàng lưu trong Database và kiểm tra trạng thái của đơn hàng, mã đơn hàng là: $orderId            
+                //Việc kiểm tra trạng thái của đơn hàng giúp hệ thống không xử lý trùng lặp, xử lý nhiều lần một giao dịch
+                //Giả sử: $order = mysqli_fetch_assoc($result);   
+                $orderDB = $this->userPaymentSer->findPaymentByOrderId($orderId);
+
+                if ($orderDB != NULL) {
+                    if ($orderDB->service->price == $vnp_Amount) //Kiểm tra số tiền thanh toán của giao dịch: giả sử số tiền kiểm tra là đúng. //$order["Amount"] == $vnp_Amount
+                    {
+                        // if ($order["Status"] != NULL && $order["Status"] == 0) {
+                        if ($inputData['vnp_ResponseCode'] == '00' || $inputData['vnp_TransactionStatus'] == '00') {
+                            $Status = 1; // Trạng thái thanh toán thành công
+                        } else {
+                            $Status = 2; // Trạng thái thanh toán thất bại / lỗi
+                        }
+                        //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
+                        //
+                        if ($Status == 1) {
+                            $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
+                        } else if ($Status == 2) {
+                            $this->userPaymentSer->updateStatus(Process::FAIL, $orderDB->id);
+                        }
+                        //
+                        //Trả kết quả về cho VNPAY: Website/APP TMĐT ghi nhận yêu cầu thành công                
+                        $returnData['RspCode'] = '00';
+                        $returnData['Message'] = 'Confirm Success';
+                        // } else {
+                        //     $returnData['RspCode'] = '02';
+                        //     $returnData['Message'] = 'Order already confirmed';
+                        // }
+                    } else {
+                        $returnData['RspCode'] = '04';
+                        $returnData['Message'] = 'invalid amount';
+                    }
+                } else {
+                    $returnData['RspCode'] = '01';
+                    $returnData['Message'] = 'Order not found';
+                }
+            } else {
+                $returnData['RspCode'] = '97';
+                $returnData['Message'] = 'Invalid signature';
+            }
+        } catch (Exception $e) {
+            $returnData['RspCode'] = '99';
+            $returnData['Message'] = 'Unknown error';
+        }
+
+        return $returnData;
     }
 }
