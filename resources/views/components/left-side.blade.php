@@ -32,6 +32,10 @@
             'name' => ' Service',
             'route' => route('web.services'),
         ],
+        [
+            'name' => 'Payment history',
+            'route' => route('web.users-payment'),
+        ],
     ];
 @endphp
 

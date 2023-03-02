@@ -6,6 +6,7 @@ use App\Http\Controllers\Web\ContinentController;
 use App\Http\Controllers\Web\CountryController;
 use App\Http\Controllers\Web\CountryTopicController;
 use App\Http\Controllers\Web\DashboardController;
+use App\Http\Controllers\Web\HistoryPaymentController;
 use App\Http\Controllers\Web\InformationController;
 use App\Http\Controllers\Web\LevelController;
 use App\Http\Controllers\Web\PackageController;
@@ -95,5 +96,6 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/videos/{id}/reviews', [QuestionController::class, 'indexReview'])->name('web.reviews');
 
         Route::get('/services', [PackageController::class, 'index'])->name('web.services');
+        Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
     }
 );
