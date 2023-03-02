@@ -61,3 +61,5 @@ Route::middleware(['auth:api'])->group(function () {
 Route::get('/services', [PackageController::class, 'index']);
 
 Route::get('/levels', [LevelController::class, 'index']);
+
+Route::get('/IPN', [PaymentController::class, 'checkIsPayMentSuccess']);

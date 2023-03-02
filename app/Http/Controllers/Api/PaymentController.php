@@ -20,4 +20,12 @@ class PaymentController extends Controller
         $paymentUrl = $this->paymentSer->getUrl($request);
         return $this->responseSuccessWithData(['url' => $paymentUrl]);
     }
+
+    public function checkIsPayMentSuccess(Request $request)
+    {
+        $returnData['RspCode'] = '00';
+        $returnData['Message'] = 'Confirm Success';
+
+        return response()->json($returnData, 200);
+    }
 }
