@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\PackageController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
@@ -53,6 +54,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::patch('/profile', [UserController::class, 'update']);
     Route::get('/countries', [CountryController::class, 'index']);
     Route::post('/countries/user-play-game', [CountryController::class, 'storeUserPlayGame']);
+    Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
 });
 
 
