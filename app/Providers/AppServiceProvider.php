@@ -100,6 +100,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Payment\IPaymentService::class,
             \App\Services\Payment\VNPayPaymentService::class
         );
+
+        $this->app->bind(
+            \App\Services\UserPayment\IUserPaymentService::class,
+            \App\Services\UserPayment\UserPaymentService::class
+        );
     }
 
     /**
