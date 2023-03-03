@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Constants\AuthStatus;
 use App\Constants\Gender;
 use App\Constants\Role;
 use App\Constants\SocialMediaProvider;
@@ -42,6 +43,7 @@ class FirebaseAuthService implements IAuthService
 
             if ($existUser) {
                 $user = $existUser;
+                $authStatus = AuthStatus::LOGIN;
             } else {
 
                 $userInfo['username'] = $userInfoFireBase->email ?? $userInfoFireBase->uid;
@@ -50,11 +52,13 @@ class FirebaseAuthService implements IAuthService
                 $userInfo['image'] = $userInfoFireBase->photoUrl;
                 $userInfo['gender'] = Gender::OTHER;
                 $userInfo['email'] = $userInfoFireBase->email;
-                // $userInfo['password'] = "$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi";
                 $userInfo['first_name'] =  $userInfoFireBase->displayName;
                 $userInfo['firebase_uid'] =  $uid;
+                $userInfo['expired'] = Carbon::now()->addDays(7)->toDateTimeString();
 
                 $user = $this->userRepo->create($userInfo);
+
+                $authStatus = AuthStatus::REGISTER;
             }
 
 
@@ -64,6 +68,7 @@ class FirebaseAuthService implements IAuthService
             $token->save();
 
             return [
+                'auth_status' =>  $authStatus,
                 'status' => true,
                 'id' => $user->id,
                 'access_token' => $tokenResult->accessToken,
