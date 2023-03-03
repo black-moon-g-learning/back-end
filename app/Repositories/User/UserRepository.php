@@ -2,6 +2,7 @@
 
 namespace App\Repositories\User;
 
+use App\Constants\Process;
 use App\Constants\Role;
 use App\Models\User;
 use App\Repositories\BaseRepository;
@@ -29,7 +30,10 @@ class UserRepository extends BaseRepository implements IUserRepository
     {
         return $this
             ->model
-            ->where('role_id', '!=', Role::ADMIN_ROLE)
+            ->with(['payment' => function ($query) {
+                return $query->where('process', Process::SUCCESS);
+            }])
+            // ->where('role_id', '!=', Role::ADMIN_ROLE)
             ->paginate($limit);
     }
     public function countUsers()

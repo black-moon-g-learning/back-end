@@ -112,11 +112,11 @@ class User extends Authenticatable
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function payment(): HasOne
+    public function payment(): HasMany
     {
-        return $this->hasOne(UserPayment::class, 'id');
+        return $this->HasMany(UserPayment::class);
     }
 
     /**
