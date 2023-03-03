@@ -1,3 +1,4 @@
+@inject('process', 'App\Constants\Process')
 @extends('layouts.master')
 
 @section('content')
@@ -34,6 +35,8 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Phone</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                        Expired</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Payment</th>
                                 </tr>
                             </thead>
@@ -63,10 +66,16 @@
                                             {{ $user->phone }}
                                         </td>
                                         <td class=" px-2">
+                                            {{ $user->expired ?? 'Payment successful' }}
+                                        </td>
+                                        <td class=" px-2">
+                                            @php
+                                                $isPaid = $user->payment->first();
+                                            @endphp
                                             <button
-                                                class="btn {{ $user->ff ? 'bg-gradient-primary' : 'bg-gradient-success' }} "
+                                                class="btn {{ isset($isPaid) && $isPaid->process == $process::SUCCESS ? 'bg-gradient-primary' : 'bg-gradient-success' }} "
                                                 onClick="confirm({{ $user->id }})" id="click">
-                                                {{ $user->ff ? 'yes' : 'no' }}</button>
+                                                {{ isset($isPaid) && $isPaid->process == $process::SUCCESS ? 'yes' : 'no' }}</button>
                                         </td>
                                     </tr>
                                 @endforeach
