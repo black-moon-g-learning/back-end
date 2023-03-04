@@ -4,16 +4,21 @@ namespace App\Services\Payment;
 
 use App\Constants\Process;
 use App\Repositories\Package\IPackageRepository;
+use App\Repositories\User\IUserRepository;
+use App\Services\User\IUserService;
 use App\Services\UserPayment\IUserPaymentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VNPayPaymentService implements IPaymentService
 {
     protected IUserPaymentService $userPaymentSer;
 
     protected IPackageRepository $packageRepo;
+
+    protected IUserRepository $userRepo;
 
     public function __construct(
         IUserPaymentService $userPaymentSer,
@@ -45,7 +50,7 @@ class VNPayPaymentService implements IPaymentService
             "vnp_IpAddr" => $vnp_IpAddr,
             "vnp_Locale" => $vnp_Locale,
             "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_ReturnUrl" => route('home'),
+            "vnp_ReturnUrl" => route('return-payment'),
             "vnp_TxnRef" => $vnp_TxnRef,
 
         );
@@ -136,8 +141,12 @@ class VNPayPaymentService implements IPaymentService
                         }
                         //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
                         //
+
                         if ($Status == 1) {
-                            $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
+                            DB::transaction(function () use ($orderDB) {
+                                $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
+                                $this->userRepo->update($orderDB->user_id, ['expired' => null]);
+                            });
                         } else if ($Status == 2) {
                             $this->userPaymentSer->updateStatus(Process::FAIL, $orderDB->id);
                         }
@@ -167,5 +176,44 @@ class VNPayPaymentService implements IPaymentService
         }
 
         return $returnData;
+    }
+
+    public function returnPayment(Request $request): array
+    {
+        $vnp_SecureHash = $request->get('vnp_SecureHash');
+        $inputData = array();
+        foreach ($request->all() as $key => $value) {
+            if (substr($key, 0, 4) == "vnp_") {
+                $inputData[$key] = $value;
+            }
+        }
+
+        unset($inputData['vnp_SecureHash']);
+        ksort($inputData);
+        $i = 0;
+        $hashData = "";
+        foreach ($inputData as $key => $value) {
+            if ($i == 1) {
+                $hashData = $hashData . '&' . urlencode($key) . "=" . urlencode($value);
+            } else {
+                $hashData = $hashData . urlencode($key) . "=" . urlencode($value);
+                $i = 1;
+            }
+        }
+
+        $secureHash = hash_hmac('sha512', $hashData, config('payment.SECRET_KEY'));
+        if ($secureHash == $vnp_SecureHash) {
+            if ($_GET['vnp_ResponseCode'] == '00') {
+                $response['data'] =  "GD Thanh cong";
+                $response['status'] = true;
+            } else {
+                $response['data']  = "GD Khong thanh cong";
+                $response['status'] = false;
+            }
+        } else {
+            $response['data']  = "Chu ky khong hop le";
+            $response['status'] = false;
+        }
+        return $response;
     }
 }

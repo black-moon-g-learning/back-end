@@ -14,16 +14,23 @@
 
         .payment {
             border: 1px solid #f2f2f2;
-            height: 280px;
+            height: 320px;
             border-radius: 20px;
             background: #fff;
         }
 
         .payment_header {
-            background: ;
             padding: 20px;
             border-radius: 20px 20px 0px 0px;
 
+        }
+
+        .success {
+            background: rgb(95, 173, 65);
+        }
+
+        .fail {
+            background: rgba(255, 102, 0, 1);
         }
 
         .check {
@@ -72,14 +79,18 @@
         <div class="row">
             <div class="col-md-6 mx-auto mt-5">
                 <div class="payment">
-                    <div class="payment_header">
-                        <div class="check"><i class="fa fa-check" aria-hidden="true"></i></div>
+                    <div class="payment_header {{ $response['status'] ? 'success' : 'fail' }}">
+                        <div class="check"><i class="fa {{ $response['status'] ? 'fa-check' : 'fa-times' }} "
+                                aria-hidden="true"></i></div>
                     </div>
                     <div class="content">
-                        <h1>Payment Success !</h1>
-                        <p>Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in laying out print,
-                            graphic or web designs. </p>
-                        <a href="#">Go to Home</a>
+                        <h1>Payment {{ $response['status'] ? 'Success' : 'Fail' }} !</h1>
+
+                        <p>If you see this message</p>
+                        <p>{{ $response['data'] }}</p>
+                        <p> {{ $response['status'] ? 'if you have email, please check it !' : '' }}
+                        </p>
+                        <a href="{{ route('home') }}">Go to Home</a>
                     </div>
 
                 </div>
