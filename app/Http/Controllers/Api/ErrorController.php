@@ -9,8 +9,11 @@ class ErrorController extends Controller
 {
     public function expiredTrial()
     {
-        $response = [];
+        $response = [
+            'status' => 'false',
+            'message' => 'Please pay to continue using the service'
+        ];
 
-        return $this->responseSuccessWithData($response);
+        return $this->responseErrorWithData($response, 403);
     }
 }
