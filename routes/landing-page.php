@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LandingPageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.landing');
-})->name('home');
+Route::get('/', [LandingPageController::class, 'showLandingPage'])->name('home');
+Route::get('/return-payment', [LandingPageController::class, 'returnPayment'])->name('return-payment');
