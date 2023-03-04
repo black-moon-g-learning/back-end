@@ -4,16 +4,21 @@ namespace App\Services\Payment;
 
 use App\Constants\Process;
 use App\Repositories\Package\IPackageRepository;
+use App\Repositories\User\IUserRepository;
+use App\Services\User\IUserService;
 use App\Services\UserPayment\IUserPaymentService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class VNPayPaymentService implements IPaymentService
 {
     protected IUserPaymentService $userPaymentSer;
 
     protected IPackageRepository $packageRepo;
+
+    protected IUserRepository $userRepo;
 
     public function __construct(
         IUserPaymentService $userPaymentSer,
@@ -136,8 +141,12 @@ class VNPayPaymentService implements IPaymentService
                         }
                         //Cài đặt Code cập nhật kết quả thanh toán, tình trạng đơn hàng vào DB
                         //
+
                         if ($Status == 1) {
-                            $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
+                            DB::transaction(function () use ($orderDB) {
+                                $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
+                                $this->userRepo->update($orderDB->user_id, ['expired' => null]);
+                            });
                         } else if ($Status == 2) {
                             $this->userPaymentSer->updateStatus(Process::FAIL, $orderDB->id);
                         }
