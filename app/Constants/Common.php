@@ -11,4 +11,6 @@ final class Common
     const FREE_DAY_TRIAL = 7;
 
     const DEFAULT_EXPIRED_TRIAL = -1;
+
+    const ADMIN_MAIL = 'hieu.tran23@student.passerellesnumeriques.org';
 }
