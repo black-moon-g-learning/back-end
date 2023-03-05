@@ -3,6 +3,8 @@
 namespace App\Services\Payment;
 
 use App\Constants\Process;
+use App\Constants\User;
+use App\Jobs\SendMail;
 use App\Repositories\Package\IPackageRepository;
 use App\Repositories\User\IUserRepository;
 use App\Services\User\IUserService;
@@ -147,6 +149,15 @@ class VNPayPaymentService implements IPaymentService
                                 $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
                                 $this->userRepo->update($orderDB->user_id, ['expired' => null]);
                             });
+
+                            if (isset($orderDB->user) && $orderDB->user->email !== null) {
+
+                                $data = array();
+                                $data['user'] = getUsername($orderDB->user);
+                                $data['email'] =  $orderDB->user->email == 'admin@gmail.com' ||  $orderDB->user->email == null ?   User::DEFAULT_MAIL : $orderDB->user->email;
+                                $data['price'] = $orderDB->service->price;
+                                SendMail::dispatch($data);
+                            }
                         } else if ($Status == 2) {
                             $this->userPaymentSer->updateStatus(Process::FAIL, $orderDB->id);
                         }
