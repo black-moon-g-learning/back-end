@@ -46,17 +46,8 @@
                                                 {{ $service->price }} Vnđ</p>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('web.countries.edit', $service->id) }}"
+                                            <a href="{{ route('web.services.edit', $service->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
-
-                                            <form method="POST" action="#">
-
-                                                @csrf
-                                                @method('DELETE')
-
-                                                <button class="btn bg-gradient-info delete-service" type="submit"
-                                                    id="click1"> Delete</button>
-                                            </form>
                                         </td>
                                         <td class=" px-2">
                                             {{ handleLongText($service->description) }}

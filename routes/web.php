@@ -97,6 +97,9 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/videos/{id}/reviews', [QuestionController::class, 'indexReview'])->name('web.reviews');
 
         Route::get('/services', [PackageController::class, 'index'])->name('web.services');
+        Route::get('/services/{id}/edit', [PackageController::class, 'edit'])->name('web.services.edit');
+        Route::put('/services/{id}', [PackageController::class, 'update'])->name('web.services.update');
+
         Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
 
         Route::get('/test-payment', [PaymentController::class, 'getUrlPaymentTest']);
