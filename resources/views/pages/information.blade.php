@@ -30,8 +30,6 @@
                                         Image</th>
                                     <th class="text-secondary  opacity-7">Action</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
-                                        Video</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Country</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Owner</th>
@@ -58,22 +56,12 @@
                                                 alt="user1">
                                         </td>
                                         <td class="align-middle">
-                                            <button class="btn btn-primary" onClick="confirm({{ $info->id }})"
-                                                id="click"> Detail</button>
                                             <a class="btn bg-gradient-info"
                                                 href={{ route('web.information.edit', $info->id) }}>
                                                 Edit
                                             </a>
                                             <button class="btn btn-secondary" onClick="confirm({{ $info->id }})"
                                                 id="click"> Delete</button>
-                                        </td>
-                                        <td class="justify-content-center">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <iframe width="300" height="200" src="{{ $info->video }}">
-                                                    </iframe>
-                                                </div>
-                                            </div>
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
