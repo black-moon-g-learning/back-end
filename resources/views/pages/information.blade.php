@@ -34,6 +34,8 @@
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Owner</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                        Published in</th>
+                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Status</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
                                         Content</th>
@@ -85,6 +87,13 @@
                                                     @include('components.status-info.status', [
                                                         'data' => $info->status,
                                                     ])
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="justify-content-center">
+                                            <div class="d-flex px-2 py-1">
+                                                <div class="d-flex flex-column justify-content-center">
+                                                    {{ $info->published_in ?? 'Unset' }}
                                                 </div>
                                             </div>
                                         </td>
