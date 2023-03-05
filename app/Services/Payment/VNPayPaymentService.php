@@ -24,10 +24,12 @@ class VNPayPaymentService implements IPaymentService
 
     public function __construct(
         IUserPaymentService $userPaymentSer,
-        IPackageRepository $packageRepo
+        IPackageRepository $packageRepo,
+        IUserRepository $userRepo
     ) {
         $this->userPaymentSer = $userPaymentSer;
         $this->packageRepo = $packageRepo;
+        $this->userRepo = $userRepo;
     }
 
     public function getUrl(Request $request): string
