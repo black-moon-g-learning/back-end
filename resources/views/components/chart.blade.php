@@ -15,16 +15,4 @@
                </div>
            </div>
        </div>
-       <div class="col-lg-5">
-           <div class="card card-carousel overflow-hidden h-100 p-0">
-               <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
-                   <div class="carousel-inner border-radius-lg h-100">
-                       <div class="carousel-item h-100 active"
-                           style="background-image: url('../assets/img/carousel-1.jpg');
-  background-size: cover;">
-                       </div>
-                   </div>
-               </div>
-           </div>
-       </div>
    </div>
