@@ -11,6 +11,7 @@ class GameHistoryRepository extends BaseRepository implements IGameHistoryReposi
     {
         return GamesHistory::class;
     }
+
     public function findUserPlayGame(int $userId, int $countryId, int $levelId = 1): mixed
     {
         $history = $this->model
@@ -23,5 +24,13 @@ class GameHistoryRepository extends BaseRepository implements IGameHistoryReposi
             return $history;
         }
         return false;
+    }
+
+    public function finByUserIdAndCountryId(int $userId, int $countryId)
+    {
+        return $this->model
+            ->where('owner_id', $userId)
+            ->where('country_id', $countryId)
+            ->first();
     }
 }

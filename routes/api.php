@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ContinentController;
 use App\Http\Controllers\Api\CountryController;
 use App\Http\Controllers\Api\ErrorController;
+use App\Http\Controllers\Api\HistoryController;
 use App\Http\Controllers\Api\InformationController;
 use App\Http\Controllers\Api\LevelController;
 use App\Http\Controllers\Api\PackageController;
@@ -45,26 +46,27 @@ Route::middleware(['auth:api'])->group(function () {
         Route::get('/countries', [CountryController::class, 'index']);
         Route::post('/countries/user-play-game', [CountryController::class, 'storeUserPlayGame']);
         Route::get('/continents', [ContinentController::class, 'index']);
+
+        Route::middleware(['idInteger'])->group(function () {
+            Route::get('/continents/{id}', [ContinentController::class, 'getCountries']);
+            Route::get('/countries/{id}/topics', [TopicController::class, 'index']);
+            Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index']);
+
+            Route::get('/videos/{id}/questions', [QuestionController::class, 'index']);
+
+            Route::get('/countries/{id}/questions', [QuestionController::class, 'getQuestionsInACountry']);
+            Route::post('/countries/{id}/history-play-game', [HistoryController::class, 'storeUserPlayGame']);
+        });
+
+        Route::group(['prefix' => 'information'], function () {
+            Route::get('/', [InformationController::class, 'index']);
+            Route::post('/', [InformationController::class, 'create']);
+        });
+
+        Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
+        Route::get('/services', [PackageController::class, 'index']);
+        Route::get('/levels', [LevelController::class, 'index']);
     });
-
-    Route::middleware(['idInteger'])->group(function () {
-        Route::get('/continents/{id}', [ContinentController::class, 'getCountries']);
-        Route::get('/countries/{id}/topics', [TopicController::class, 'index']);
-        Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index']);
-
-        Route::get('/videos/{id}/questions', [QuestionController::class, 'index']);
-
-        Route::get('/countries/{id}/questions', [QuestionController::class, 'getQuestionsInACountry']);
-    });
-
-    Route::group(['prefix' => 'information'], function () {
-        Route::get('/', [InformationController::class, 'index']);
-        Route::post('/', [InformationController::class, 'create']);
-    });
-
-    Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
-    Route::get('/services', [PackageController::class, 'index']);
-    Route::get('/levels', [LevelController::class, 'index']);
 });
 
 Route::get('/IPN', [PaymentController::class, 'checkIsPayMentSuccess']);
