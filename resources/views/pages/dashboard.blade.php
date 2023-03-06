@@ -203,9 +203,9 @@
         new Chart(ctx1, {
             type: "line",
             data: {
-                labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", 'Dec'],
                 datasets: [{
-                    label: "Mobile apps",
+                    label: "user register",
                     tension: 0.4,
                     borderWidth: 0,
                     pointRadius: 0,
@@ -213,7 +213,7 @@
                     backgroundColor: gradientStroke1,
                     borderWidth: 3,
                     fill: true,
-                    data: [{{ $cc ?? 102 }}, 450, 300, 220, 500, 250, 400, 230, 500],
+                    data: {{ $userRegister->pluck('user') }},
                     maxBarThickness: 6
 
                 }],

@@ -1,7 +1,7 @@
 @php
     $status = [
         'DOING' => 'btn-success',
-        'SUCESS' => 'btn-warning',
+        'SUCCESS' => 'btn-warning',
         'FAIL' => 'btn-primary',
     ];
 @endphp
