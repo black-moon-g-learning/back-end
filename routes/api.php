@@ -62,10 +62,10 @@ Route::middleware(['auth:api'])->group(function () {
             Route::post('/', [InformationController::class, 'create']);
         });
 
-        Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
-        Route::get('/services', [PackageController::class, 'index']);
         Route::get('/levels', [LevelController::class, 'index']);
     });
+    Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
+    Route::get('/services', [PackageController::class, 'index']);
 });
 
 Route::get('/IPN', [PaymentController::class, 'checkIsPayMentSuccess']);
