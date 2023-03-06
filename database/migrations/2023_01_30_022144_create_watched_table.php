@@ -17,11 +17,12 @@ return new class extends Migration
     {
         Schema::create('watched', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->integer('video_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('video_id')->unsigned()->nullable();
+            $table->integer('stop_at')->unsigned()->nullable();
 
-            $this->createForeignKey($table,'user_id','users');
-            $this->createForeignKey($table,'video_id','videos');
+            $this->createForeignKey($table, 'user_id', 'users');
+            $this->createForeignKey($table, 'video_id', 'videos');
 
             $table->timestamps();
         });

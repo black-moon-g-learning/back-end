@@ -55,6 +55,8 @@ Route::middleware(['auth:api'])->group(function () {
 
             Route::get('/countries/{id}/questions', [QuestionController::class, 'getQuestionsInACountry']);
             Route::post('/countries/{id}/history-play-game', [HistoryController::class, 'storeUserPlayGame']);
+
+            Route::post('/videos/{id}/store-history', [HistoryController::class, 'storeUserWatched']);
         });
 
         Route::group(['prefix' => 'information'], function () {

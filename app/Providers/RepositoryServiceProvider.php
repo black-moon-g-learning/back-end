@@ -82,6 +82,11 @@ class RepositoryServiceProvider extends ServiceProvider
             \App\Repositories\UserPayment\IUserPaymentRepository::class,
             \App\Repositories\UserPayment\UserPaymentRepository::class
         );
+
+        $this->app->singleton(
+            \App\Repositories\Watched\IWatchedRepository::class,
+            \App\Repositories\Watched\WatchRepository::class
+        );
     }
 
     /**
