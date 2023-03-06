@@ -23,7 +23,7 @@
                 </tr><!-- end tr -->
                 <tr>
                     <td valign="middle" class="hero bg_white" style="padding: 3em 0 2em 0;">
-                        <img src="{{ $message->embed(asset('img/g-learning.png')) }}" alt=""
+                        <img src="{{ $message->embed(asset('favicon.png')) }}" alt=""
                             style="width: 300px; max-width: 600px; height: auto; margin: auto; display: block;">
                     </td>
                 </tr><!-- end tr -->
