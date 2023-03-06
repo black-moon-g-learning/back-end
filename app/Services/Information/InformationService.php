@@ -29,9 +29,9 @@ class InformationService implements IInformationService
         $this->countryRepo = $countryRepo;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $response =  $this->informationRepo->paginatePage();
+        $response =  $this->informationRepo->paginatePage(10, $request->get('country-id'));
         return collect(InformationResource::collection($response))->toArray();
     }
 

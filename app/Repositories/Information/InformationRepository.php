@@ -26,13 +26,18 @@ class InformationRepository extends BaseRepository implements IInformationReposi
      * @param  int|null $page
      * @return void
      */
-    public function paginatePage(int $page = 10)
+    public function paginatePage(int $page = 10, ?int $countryId)
     {
-        return $this->model
+        $query = $this->model
             ->where('status', '=', Information::PUBLISHED)
             ->with(['user', 'country'])
-            ->orderBy('id', 'desc')
-            ->paginate($page);
+            ->orderBy('id', 'desc');
+
+        if ($countryId) {
+            $query->where('country_id', $countryId);
+        }
+
+        return $query->paginate($page);
     }
 
     public function getAll()
