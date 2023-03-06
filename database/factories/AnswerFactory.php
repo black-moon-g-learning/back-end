@@ -17,12 +17,12 @@ class AnswerFactory extends Factory
      */
     public function definition()
     {
-        $questionIds= $this->getArrayIds('questions');
+        $questionIds = $this->getArrayIds('questions');
 
         return [
             'content' => $this->faker->sentence(rand(10, 40)),
-            'question_id'=>$this->faker->randomElement($questionIds),
-            'is_correct'=>$this->faker->boolean(),
+            'question_id' => $this->faker->randomElement($questionIds),
+            'is_correct' => 0,
             'image' => $this->faker->imageUrl('640', '480', 'animal', true),
         ];
     }

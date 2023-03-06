@@ -108,14 +108,20 @@ class DatabaseSeeder extends Seeder
         Question::factory(200)->create();
 
         for ($i = 1; $i <= Question::count(); $i++) {
-            Answer::factory(4)->create([
-                'question_id' => $i
-            ]);
+
+            $is_correct_at = rand(1, 4);
+            $data = array();
+            for ($j = 1; $j <= 4; $j++) {
+
+                $data['question_id'] = $i;
+
+                if ($is_correct_at == $j) {
+                    $data['is_correct'] = 1;
+                }
+                Answer::factory()->create($data);
+                $data['is_correct'] = 0;
+            }
         }
-
-        Answer::factory(140)->create();
-        UserPlayGame::factory(131)->create();
-
         Contribute::factory(20)->create();
     }
 }
