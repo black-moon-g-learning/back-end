@@ -14,6 +14,6 @@ class Watched extends Model
     protected $fillable = [
         'user_id',
         'video_id',
-        'time'
+        'stop_at'
     ];
 }

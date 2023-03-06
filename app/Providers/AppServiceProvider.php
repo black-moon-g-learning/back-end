@@ -110,6 +110,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\History\IHistoryService::class,
             \App\Services\History\HistoryService::class
         );
+
+        $this->app->bind(
+            \App\Services\Watched\IWatchedService::class,
+            \App\Services\Watched\WatchedService::class
+        );
     }
 
     /**

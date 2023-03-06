@@ -23,7 +23,7 @@ class WatchedService implements IWatchedService
 
         $data['user_id'] = $user->id;
         $data['video_id'] = $videoId;
-        $data['time'] = null;
+        $data['stop_at'] =  $request->get('stop-at');
 
         if ($watched) {
             $this->watchedRepo->update($watched->id, $data);
