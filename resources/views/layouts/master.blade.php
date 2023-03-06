@@ -10,6 +10,7 @@
     <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
     <!-- CSS Files -->
     <link id="pagestyle" href={{ asset('css/argon-dashboard.css?v=2.0.4') }} rel="stylesheet" />
+    <link href="{{ asset('/vendor/nucleo/css/nucleo.css') }}" rel="stylesheet">
     @yield('customCss')
 </head>
 

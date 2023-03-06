@@ -70,8 +70,7 @@ class CountryService implements ICountryService
         $validator = Validator::make($request->all(), [
             'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
             'name' => 'required',
-            'description' => 'nullable',
-            'place' => 'required|integer'
+            'description' => 'nullable'
         ]);
 
         $country = $validator->validated();
@@ -100,22 +99,6 @@ class CountryService implements ICountryService
         ];
     }
 
-    public function storeUserPlayGame(Request $request)
-    {
-        $gameHistory = $this->setupDataForHistory($request);
-
-        $isUpdate = $this->gameRepo
-            ->findUserPlayGame(
-                $gameHistory['owner_id'],
-                $gameHistory['country_id'],
-                $gameHistory['level_id']
-            );
-
-        if ($isUpdate) {
-            return $this->gameRepo->update($isUpdate->id, $gameHistory);
-        }
-        return $this->gameRepo->create($gameHistory);
-    }
 
     public function setupDataForHistory(Request $request)
     {

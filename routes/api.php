@@ -44,7 +44,6 @@ Route::middleware(['auth:api'])->group(function () {
 
     Route::middleware(['expiredTrial'])->group(function () {
         Route::get('/countries', [CountryController::class, 'index']);
-        Route::post('/countries/user-play-game', [CountryController::class, 'storeUserPlayGame']);
         Route::get('/continents', [ContinentController::class, 'index']);
 
         Route::middleware(['idInteger'])->group(function () {

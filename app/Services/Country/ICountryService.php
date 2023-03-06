@@ -16,5 +16,4 @@ interface ICountryService
 
     public function update(Request $request, int $id);
 
-    public function storeUserPlayGame(Request $request);
 }
