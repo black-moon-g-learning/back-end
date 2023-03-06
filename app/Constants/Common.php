@@ -13,4 +13,6 @@ final class Common
     const DEFAULT_EXPIRED_TRIAL = -1;
 
     const ADMIN_MAIL = 'hieu.tran23@student.passerellesnumeriques.org';
+
+    const DEFAULT_LEVEL_ID = 1;
 }

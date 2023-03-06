@@ -105,6 +105,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\UserPayment\IUserPaymentService::class,
             \App\Services\UserPayment\UserPaymentService::class
         );
+
+        $this->app->bind(
+            \App\Services\History\IHistoryService::class,
+            \App\Services\History\HistoryService::class
+        );
     }
 
     /**
