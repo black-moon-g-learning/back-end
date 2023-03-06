@@ -13,7 +13,7 @@
                     id="example-text-input">
             </div>
             @if (isset(Session::get('errors')['name']))
-                <div class="col-md-4 form-group">
+                <div class=" form-group">
                     @include('components.alert', $data = Session::get('errors')['name'])
                 </div>
             @endif

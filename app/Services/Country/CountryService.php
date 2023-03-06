@@ -73,6 +73,13 @@ class CountryService implements ICountryService
             'description' => 'nullable'
         ]);
 
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->errors()->toArray()
+            ];
+        }
+
         $country = $validator->validated();
 
         if ($request->has('file')) {
