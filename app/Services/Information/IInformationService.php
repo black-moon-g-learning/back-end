@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 interface IInformationService
 {
-    public function index();
+    public function index(Request $request);
 
     public function create(InformationRequest $informationRequest): mixed;
 

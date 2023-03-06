@@ -7,6 +7,7 @@ use App\Http\Requests\InformationRequest;
 use App\Services\Information\IInformationService;
 use App\Utils\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 
 class InformationController extends Controller
 {
@@ -20,11 +21,12 @@ class InformationController extends Controller
     /**
      * @return Response|JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        $response = $this->informationSer->index();
+        $response = $this->informationSer->index($request);
         return $this->responseSuccessWithData($response);
     }
+
 
     /**
      * create
