@@ -72,9 +72,6 @@ Route::middleware(['auth:api'])->group(function () {
 
 Route::get('/IPN', [PaymentController::class, 'checkIsPayMentSuccess']);
 
-
-Route::post('/videos/{id}/store-history', [HistoryController::class, 'storeUserWatched']);
-
 Route::group(
     [
         'prefix' => '/errors',
