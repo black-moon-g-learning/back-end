@@ -70,8 +70,7 @@ class CountryService implements ICountryService
         $validator = Validator::make($request->all(), [
             'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
             'name' => 'required',
-            'description' => 'nullable',
-            'place' => 'required|integer'
+            'description' => 'nullable'
         ]);
 
         $country = $validator->validated();

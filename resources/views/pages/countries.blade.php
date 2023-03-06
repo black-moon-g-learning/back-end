@@ -27,8 +27,7 @@
                                         Image</th>
                                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Country</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                        Place</th>
+
                                     <th class="text-secondary  opacity-7">Action</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Description</th>
@@ -51,11 +50,6 @@
                                                 </h6>
                                             </div>
                                         </td>
-                                        <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
-                                                {{ $country->place }}</p>
-                                        </td>
-
                                         <td class="align-middle">
                                             <a href="{{ route('web.countries.edit', $country->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
