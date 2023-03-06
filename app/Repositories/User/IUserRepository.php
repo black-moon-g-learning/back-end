@@ -13,4 +13,6 @@ interface IUserRepository extends RepositoryInterface
     public function getUserWithoutAdmin(int $limit = 20): mixed;
 
     public function countUsers();
+
+    public function getUserRegisterInYear(int $year);
 }

@@ -46,6 +46,23 @@ class DashboardService implements IDashboardService
         return $this->infoRepo->countInfo();
     }
 
+    public function getUserRegisterInYear(int $year)
+    {
+        $months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        $monthCollection = $this->userRepo->getUserRegisterInYear($year);
+        $existMonths = $monthCollection->pluck('month');
+
+        foreach ($months as $month) {
+            if (!$existMonths->contains($month)) {
+                $item['month'] = $month;
+                $item['user'] = 0;
+                $monthCollection->push($item);
+            }
+        }
+
+        return $monthCollection->sortBy('month');
+    }
+
     public function getUserContributed()
     {
         return $this->infoRepo->getUserContribute();
@@ -53,16 +70,27 @@ class DashboardService implements IDashboardService
 
     public function loadComponents()
     {
+
         view()->composer('components.card', function ($view) {
 
             $totalUsers = $this->totalUsers();
             $totalVideos = $this->totalVideos();
             $totalInfos = $this->totalInfos();
 
+
             $view->with([
                 'totalUsers' => $totalUsers,
                 'totalVideos' => $totalVideos,
                 'totalInfos' => $totalInfos
+            ]);
+        });
+
+        view()->composer('pages.dashboard', function ($view) {
+
+            $userRegister = $this->getUserRegisterInYear(2023);
+
+            $view->with([
+                'userRegister' => $userRegister
             ]);
         });
     }

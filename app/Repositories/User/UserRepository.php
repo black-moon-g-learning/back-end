@@ -36,8 +36,19 @@ class UserRepository extends BaseRepository implements IUserRepository
             // ->where('role_id', '!=', Role::ADMIN_ROLE)
             ->paginate($limit);
     }
+
     public function countUsers()
     {
         return $this->model->where('role_id', '!=', Role::ADMIN_ROLE)->count();
+    }
+
+    public function getUserRegisterInYear(int $year)
+    {
+        return $this
+            ->model
+            ->selectRaw('MONTH(created_at) AS month, COUNT(*) AS user')
+            ->whereRaw('YEAR(created_at) = ' . $year . '')
+            ->groupByRaw('MONTH(created_at)')
+            ->get();
     }
 }
