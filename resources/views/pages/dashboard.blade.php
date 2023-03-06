@@ -13,52 +13,66 @@
                 </div>
                 <div class="table-responsive">
                     @isset($response)
-                        <table class="table align-items-center ">
-                            @foreach ($response['usersContributed'] as $contribute)
-                                <tbody>
-                                    <tr>
-                                        <td class="w-30">
-                                            <div class="d-flex px-2 py-1 align-items-center">
-                                                <div>
-                                                    {{ $contribute->first_name }}
-                                                </div>
-
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="ms-4">
-                                                <p class="text-xs font-weight-bold mb-0">Total post</p>
-                                                <h6 class="text-sm mb-0">{{ $contribute->totals }}</h6>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Pending</p>
-                                                <h6 class="text-sm mb-0">{{ $contribute->pending }}</h6>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <div class="col text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Published</p>
-                                                <h6 class="text-sm mb-0">{{ $contribute->published }}</h6>
-                                            </div>
-                                        </td>
-                                        <td class="align-middle text-sm">
-                                            <div class="col text-center">
-                                                <p class="text-xs font-weight-bold mb-0">Future</p>
-                                                <h6 class="text-sm mb-0">{{ $contribute->future }}</h6>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            @endforeach
-                        </table>
+                        <div class="card mb-4">
+                            <div class="card-header pb-0">
+                                <h6>Authors table</h6>
+                            </div>
+                            <div class="card-body px-0 pt-0 pb-2">
+                                <div class="table-responsive p-0">
+                                    <table class="table align-items-center mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Author</th>
+                                                <th
+                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Total post</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Peding</th>
+                                                <th
+                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                    Published</th>
+                                                <th class="text-secondary opacity-7">Future</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($response['usersContributed'] as $contribute)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm"> {{ $contribute->first_name }}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <p class="text-xs font-weight-bold mb-0">{{ $contribute->totals }}</p>
+                                                    </td>
+                                                    <td class="align-middle text-center text-sm">
+                                                        <span
+                                                            class="badge badge-sm bg-gradient-success">{{ $contribute->pending }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                          {{ $contribute->published }}
+                                                    </td>
+                                                    <td class="align-middle  text-center">
+                                                        {{ $contribute->future }}
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         {{ $response['usersContributed']->links() }}
                     @endisset
                 </div>
             </div>
         </div>
     </div>
+
     @include('components.footer')
 @endsection
 
