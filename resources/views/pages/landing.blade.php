@@ -11,7 +11,7 @@
     <!-- Swiper slider-->
     <link rel="stylesheet" href="{{ asset('landing-page/vendor/swiper/swiper-bundle.min.css') }}">
     <!-- Modal Video-->
-    <link rel="stylesheet" href="{{ asset('landing-page/') }}">
+    <link rel="stylesheet" href="{{ asset('landing-page/vendor/modal-video/css/modal-video.min.css') }}">
     {{-- vendor/modal-video/css/modal-video.min.css --}}
     <!-- Google fonts-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,600,800&amp;display=swap">
@@ -22,15 +22,15 @@
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="{{ asset('landing-page/css/custom.css') }} ">
     <!-- Favicon-->
-    <link rel="shortcut icon" href="{{ asset('landing-page/img/favicon.png') }} ">
+    <link rel="shortcut icon" href="{{ asset('favicon.png') }} ">
 </head>
 
 <body>
     <!-- navbar-->
     <header class="header">
         <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="navbar">
-            <div class="container"><a class="navbar-brand" href="index.html"><img src="img/logo.svg" alt=""
-                        width="110"></a>
+            <div class="container"><a class="navbar-brand" href="index.html"><img src="{{ asset('favicon.png') }}"
+                        alt="" width="110"></a>
                 <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -52,21 +52,20 @@
         <div class="container py-5">
             <div class="row py-5">
                 <div class="col-lg-5 py-5">
-                    <h1>Download your best app </h1>
+                    <h1>Download G - learning app </h1>
                     <p class="my-4 text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
                         eirmod.</p>
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item mb-2 mb-lg-0"><a class="btn btn-success btn-lg px-4" href="#!">
-                                <i class="fab fa-google-play me-3"></i>Google Play</a></li>
+                                <i class="fab fa-google-play me-3"></i>Install now</a></li>
                         <li class="list-inline-item"><a class="btn btn-success btn-lg px-4" href="#!"> <i
-                                    class="fab fa-app-store me-3"></i>Install now</a></li>
+                                    class="fab fa-app-store me-3"></i>Comming soon!</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 ml-auto">
                     <div class="device-wrapper mx-auto">
-                        <div class="device shadow" data-device="iPhoneX" data-orientation="portrait" data-color="black">
-                            <div class="screen"><img class="img-fluid" src="{{ asset('landing-page/img/mobile.png') }}"
-                                    alt=""></div>
+                        <div class="screen" style="display:flex">
+                            <img class="img-fluid" src="{{ asset('img/app-image.png') }}"alt="">
                         </div>
                     </div>
                 </div>
@@ -125,7 +124,8 @@
         <section class="with-pattern-1 py-5" id="services">
             <div class="container py-5">
                 <div class="row align-items-center mb-5 gy-5">
-                    <div class="col-lg-6"><img class="img-fluid w-100 px-lg-5" src="img/objects.svg" alt="">
+                    <div class="col-lg-6"><img class="img-fluid w-100 px-lg-5"
+                            src="{{ asset('landing-page/img/objects.svg') }}" alt="">
                     </div>
                     <div class="col-lg-6">
                         <h2>The Best Business Solutions Guide for You</h2>
