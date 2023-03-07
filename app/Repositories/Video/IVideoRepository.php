@@ -11,4 +11,6 @@ interface IVideoRepository extends RepositoryInterface
     public function search(int $countryTopicId, string $search);
 
     public function countVideos();
+
+    public function getWatchedVideos(int $userId);
 }

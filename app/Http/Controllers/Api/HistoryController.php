@@ -32,4 +32,10 @@ class HistoryController extends Controller
         $this->watchedSer->storeUserWatched($request, $videoId);
         return $this->responseSuccess(201);
     }
+
+    public function getWatchedVideos()
+    {
+        $watchedVideo = $this->watchedSer->getWatchedVideos();
+        return $this->responseSuccessWithData($watchedVideo);
+    }
 }

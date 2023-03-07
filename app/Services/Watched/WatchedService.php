@@ -2,6 +2,10 @@
 
 namespace App\Services\Watched;
 
+use App\Http\Resources\VideoHistoryResource;
+use App\Http\Resources\VideoResource;
+use App\Models\User;
+use App\Repositories\Video\IVideoRepository;
 use App\Repositories\Watched\IWatchedRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,15 +14,20 @@ class WatchedService implements IWatchedService
 {
     protected IWatchedRepository $watchedRepo;
 
-    public function __construct(IWatchedRepository $watchedRepo)
-    {
+    protected IVideoRepository $videoRepo;
+
+
+    public function __construct(
+        IWatchedRepository $watchedRepo,
+        IVideoRepository $videoRepo
+    ) {
         $this->watchedRepo = $watchedRepo;
+        $this->videoRepo = $videoRepo;
     }
 
     public function storeUserWatched(Request $request, int $videoId)
     {
         $user = Auth::user();
-
         $watched = $this->watchedRepo->findWatchedVideo($user->id, $videoId);
 
         $data['user_id'] = $user->id;
@@ -30,5 +39,11 @@ class WatchedService implements IWatchedService
         } else {
             $this->watchedRepo->create($data);
         }
+    }
+
+    public function getWatchedVideos()
+    {
+        $user = Auth::user();
+        return collect(VideoResource::collection($this->videoRepo->getWatchedVideos($user->id)))->toArray();
     }
 }

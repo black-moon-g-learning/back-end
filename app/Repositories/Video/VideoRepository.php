@@ -30,6 +30,15 @@ class VideoRepository extends BaseRepository implements IVideoRepository
             ->get();
     }
 
+    public function getWatchedVideos(int $userId)
+    {
+        return $this->model
+            ->join('watched', 'watched.video_id', '=', 'videos.id')
+            ->where('watched.user_id', $userId)
+            ->with(['user', 'watched'])
+            ->get(['videos.*']);
+    }
+
     public function countVideos()
     {
         return $this->model->count();

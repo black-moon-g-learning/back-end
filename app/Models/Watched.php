@@ -16,4 +16,9 @@ class Watched extends Model
         'video_id',
         'stop_at'
     ];
+
+    public function video()
+    {
+        return $this->belongsTo(Video::class, 'video_id', 'id');
+    }
 }
