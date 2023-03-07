@@ -78,7 +78,7 @@
         <section class="about py-0">
             <div class="container">
                 <p class="h6 text-uppercase text-primary">What is it all about?</p>
-                <h2 class="mb-5">Track your time and expenses</h2>
+                <h2 class="mb-5">Learn geography easier by watch videos</h2>
                 <div class="row pb-5 gy-4">
                     <div class="col-lg-4 col-md-6">
                         <!-- Services Item-->
@@ -87,7 +87,7 @@
                                 <svg class="svg-icon svg-icon-light" style="width:60px;height:60px;color:#ff904e">
                                     <use xlink:href="#document-saved-1"> </use>
                                 </svg>
-                                <h3 class="h4 my-4">Online Marketing</h3>
+                                <h3 class="h4 my-4">Watch video</h3>
                                 <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed do
                                     eiusmod tempor incididunt ut labore.</p>
                             </div>
@@ -100,7 +100,7 @@
                                 <svg class="svg-icon svg-icon-light" style="width:60px;height:60px;color:#39f8d2">
                                     <use xlink:href="#map-marker-1"> </use>
                                 </svg>
-                                <h3 class="h4 my-4">Track your move </h3>
+                                <h3 class="h4 my-4">195 countries </h3>
                                 <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed
                                     do eiusmod tempor incididunt ut labore.</p>
                             </div>
@@ -113,7 +113,7 @@
                                 <svg class="svg-icon svg-icon-light" style="width:60px;height:60px;color:#8190ff">
                                     <use xlink:href="#arrow-target-1"> </use>
                                 </svg>
-                                <h3 class="h4 my-4">Market analysis</h3>
+                                <h3 class="h4 my-4">Free in 7 days</h3>
                                 <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed
                                     do eiusmod tempor incididunt ut labore.</p>
                             </div>
@@ -158,7 +158,7 @@
                                         <svg class="svg-icon" style="width:40px;height:40px;color:#ff904e">
                                             <use xlink:href="#document-saved-1"> </use>
                                         </svg>
-                                        <h3 class="h5 my-3">Online Marketing</h3>
+                                        <h3 class="h5 my-3">Watch video</h3>
                                         <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
                                             adipisicing.</p>
                                     </div>
@@ -184,7 +184,7 @@
                                         <svg class="svg-icon" style="width:40px;height:40px;color:#8190ff">
                                             <use xlink:href="#arrow-target-1"> </use>
                                         </svg>
-                                        <h3 class="h5 my-3">Market analysis</h3>
+                                        <h3 class="h5 my-3">Free in 7 days</h3>
                                         <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
                                             adipisicing.</p>
                                     </div>
