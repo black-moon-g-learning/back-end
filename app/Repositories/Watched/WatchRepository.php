@@ -19,12 +19,4 @@ class WatchRepository extends BaseRepository implements IWatchedRepository
             ->where('video_id', $videoId)
             ->first();
     }
-
-    public function getWatchedVideos(int $userId)
-    {
-        return $this->model
-            ->where('user_id', $userId)
-            ->with('video')
-            ->get();
-    }
 }
