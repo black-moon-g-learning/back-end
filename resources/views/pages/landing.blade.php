@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+@inject('Common', 'App\Constants\Common')
 
 <head>
     <meta charset="utf-8">
@@ -131,7 +132,7 @@
                         <h2>The Best Business Solutions Guide for You</h2>
                         <p class="text-muted">Dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore
                             dolore magna aliqua enim ad minim veniam quis nostrud exercitation.</p>
-                        <button class="btn btn-primary js-modal-btn" data-video-id="B6uuIHpFkuo"><i
+                        <button class="btn btn-primary js-modal-btn" data-video-id={{ $Common::VIDEO_SURVEY }}><i
                                 class="fas fa-play-circle me-2"></i>Play video</button>
                     </div>
                 </div>
@@ -145,7 +146,7 @@
                             <li class="text-muted mb-2">Page Load Details (time, size, number of requests)</li>
                             <li class="text-muted mb-2">Waterfall, Video and Report History</li>
                         </ul>
-                        <button class="btn btn-primary js-modal-btn" data-video-id="B6uuIHpFkuo"><i
+                        <button class="btn btn-primary js-modal-btn" data-video-id="{{ $Common::VIDEO_SURVEY }}"><i
                                 class="fas fa-play-circle me-2"></i>Play video</button>
                     </div>
                     <div class="col-lg-6">
