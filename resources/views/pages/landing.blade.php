@@ -30,8 +30,8 @@
     <!-- navbar-->
     <header class="header">
         <nav class="navbar navbar-light navbar-expand-lg fixed-top" id="navbar">
-            <div class="container"><a class="navbar-brand" href="index.html"><img src="{{ asset('favicon.png') }}"
-                        alt="" width="110"></a>
+            <div class="container"><a class="navbar-brand" href="index.html"><img high="50" width="80"
+                        src="{{ asset('favicon.png') }}" alt="" width="110"></a>
                 <button class="navbar-toggler navbar-toggler-end" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
@@ -210,7 +210,7 @@
         </section>
     </section>
     <section class="p-0" id="testimonials"
-        style="background: url(img/testimonials-bg.png) no-repeat; background-size: 40% 100%; background-position: left center">
+        style="background: url({{ asset('landing-page/img/testimonials-bg.png') }}) no-repeat; background-size: 40% 100%; background-position: left center">
         <div class="container text-center">
             <p class="h6 text-uppercase text-primary">Testimonials</p>
             <h2 class="mb-5">What Our Users Says?</h2>
@@ -224,7 +224,8 @@
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
                                         <div class="card-body index-forward pt-5 rounded-lg">
                                             <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="img/avatar-1.jpg" alt="" width="100" /></div>
+                                                    src="{{ asset('landing-page/img/avatar-1.jpg') }}" alt=""
+                                                    width="100" /></div>
                                             <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
                                                 adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                                                 magna aliqua. Ut enim ad minim veniam.</p>
@@ -240,7 +241,8 @@
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
                                         <div class="card-body index-forward pt-5 rounded-lg">
                                             <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="img/avatar-2.png" alt="" width="100" /></div>
+                                                    src="{{ asset('landing-page/img/avatar-2.png') }}" alt=""
+                                                    width="100" /></div>
                                             <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
                                                 adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                                                 magna aliqua. Ut enim ad minim veniam.</p>
@@ -256,7 +258,8 @@
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
                                         <div class="card-body index-forward pt-5 rounded-lg">
                                             <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="img/avatar-1.jpg" alt="" width="100" /></div>
+                                                    src="{{ asset('landing-page/img/avatar-1.jpg') }}" alt=""
+                                                    width="100" /></div>
                                             <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
                                                 adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                                                 magna aliqua. Ut enim ad minim veniam.</p>
@@ -272,7 +275,8 @@
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
                                         <div class="card-body index-forward pt-5 rounded-lg">
                                             <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="img/avatar-2.png" alt="" width="100" /></div>
+                                                    src="{{ asset('landing-page/img/avatar-2.png') }}" alt=""
+                                                    width="100" /></div>
                                             <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
                                                 adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
                                                 magna aliqua. Ut enim ad minim veniam.</p>
@@ -292,7 +296,8 @@
     <footer class="with-pattern-1 position-relative pt-5">
         <div class="container py-5">
             <div class="row gy-4">
-                <div class="col-lg-3"><img class="mb-4" src="img/logo.svg" alt="" width="110">
+                <div class="col-lg-3"><img class="mb-4" src="{{ asset('favicon.png') }}" alt=""
+                        width="110">
                     <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                         tempor incididunt ut labore et dolore.</p>
                 </div>
@@ -321,9 +326,10 @@
                 <div class="col-lg-5">
                     <h2 class="h5 mb-4">Contact Info</h2>
                     <ul class="list-unstyled me-4 mb-3">
-                        <li class="mb-2 text-muted">728 Ocello Street, San Diego, California. </li>
-                        <li class="mb-2"><a class="footer-link" href="tel:619-851-4132">619-851-4132</a></li>
-                        <li class="mb-2"><a class="footer-link" href="mailto:Nova@example.com">Nova@example.com</a>
+                        <li class="mb-2 text-muted">99 To Hien Thanh - Son Tra - Da Nang. </li>
+                        <li class="mb-2"><a class="footer-link" href="tel:0917459572">0917459572</a></li>
+                        <li class="mb-2"><a class="footer-link"
+                                href="mailto:010102tranvanhieu@gmail.com">010102tranvanhieu@gmail.com</a>
                         </li>
                     </ul>
                     <ul class="list-inline mb-0">
@@ -341,8 +347,9 @@
         </div>
         <div class="copyrights">
             <div class="container text-center py-4">
-                <p class="mb-0 text-muted text-sm">&copy; 2021, Your company. Template by <a
-                        href="https://bootstrapious.com/p/app-landing-page" class="text-reset">Bootstrapious</a>.</p>
+                <p class="mb-0 text-muted text-sm">&copy; 2023, PNV student <a
+                        href="https://www.passerellesnumeriques.org/vi/cac-trung-tam/vietnam/"
+                        class="text-reset">Bootstrapious</a>.</p>
                 <!-- If you want to remove the backlink, please purchase the Attribution-Free License. See details in readme.txt or license.txt. Thanks!-->
             </div>
         </div>
