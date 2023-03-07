@@ -19,4 +19,6 @@ final class Common
     const WATCHED_VIDEO = 1;
 
     const UNWATCHED_VIDEO = 0;
+
+    const VIDEO_SURVEY = 'bTcrVKqYukA';
 }
