@@ -65,7 +65,10 @@ Route::middleware(['auth:api'])->group(function () {
         });
 
         Route::get('/levels', [LevelController::class, 'index']);
+
+        Route::get('/watched-history', [HistoryController::class, 'getWatchedVideos']);
     });
+
     Route::get('/payment', [PaymentController::class, 'getUrlPayment']);
     Route::get('/services', [PackageController::class, 'index']);
 });
