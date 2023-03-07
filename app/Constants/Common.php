@@ -15,4 +15,8 @@ final class Common
     const ADMIN_MAIL = 'hieu.tran23@student.passerellesnumeriques.org';
 
     const DEFAULT_LEVEL_ID = 1;
+
+    const WATCHED_VIDEO = 1;
+
+    const UNWATCHED_VIDEO = 0;
 }

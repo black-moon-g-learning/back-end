@@ -33,4 +33,9 @@ class Video extends Model
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');
     }
+
+    public function watched()
+    {
+        return $this->hasOne(Watched::class);
+    }
 }
