@@ -5,6 +5,7 @@ namespace App\Repositories\Information;
 use App\Constants\Information;
 use App\Models\Contribute;
 use App\Repositories\BaseRepository;
+use Illuminate\Http\Request;
 
 class InformationRepository extends BaseRepository implements IInformationRepository
 {
@@ -40,10 +41,15 @@ class InformationRepository extends BaseRepository implements IInformationReposi
         return $query->paginate($page);
     }
 
-    public function getAll()
+    public function indexAdmin(Request $request)
     {
-        return $this->model
-            ->with(['user', 'country'])
+        $query = $this->model
+            ->with(['user', 'country']);
+
+        if ($request->has('status')) {
+            $query->where('status', $request->get('status'));
+        }
+        return $query
             ->orderBy('status', 'desc')
             ->paginate($this->limit);
     }

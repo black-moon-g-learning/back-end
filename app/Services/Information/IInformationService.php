@@ -11,7 +11,7 @@ interface IInformationService
 
     public function create(InformationRequest $informationRequest): mixed;
 
-    public function getAll();
+    public function getAll(Request $request);
 
     public function edit(int $id);
 
