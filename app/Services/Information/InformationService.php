@@ -68,9 +68,9 @@ class InformationService implements IInformationService
         ];
     }
 
-    public function getAll()
+    public function getAll(Request $request)
     {
-        $response =  $this->informationRepo->getAll();
+        $response = $this->informationRepo->indexAdmin($request);
         return $response;
     }
 

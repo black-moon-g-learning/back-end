@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('Information', 'App\Constants\Information')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -17,6 +17,19 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Information table</h6>
+                </div>
+                <div class="card-header col-2">
+                    <label for="chage-status">Filter by status</label>
+                    <select class="form-control" id="change-status">
+                        <option value="default" disable>Default</option>
+                        <option {{ request()->get('status') == $Information::PENDING ? 'selected' : '' }}
+                            value="{{ $Information::PENDING }}">PENDING</option>
+                        <option {{ request()->get('status') == $Information::PUBLISHED ? 'selected' : '' }}
+                            value="{{ $Information::PUBLISHED }}">PUBLISHED
+                        </option>
+                        <option {{ request()->get('status') == $Information::FUTURE ? 'selected' : '' }}
+                            value="{{ $Information::FUTURE }}">FUTURE</option>
+                    </select>
                 </div>
                 <div class="card-body px-0 pt-0 pb-2">
                     <div class="table-responsive p-0">
@@ -84,16 +97,16 @@
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    @include('components.status-info.status', [
-                                                        'data' => $info->status,
-                                                    ])
+                                                    {{ $info->published_in ?? 'Unset' }}
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    {{ $info->published_in ?? 'Unset' }}
+                                                    @include('components.status-info.status', [
+                                                        'data' => $info->status,
+                                                    ])
                                                 </div>
                                             </div>
                                         </td>
@@ -117,4 +130,17 @@
         {{ $information->links() }}
     </div>
     @include('components.footer')
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $('#change-status').on('change', function() {
+            var selected = $(this).find(":selected").val();
+            if (selected == 'default') {
+                window.location.href = `{{ route('web.information') }}`;
+            }
+            window.location.href = `{{ route('web.information') }}?status=${selected}`;
+        });
+    </script>
 @endsection
