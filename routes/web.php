@@ -49,6 +49,7 @@ Route::middleware(['auth', 'role'])->group(
             Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
 
             Route::delete('users/{id}', [UserController::class, 'delete'])->name('web.users.delete');
+            Route::put('users/{id}', [UserController::class, 'updateStatus'])->name('web.users.update-status');
 
             Route::get('/countries/{id}', [CountryController::class, 'edit'])->name('web.countries.edit');
             Route::put('/countries/{id}', [CountryController::class, 'update'])->name('web.countries.update');

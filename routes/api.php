@@ -34,7 +34,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 
-Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api', 'blocked'])->group(function () {
 
     Route::group(['prefix' => '/profile'], function () {
         Route::get('/', [UserController::class, 'getProfile']);
@@ -82,5 +82,6 @@ Route::group(
     ],
     function () {
         Route::get('/expired-trial', [ErrorController::class, 'expiredTrial'])->name('expired-trial');
+        Route::get('/blocked', [ErrorController::class, 'blocked'])->name('blocked');
     }
 );

@@ -1,6 +1,7 @@
 <?php
 
 use App\Constants\Common;
+use App\Constants\User as ConstantsUser;
 use App\Models\User;
 
 if (!function_exists('getUsername')) {
@@ -101,5 +102,17 @@ if (!function_exists('calPercent')) {
         } else {
             return round($first / $second * 33.3, 2);
         }
+    }
+}
+
+if (!function_exists('showStatusUser')) {
+    function showStatusUser(null| string $statusUser)
+    {
+        $status = [
+            ConstantsUser::ACTIVE_STATUS =>  ConstantsUser::ACTIVE_STATUS,
+            ConstantsUser::BLOCKED_STATUS => ConstantsUser::BLOCKED_STATUS,
+            null => ConstantsUser::ACTIVE_STATUS
+        ];
+        return $status[$statusUser];
     }
 }

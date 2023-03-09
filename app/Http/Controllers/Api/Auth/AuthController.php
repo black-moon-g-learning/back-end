@@ -21,7 +21,7 @@ class AuthController extends Controller
      */
     public function __construct(IAuthService $auth)
     {
-    
+
         $this->auth = $auth;
     }
 
@@ -37,6 +37,8 @@ class AuthController extends Controller
 
         if ($response['status']) {
             return $this->responseSuccessWithData($response);
+        } elseif (!$response['status'] && $response['code'] === 403) {
+            return redirect()->route('errors.expired-trial');
         }
 
         return $this->responseErrorWithData([
