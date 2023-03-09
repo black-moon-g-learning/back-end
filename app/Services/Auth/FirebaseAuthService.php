@@ -68,16 +68,23 @@ class FirebaseAuthService implements IAuthService
             $token->expires_at = Carbon::now()->addWeek();
             $token->save();
 
-            return [
-                'auth_status' =>  $authStatus,
-                'status' => true,
-                'id' => $user->id,
-                'access_token' => $tokenResult->accessToken,
-                'token_type' => 'Bearer',
-                'expires_at' => Carbon::parse(
-                    $tokenResult->token->expires_at
-                )->toDateTimeString()
-            ];
+            if ($user->status === User::BLOCKED_STATUS) {
+                return [
+                    'auth_status' =>  $authStatus,
+                    'status' => true,
+                    'id' => $user->id,
+                    'access_token' => $tokenResult->accessToken,
+                    'token_type' => 'Bearer',
+                    'expires_at' => Carbon::parse(
+                        $tokenResult->token->expires_at
+                    )->toDateTimeString()
+                ];
+            } else {
+                return [
+                    'status' => false,
+                    'code' => 403
+                ];
+            }
         }
     }
 
