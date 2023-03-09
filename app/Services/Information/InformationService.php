@@ -129,4 +129,25 @@ class InformationService implements IInformationService
             'data' => 'Update information successful'
         ];
     }
+
+    public function delete(int $id)
+    {
+
+        $infoDB = $this->informationRepo->find($id);
+        if ($this->storageSer->exists($infoDB->image)) {
+            $this->storageSer->delete($infoDB->image);
+        };
+        $deletedInfo =  $this->informationRepo->delete($id);
+        if ($deletedInfo) {
+            return [
+                'status' => true,
+                'data' => 'Delete post successful'
+            ];
+        } else {
+            return [
+                'status' => false,
+                'data' => 'Can not delete now'
+            ];
+        }
+    }
 }

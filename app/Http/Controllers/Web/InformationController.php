@@ -39,4 +39,13 @@ class InformationController extends Controller
         }
         return redirect()->back()->with("errors", $response["errors"]);
     }
+
+    public function delete(int $id)
+    {
+        $response = $this->informationSer->delete($id);
+        if ($response["status"]) {
+            return redirect()->route('web.information')->with('response', $response);
+        }
+        return redirect()->back()->with("errors", $response["errors"]);
+    }
 }

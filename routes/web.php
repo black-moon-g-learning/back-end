@@ -47,6 +47,7 @@ Route::middleware(['auth', 'role'])->group(
         Route::middleware('idInteger')->group(function () {
             Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
             Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
+            Route::delete('/information/{id}', [InformationController::class, 'delete'])->name('web.information.delete');
 
             Route::delete('users/{id}', [UserController::class, 'delete'])->name('web.users.delete');
             Route::put('users/{id}', [UserController::class, 'updateStatus'])->name('web.users.update-status');
