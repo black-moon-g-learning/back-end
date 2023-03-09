@@ -70,6 +70,11 @@ class FirebaseAuthService implements IAuthService
 
             if ($user->status === User::BLOCKED_STATUS) {
                 return [
+                    'status' => false,
+                    'code' => 403
+                ];
+            } else {
+                return [
                     'auth_status' =>  $authStatus,
                     'status' => true,
                     'id' => $user->id,
@@ -78,11 +83,6 @@ class FirebaseAuthService implements IAuthService
                     'expires_at' => Carbon::parse(
                         $tokenResult->token->expires_at
                     )->toDateTimeString()
-                ];
-            } else {
-                return [
-                    'status' => false,
-                    'code' => 403
                 ];
             }
         }
