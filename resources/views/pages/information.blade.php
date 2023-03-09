@@ -17,6 +17,8 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Information table</h6>
+                    <a href="{{ route('web.information.create') }}" class="btn bg-success badge-primary" id="click">
+                        Create new</a>
                 </div>
                 <div class="card-header col-2">
                     <label for="chage-status">Filter by status</label>

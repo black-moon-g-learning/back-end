@@ -19,10 +19,14 @@
     @endphp
 
     <div class="p-4 bg-secondary">
-        <form enctype="multipart/form-data" action="{{ route('web.information.update', $info->id) }}" method="POST">
+        <form enctype="multipart/form-data"
+            action="{{ isset($info) ? route('web.information.update', $info->id) : route('web.information.store') }}"
+            method="POST">
 
             @csrf
-            @method('PUT')
+            @isset($info)
+                @method('PUT')
+            @endisset
 
             <div class="form-group">
                 <label for="example-text-input" class="form-control-label">Title</label>
@@ -39,7 +43,8 @@
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Onwer</label>
                         <input readonly class="form-control" type="text" name="description"
-                            value="{{ isset($info) ? $info->user->first_name : '' }}" id="example-search-input">
+                            value="{{ isset($info) ? getUsername($info->user) : (isset($user) ? getUsername($user) : '') }}"
+                            id="example-search-input">
                     </div>
                     @if (isset(Session::get('errors')['description']))
                         <div class="form-group">
@@ -52,7 +57,8 @@
                         <label for="example-search-input" class="form-control-label">Status</label>
                         <select name="status" class="form-control">
                             @foreach ($infoStatus as $key => $values)
-                                <option value={{ $key }} {{ $key == $info->status ? 'selected' : ' ' }}>
+                                <option value={{ $key }}
+                                    {{ isset($infor) && $key == $info->status ? 'selected' : ' ' }}>
                                     {{ $values['status'] }}
                                 </option>
                             @endforeach
@@ -71,7 +77,8 @@
                         <select multiple class="form-control" name="country_id">
                             @foreach ($countries as $country)
                                 <option value="{{ $country->id }}"
-                                    {{ $country->id == $info->country_id ? 'selected' : ' ' }}>{{ $country->name }}
+                                    {{ isset($info) && $country->id == $info->country_id ? 'selected' : ' ' }}>
+                                    {{ $country->name }}
                                 </option>
                             @endforeach
                         </select>

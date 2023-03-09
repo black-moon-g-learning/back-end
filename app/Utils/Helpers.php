@@ -6,8 +6,11 @@ use App\Models\User;
 
 if (!function_exists('getUsername')) {
 
-    function getUsername(User $user)
+    function getUsername(User|null $user)
     {
+        if ($user === null) {
+            return "Unknown";
+        }
         return $user->first_name . ' ' . $user->last_name;
     }
 }

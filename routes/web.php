@@ -43,6 +43,8 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/countries', [CountryController::class, 'index'])->name('web.countries');
 
         Route::get('/information', [InformationController::class, 'index'])->name('web.information');
+        Route::get('/information/create', [InformationController::class, 'create'])->name('web.information.create');
+        Route::post('/information/store', [InformationController::class, 'store'])->name('web.information.store');
 
         Route::middleware('idInteger')->group(function () {
             Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
