@@ -90,7 +90,7 @@
                         <p>{{ $response['data'] }}</p>
                         <p> {{ $response['status'] ? 'if you have email, please check it !' : '' }}
                         </p>
-                        <a href="{{ route('home') }}">Go to Home</a>
+                        <a href="g-learning://open.app">Go to App</a>
                     </div>
 
                 </div>
