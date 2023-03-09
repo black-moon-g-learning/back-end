@@ -105,6 +105,10 @@ class InformationService implements IInformationService
         $info = $validator->validated();
 
         if ($request->has('file')) {
+            $infoDB = $this->informationRepo->find($id);
+            if ($this->storageSer->exists($infoDB->image)) {
+                $this->storageSer->delete($infoDB->image);
+            };
             $uploaded = $this
                 ->storageSer
                 ->upload(
