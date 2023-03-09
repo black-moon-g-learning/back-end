@@ -37,8 +37,8 @@ class AuthController extends Controller
 
         if ($response['status']) {
             return $this->responseSuccessWithData($response);
-        } elseif (!$response['status'] && $response['code'] === 403) {
-            return redirect()->route('errors.expired-trial');
+        } elseif (!$response['status'] && $response['code'] === 426) {
+            return redirect()->route('errors.blocked');
         }
 
         return $this->responseErrorWithData([

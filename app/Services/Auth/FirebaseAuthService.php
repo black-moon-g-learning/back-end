@@ -71,7 +71,7 @@ class FirebaseAuthService implements IAuthService
             if ($user->status === User::BLOCKED_STATUS) {
                 return [
                     'status' => false,
-                    'code' => 403
+                    'code' => 423
                 ];
             } else {
                 return [
