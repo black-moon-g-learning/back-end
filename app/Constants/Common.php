@@ -21,4 +21,6 @@ final class Common
     const UNWATCHED_VIDEO = 0;
 
     const VIDEO_SURVEY = 'bTcrVKqYukA';
+
+    const SERVER_API_KEY = 'AAAA-_0XyPU:APA91bGI-QszN-V1cKL1BJeOzCJaIFCufWhr-zZi8gZaaxFMbsYpedUJECxZsp5OOQtQrFNLoVucPFT-KeLSwr8bGJbaqloYQVeXnX7i_IKjZKB713eTdAK_a2t8eNiKcF5EHZWEuudT';
 }

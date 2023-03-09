@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
@@ -107,5 +108,9 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
 
         Route::get('/test-payment', [PaymentController::class, 'getUrlPaymentTest']);
+
+        Route::get('/home', [NotificationController::class, 'index'])->name('notify-home');
+        Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
+        Route::post('/send-notification', [NotificationController::class, 'sendNotification'])->name('send.notification');
     }
 );
