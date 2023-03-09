@@ -24,6 +24,6 @@ class ErrorController extends Controller
             'message' => "Your account was blocked, please contact to admin",
         ];
 
-        return $this->responseErrorWithData($response, 403);
+        return $this->responseErrorWithData($response, 426);
     }
 }
