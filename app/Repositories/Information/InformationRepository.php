@@ -68,9 +68,9 @@ class InformationRepository extends BaseRepository implements IInformationReposi
             ->join('users', 'users.id', '=', 'contributes.owner_id')
             ->selectRaw('users.first_name
                 ,COUNT(owner_id) as totals
-                ,SUM(status=' . Information::PENDING . ')  AS pending
-                ,SUM(status=' . Information::PUBLISHED . ') AS published
-                ,SUM(status=' . Information::FUTURE . ') AS future')
+                ,SUM(contributes.status=' . Information::PENDING . ')  AS pending
+                ,SUM(contributes.status=' . Information::PUBLISHED . ') AS published
+                ,SUM(contributes.status=' . Information::FUTURE . ') AS future')
             ->groupBy('owner_id')
             ->orderBy('totals', 'desc')
             ->paginate(10);
