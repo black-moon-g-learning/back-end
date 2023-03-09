@@ -1,4 +1,5 @@
 @inject('process', 'App\Constants\Process')
+@inject('constantUser', 'App\Constants\User')
 @extends('layouts.master')
 
 @section('content')
@@ -31,7 +32,7 @@
                                         Name</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                         Email</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
+                                    <th class="text-secondary  opacity-7">Status</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                         Phone</th>
                                     <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
@@ -55,11 +56,18 @@
                                                 class="justify-content-center badge badge-sm bg-gradient-success">{{ $user->email }}</span>
                                         </td>
                                         <td class="align-middle">
-                                            <form method="POST" action={{ route('web.users.delete', $user->id) }}>
+                                            <form method='POST' action="{{ route('web.users.update-status', $user->id) }}">
+
                                                 @csrf
-                                                @method('DELETE')
-                                                <button class="btn bg-gradient-info  delete-user" type="submit"
-                                                    id="click1"> Delete</button>
+                                                @method('PUT')
+
+                                                <input name="status" value="{{ showStatusUser($user->status) }}"
+                                                    type="hidden" />
+                                                <button
+                                                    class="btn {{ showStatusUser($user->status) === 'ACTIVE' ? 'bg-gradient-info' : 'bg-gradient-warning' }}  update-user"
+                                                    type="submit" id="click1">{{ showStatusUser($user->status) }}
+                                                </button>
+
                                             </form>
                                         </td>
                                         <td class=" px-2">
@@ -98,7 +106,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script>
-        $('.delete-user').click(function(e) {
+        $('.update-user').click(function(e) {
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
                 title: 'Confirm Edit!',

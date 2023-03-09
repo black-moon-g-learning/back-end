@@ -41,7 +41,8 @@ class User extends Authenticatable
         'token',
         'image',
         'firebase_uid',
-        'expired'
+        'expired',
+        'status'
 
     ];
 

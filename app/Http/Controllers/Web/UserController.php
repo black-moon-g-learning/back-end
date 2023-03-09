@@ -26,4 +26,10 @@ class UserController extends Controller
         $result = $this->userSer->delete($id);
         return redirect()->back()->with("response", $result);
     }
+
+    public function updateStatus(int $id, Request $request)
+    {
+        $response = $this->userSer->updateStatus($id, $request);
+        return redirect()->back()->with("response", $response);
+    }
 }

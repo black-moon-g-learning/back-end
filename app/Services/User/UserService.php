@@ -2,10 +2,12 @@
 
 namespace App\Services\User;
 
+use App\Constants\User as ConstantsUser;
 use App\Http\Requests\UserRequest;
 use App\Models\User;
 use App\Repositories\User\IUserRepository;
 use App\Services\Storage\IStorageService;
+use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
 
@@ -94,12 +96,28 @@ class UserService implements IUserService
     {
         $userInfo['username'] = $userInfo['email'];
         $userInfo['first_name'] = $userInfo['firstName'];
-        
+
         $user = $this->userRepo->update($user->id, $userInfo);
 
         if ($user) {
             return true;
         }
         return false;
+    }
+
+    public function updateStatus(int $id, Request $request)
+    {
+        if ($request->has('status')) {
+
+            if ($request->get('status') === ConstantsUser::BLOCKED_STATUS) {
+                $userInfo['status'] = ConstantsUser::ACTIVE_STATUS;
+            } else {
+                $userInfo['status'] = ConstantsUser::BLOCKED_STATUS;
+            }
+            $this->userRepo->update($id, $userInfo);
+
+            return $this->successUpdate;
+        }
+        return $this->failedUpdate;
     }
 }
