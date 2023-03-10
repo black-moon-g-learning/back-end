@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VideoController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -67,6 +68,8 @@ Route::middleware(['auth:api', 'blocked'])->group(function () {
         Route::get('/levels', [LevelController::class, 'index']);
 
         Route::get('/watched-history', [HistoryController::class, 'getWatchedVideos']);
+
+        Route::post('/save-token', [NotificationController::class, 'saveToken']);
     });
 
     Route::get('/payment', [PaymentController::class, 'getUrlPayment']);

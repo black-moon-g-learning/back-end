@@ -15,7 +15,7 @@
             ],
         ];
     @endphp
-    <button type="button" class="btn {{ $response[$data]['css'] }}">
+    <button style="width: 130px" type="button" class="btn {{ $response[$data]['css'] }}">
         {{ $response[$data]['status'] }}
     </button>
 @endisset

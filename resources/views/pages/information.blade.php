@@ -73,17 +73,31 @@
                                                 alt="user1">
                                         </td>
                                         <td class="align-middle">
-                                            <a class="btn bg-gradient-info"
-                                                href={{ route('web.information.edit', $info->id) }}>
-                                                Edit
+
+                                            <a href={{ route('web.information.edit', $info->id) }}>
+                                                <div style="width: 100px" class="btn bg-gradient-info">
+
+                                                    Edit
+                                                </div>
                                             </a>
                                             <form method="POST" action="{{ route('web.information.delete', $info->id) }}">
 
                                                 @csrf
                                                 @method('DELETE')
-                                                <button class="btn btn-secondary delete-information" type="submit">
+                                                <button style="width: 100px" class="btn btn-secondary delete-information"
+                                                    type="submit">
                                                     Delete</button>
                                             </form>
+
+                                            <form method="POST"
+                                                action="{{ route('web.information.send-notification', $info->id) }}">
+                                                @csrf
+                                                @method('PUT')
+                                                <button style="width: 100px" class="btn btn-warning push-notification"
+                                                    type="submit">
+                                                    Push now</button>
+                                            </form>
+
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
@@ -144,6 +158,7 @@
 @section('customJs')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
     <script>
         $('#change-status').on('change', function() {
             var selected = $(this).find(":selected").val();
@@ -168,5 +183,21 @@
                 }
             })
         });
+        $('.push-notification').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm push notification!',
+                content: 'Do you want to push notification!',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
     </script>
+    @include('components.firebase-fcm')
 @endsection
