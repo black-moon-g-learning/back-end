@@ -51,4 +51,14 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->groupByRaw('MONTH(created_at)')
             ->get();
     }
+
+    public function getUserTokenDevice()
+    {
+        return $this
+            ->model
+            // ->where('role_id', '!=', Role::ADMIN_ROLE)
+            ->whereNotNull('device_token')
+            ->pluck('device_token')
+            ->all();
+    }
 }

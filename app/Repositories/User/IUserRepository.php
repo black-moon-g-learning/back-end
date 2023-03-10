@@ -15,4 +15,6 @@ interface IUserRepository extends RepositoryInterface
     public function countUsers();
 
     public function getUserRegisterInYear(int $year);
+
+    public function getUserTokenDevice();
 }

@@ -84,7 +84,6 @@
                                                 <button class="btn btn-secondary delete-information" type="submit">
                                                     Delete</button>
                                             </form>
-
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">

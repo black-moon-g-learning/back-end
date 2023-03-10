@@ -115,6 +115,11 @@ class AppServiceProvider extends ServiceProvider
             \App\Services\Watched\IWatchedService::class,
             \App\Services\Watched\WatchedService::class
         );
+
+        $this->app->bind(
+            \App\Services\Notification\INotificationService::class,
+            \App\Services\Notification\FirebaseNotificationService::class
+        );
     }
 
     /**
