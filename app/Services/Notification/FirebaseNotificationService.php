@@ -28,7 +28,7 @@ class FirebaseNotificationService implements INotificationService
         $user = auth()->user();
         $user->device_token = $request->token;
         $user->save();
-
+        
         return ['token saved successfully.'];
     }
 
@@ -48,23 +48,8 @@ class FirebaseNotificationService implements INotificationService
             'Content-Type: application/json',
         ];
 
-        $ch = curl_init();
+        PushNotificationFirebase::dispatch($headers, $dataString);
 
-        curl_setopt($ch, CURLOPT_URL, Common::FCM_ENDPOINT);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER,   $headers);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POSTFIELDS,  $dataString);
-
-        $result = curl_exec($ch);
-
-        if (!$result) {
-            Log::debug('Curl failed: ' . curl_error($ch));
-        }
-        Log::debug($result);
-
-        dd($result);
         return [
             'status' => true,
             'data' => "Sending info for all users"
