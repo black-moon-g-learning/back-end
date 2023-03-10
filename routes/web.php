@@ -111,6 +111,6 @@ Route::middleware(['auth', 'role'])->group(
 
         Route::get('/home', [NotificationController::class, 'index'])->name('notify-home');
         Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
-        Route::post('/send-notification', [NotificationController::class, 'sendNotification'])->name('send.notification');
+        Route::get('/send-notification/{id}', [NotificationController::class, 'sendNotification'])->name('web.information.push');
     }
 );
