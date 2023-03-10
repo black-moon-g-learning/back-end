@@ -22,5 +22,5 @@ final class Common
 
     const VIDEO_SURVEY = 'bTcrVKqYukA';
 
-    const FCM_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
+    const SERVER_API_KEY = 'AAAA-_0XyPU:APA91bG1_Es_OwcajPWSqM4D2MWBljmzyG18_YLRb4P5U7uhyqF3NmbtkBN1R45H8Wv4ZGBz7Opy4t13QEmIH5uHdCbEUsKxzk9jzph8NmEO-VAOKwbENnVdZcI4VLILX5tsxaTJeSY0';
 }

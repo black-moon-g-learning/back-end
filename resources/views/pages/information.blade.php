@@ -84,10 +84,6 @@
                                                 <button class="btn btn-secondary delete-information" type="submit">
                                                     Delete</button>
                                             </form>
-                                            <a class="btn bg-gradient-info"
-                                                href={{ route('web.information.push', $info->id) }}>
-                                                Push now
-                                            </a>
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
