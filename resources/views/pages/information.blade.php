@@ -89,14 +89,16 @@
                                                     Delete</button>
                                             </form>
 
-                                            <form method="POST"
-                                                action="{{ route('web.information.send-notification', $info->id) }}">
-                                                @csrf
-                                                @method('PUT')
-                                                <button style="width: 100px" class="btn btn-warning push-notification"
-                                                    type="submit">
-                                                    Push now</button>
-                                            </form>
+                                            @if ($info->status !== $Information::PUBLISHED)
+                                                <form method="POST"
+                                                    action="{{ route('web.information.send-notification', $info->id) }}">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <button style="width: 100px" class="btn btn-warning push-notification"
+                                                        type="submit">
+                                                        Push now</button>
+                                                </form>
+                                            @endif
 
                                         </td>
                                         <td class="justify-content-center">
