@@ -22,4 +22,5 @@ final class Common
 
     const VIDEO_SURVEY = 'bTcrVKqYukA';
 
+    const FCM_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
 }
