@@ -3,6 +3,7 @@
 namespace App\Services\Notification;
 
 use App\Constants\Common;
+use App\Constants\Information;
 use App\Jobs\PushNotificationFirebase;
 use App\Repositories\Information\IInformationRepository;
 use App\Repositories\User\IUserRepository;
@@ -25,15 +26,26 @@ class FirebaseNotificationService implements INotificationService
 
     public function saveToken(Request $request)
     {
-        $user = auth()->user();
-        $user->device_token = $request->token;
-        $user->save();
-        
-        return ['token saved successfully.'];
+        if ($request->has('token')) {
+            $user = auth()->user();
+            $user->device_token = $request->token;
+            $user->save();
+
+            return [
+                'status' => true,
+                'message' => 'Save device token successful'
+            ];
+        }
+
+        return [
+            'status' => false,
+            'message' => 'Not found device Token'
+        ];
     }
 
     public function sendNotification(int $infoId)
     {
+
         $firebaseToken = $this->userRepo->getUserTokenDevice();
 
         $data = [
@@ -48,7 +60,7 @@ class FirebaseNotificationService implements INotificationService
             'Content-Type: application/json',
         ];
 
-        PushNotificationFirebase::dispatch($headers, $dataString);
+        $this->pushByCurl($headers, $dataString);
 
         return [
             'status' => true,
@@ -60,10 +72,31 @@ class FirebaseNotificationService implements INotificationService
     public function setupNotificationContent(int $infoId): array
     {
         $infoDB = $this->infoRepo->find($infoId);
+        $infoUpdate['status'] = Information::PUBLISHED;
+
+        $this->infoRepo->update($infoId, $infoUpdate);
 
         return [
-            "title" =>  handleLongText($infoDB->title, 15),
-            "body" =>  handleLongText($infoDB->description, 30)
+            "title" =>  handleLongText($infoDB->title, 25),
+            "body" =>  handleLongText($infoDB->description, 50)
         ];
+    }
+
+    public function pushByCurl(array $headers, string $data)
+    {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/fcm/send');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER,  $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+        $response = curl_exec($ch);
+
+        curl_close($ch);
+        Log::debug($response);
+        return $response;
     }
 }
