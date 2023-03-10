@@ -39,4 +39,31 @@ class InformationController extends Controller
         }
         return redirect()->back()->with("errors", $response["errors"]);
     }
+
+    public function delete(int $id)
+    {
+        $response = $this->informationSer->delete($id);
+        if ($response["status"]) {
+            return redirect()->route('web.information')->with('response', $response);
+        }
+        return redirect()->back()->with("errors", $response["errors"]);
+    }
+
+    public function create()
+    {
+        $response = $this->informationSer->createInfo();
+        $countries = $response['countries'];
+        $user = $response['user'];
+        return view('forms.form-information', compact('countries', 'user'));
+    }
+
+    public function store(Request $request)
+    {
+        $response = $this->informationSer->store($request);
+
+        if ($response["status"]) {
+            return redirect()->route('web.information')->with('response', $response);
+        }
+        return redirect()->back()->with("errors", $response["errors"]);
+    }
 }

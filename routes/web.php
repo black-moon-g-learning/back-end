@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\PaymentController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\Web\QuestionController;
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ContinentController;
@@ -43,10 +44,13 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/countries', [CountryController::class, 'index'])->name('web.countries');
 
         Route::get('/information', [InformationController::class, 'index'])->name('web.information');
+        Route::get('/information/create', [InformationController::class, 'create'])->name('web.information.create');
+        Route::post('/information/store', [InformationController::class, 'store'])->name('web.information.store');
 
         Route::middleware('idInteger')->group(function () {
             Route::get('/information/{id}/edit', [InformationController::class, 'edit'])->name('web.information.edit');
             Route::put('/information/{id}/update', [InformationController::class, 'update'])->name('web.information.update');
+            Route::delete('/information/{id}', [InformationController::class, 'delete'])->name('web.information.delete');
 
             Route::delete('users/{id}', [UserController::class, 'delete'])->name('web.users.delete');
             Route::put('users/{id}', [UserController::class, 'updateStatus'])->name('web.users.update-status');
@@ -104,5 +108,9 @@ Route::middleware(['auth', 'role'])->group(
         Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
 
         Route::get('/test-payment', [PaymentController::class, 'getUrlPaymentTest']);
+
+        Route::get('/home', [NotificationController::class, 'index'])->name('notify-home');
+        Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
+        Route::get('/send-notification/{id}', [NotificationController::class, 'sendNotification'])->name('web.information.push');
     }
 );

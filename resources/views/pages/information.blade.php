@@ -17,6 +17,8 @@
             <div class="card mb-4">
                 <div class="card-header pb-0">
                     <h6>Information table</h6>
+                    <a href="{{ route('web.information.create') }}" class="btn bg-success badge-primary" id="click">
+                        Create new</a>
                 </div>
                 <div class="card-header col-2">
                     <label for="chage-status">Filter by status</label>
@@ -75,8 +77,17 @@
                                                 href={{ route('web.information.edit', $info->id) }}>
                                                 Edit
                                             </a>
-                                            <button class="btn btn-secondary" onClick="confirm({{ $info->id }})"
-                                                id="click"> Delete</button>
+                                            <form method="POST" action="{{ route('web.information.delete', $info->id) }}">
+
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-secondary delete-information" type="submit">
+                                                    Delete</button>
+                                            </form>
+                                            <a class="btn bg-gradient-info"
+                                                href={{ route('web.information.push', $info->id) }}>
+                                                Push now
+                                            </a>
                                         </td>
                                         <td class="justify-content-center">
                                             <div class="d-flex px-2 py-1">
@@ -131,9 +142,12 @@
     </div>
     @include('components.footer')
 @endsection
-
+@section('customCss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endsection
 @section('customJs')
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
     <script>
         $('#change-status').on('change', function() {
             var selected = $(this).find(":selected").val();
@@ -141,6 +155,22 @@
                 window.location.href = `{{ route('web.information') }}`;
             }
             window.location.href = `{{ route('web.information') }}?status=${selected}`;
+        });
+
+        $('.delete-information').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm delete!',
+                content: 'Do you want to delete this row!',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
         });
     </script>
 @endsection

@@ -9,6 +9,7 @@ use App\Repositories\Country\ICountryRepository;
 use App\Repositories\Information\IInformationRepository;
 use App\Services\Storage\IStorageService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class InformationService implements IInformationService
@@ -76,7 +77,7 @@ class InformationService implements IInformationService
 
     public function edit(int $id)
     {
-        $countries = $this->countryRepo->getAll();
+        $countries = $this->getAllCountries();
         $info = $this->informationRepo->find($id);
 
         return [
@@ -105,6 +106,10 @@ class InformationService implements IInformationService
         $info = $validator->validated();
 
         if ($request->has('file')) {
+            $infoDB = $this->informationRepo->find($id);
+            if ($this->storageSer->exists($infoDB->image)) {
+                $this->storageSer->delete($infoDB->image);
+            };
             $uploaded = $this
                 ->storageSer
                 ->upload(
@@ -127,6 +132,90 @@ class InformationService implements IInformationService
         return [
             'status' => true,
             'data' => 'Update information successful'
+        ];
+    }
+
+    public function delete(int $id)
+    {
+
+        $infoDB = $this->informationRepo->find($id);
+        if ($this->storageSer->exists($infoDB->image)) {
+            $this->storageSer->delete($infoDB->image);
+        };
+        $deletedInfo =  $this->informationRepo->delete($id);
+        if ($deletedInfo) {
+            return [
+                'status' => true,
+                'data' => 'Delete post successful'
+            ];
+        } else {
+            return [
+                'status' => false,
+                'data' => 'Can not delete now'
+            ];
+        }
+    }
+
+    public function createInfo()
+    {
+        $user = Auth::user();
+        $countries = $this->getAllCountries();
+
+        return [
+            'countries' => $countries,
+            'user' => $user
+        ];
+    }
+
+    public function getAllCountries()
+    {
+        return $this->countryRepo->getAll();
+    }
+
+    public function store(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
+            'title' => 'required',
+            'status' => 'required|integer',
+            'country_id' => 'required',
+            'description' => 'nullable',
+        ]);
+
+        if ($validator->fails()) {
+            return [
+                "status" => false,
+                "errors" => $validator->errors()->toArray()
+            ];
+        }
+
+        $info = $validator->validated();
+
+        if ($request->has('file')) {
+            $uploaded = $this
+                ->storageSer
+                ->upload(
+                    $request->file('file'),
+                    Information::ROOT_FOLDER
+                );
+            if ($uploaded['status']) {
+                $info['image'] = $uploaded['url'];
+            } else {
+                return [
+                    'status' => false,
+                    'message' => 'Can not upload this file'
+                ];
+            }
+        }
+
+        $user = Auth::user();
+        $info['owner_id'] = $user->id;
+        $this->informationRepo->create($info);
+
+        return [
+            'status' => true,
+            'data' => 'Create information successful'
         ];
     }
 }

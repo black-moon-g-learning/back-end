@@ -21,4 +21,6 @@ final class Common
     const UNWATCHED_VIDEO = 0;
 
     const VIDEO_SURVEY = 'bTcrVKqYukA';
+
+    const FCM_ENDPOINT = 'https://fcm.googleapis.com/fcm/send';
 }
