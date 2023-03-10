@@ -51,7 +51,7 @@ class PushNotificationFirebase implements ShouldQueue
         if (!$result) {
             Log::debug('Curl failed: ' . curl_error($ch));
         }
-        Log::debug('success');
+        Log::debug($result);
 
         curl_close($ch);
     }

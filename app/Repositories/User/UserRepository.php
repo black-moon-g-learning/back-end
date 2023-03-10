@@ -56,7 +56,7 @@ class UserRepository extends BaseRepository implements IUserRepository
     {
         return $this
             ->model
-            ->where('role_id', '!=', Role::ADMIN_ROLE)
+            // ->where('role_id', '!=', Role::ADMIN_ROLE)
             ->whereNotNull('device_token')
             ->pluck('device_token')
             ->all();
