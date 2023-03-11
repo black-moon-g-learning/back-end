@@ -56,6 +56,7 @@ class FirebaseAuthService implements IAuthService
                 $userInfo['firebase_uid'] =  $uid;
                 $userInfo['expired'] = Carbon::now()->addDays(7)->toDateTimeString();
                 $userInfo['status'] = User::ACTIVE_STATUS;
+                $userInfo['device_token'] = $request->get('device_token') ?? null;
 
                 $user = $this->userRepo->create($userInfo);
 
