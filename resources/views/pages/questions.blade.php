@@ -50,7 +50,7 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    {{ handleLongText($question->answers->first()->content ?? 'No correct answer') }}
+                                                    {{ handleLongText($question->correctAnswer()->content ?? 'Answer by image') }}
                                                 </div>
                                             </td>
                                             <td class="align-middle">

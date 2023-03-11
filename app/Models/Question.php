@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Constants\Common;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,8 +32,8 @@ class Question extends Model
         return $this->hasMany(Answer::class);
     }
 
-    public function correctAnswer(): HasOne
+    public function correctAnswer()
     {
-        return $this->hasOne(Answer::class);
+        return $this->hasOne(Answer::class)->where('is_correct', Common::CORRECTED_ANSWER)->first();
     }
 }

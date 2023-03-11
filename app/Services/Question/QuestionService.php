@@ -105,6 +105,12 @@ class QuestionService implements IQuestionService
 
     public function delete(Request $request, int $id): mixed
     {
+        $question = $this->questionRepo->find($id);
+
+        foreach ($question->answers as $answer) {
+            $this->storeSer->delete($answer->image);
+        }
+
         $deletedQuestion = $this->questionRepo->delete($id);
         $countryId = $request->get('country-id');
 
@@ -246,7 +252,7 @@ class QuestionService implements IQuestionService
     {
         $validator = new ReviewValidateService($request->all());
         $validated = $validator->afterValidated();
-        
+
         if ($validated['status']) {
 
             $question['content'] = $validated['data']['question'];
@@ -276,9 +282,7 @@ class QuestionService implements IQuestionService
 
             $answerDB = $this->answerRepo->find($id);
 
-            if ($this->storeSer->exists($answerDB->image)) {
-                $this->storeSer->delete($answerDB->image);
-            }
+            $this->storeSer->delete($answerDB->image);
 
             $uploaded = $this->storeSer->upload($file, 'reviews');
 
