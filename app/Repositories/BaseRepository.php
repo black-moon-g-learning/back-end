@@ -1,7 +1,9 @@
 <?php
+
 namespace App\Repositories;
 
-abstract class BaseRepository implements  RepositoryInterface{
+abstract class BaseRepository implements RepositoryInterface
+{
 
     protected $model;
 
@@ -83,5 +85,16 @@ abstract class BaseRepository implements  RepositoryInterface{
         }
 
         return false;
+    }
+
+    /**
+     * getDataWithPaginate
+     *
+     * @param  int $limit
+     * @return mixed
+     */
+    public function getDataWithPaginate(int $limit = 20)
+    {
+        return $this->model->paginate($limit);
     }
 }

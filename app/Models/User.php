@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
@@ -25,6 +25,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'username',
         'name',
         'email',
         'password',
@@ -35,9 +36,15 @@ class User extends Authenticatable
         'gender',
         'country_id',
         'goal',
-        'role',
+        'role_id',
         'provider_id',
         'token',
+        'image',
+        'firebase_uid',
+        'expired',
+        'status',
+        'device_token'
+
     ];
 
     /**
@@ -59,28 +66,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * @return HasOne
-     */
-    public function role(): HasOne
-    {
-        return $this->hasOne(Role::class);
-    }
 
     /**
      * @return HasOne
      */
     public function service(): HasOne
     {
-        return  $this->hasOne(Service::class);
+        return  $this->hasOne(Service::class, 'id');
     }
 
     /**
      * @return HasOne
      */
-    public function goal(): HasOne
+    public function target(): HasOne
     {
-        return $this->hasOne(Goal::class);
+        return $this->hasOne(Target::class, 'id');
     }
 
     /**
@@ -88,7 +88,7 @@ class User extends Authenticatable
      */
     public function character(): HasOne
     {
-        return $this->hasOne(Character::class);
+        return $this->hasOne(Character::class, 'id');
     }
 
     /**
@@ -96,7 +96,7 @@ class User extends Authenticatable
      */
     public function country(): HasOne
     {
-        return $this->hasOne(Country::class);
+        return $this->hasOne(Country::class, 'id');
     }
 
     /**
@@ -104,14 +104,22 @@ class User extends Authenticatable
      */
     public function playGame(): HasMany
     {
-        return $this->hasMany(UserPlayGame::class);
+        return $this->hasMany(UserPlayGame::class, 'id');
     }
 
     /**
-     * @return HasOne
+     * @return HasMany
      */
-    public function payment(): HasOne
+    public function payment(): HasMany
     {
-        return $this->hasOne(UserPayment::class);
+        return $this->HasMany(UserPayment::class);
+    }
+
+    /**
+     * @return HasMany
+     */
+    public function video(): HasMany
+    {
+        return $this->hasMany(Video::class, 'id');
     }
 }

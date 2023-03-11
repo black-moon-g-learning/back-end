@@ -1,5 +1,8 @@
 <?php
+
 namespace App\Utils;
+
+use Illuminate\Database\Eloquent\Collection;
 
 trait Response
 {
@@ -17,7 +20,7 @@ trait Response
      * @param string $message
      * @param int $status
      */
-    public function response(array $data = [], string $message = "", int $status = 200)
+    public function response(array|Collection $data = [], string $message = "", int $status = 200)
     {
         return response()->json([
             'message' => $message,
@@ -30,7 +33,7 @@ trait Response
      * @param int $status
      * @return Response|\Illuminate\Http\JsonResponse
      */
-    public function responseSuccessWithData(array $data = [], int $status = 200)
+    public function responseSuccessWithData(array|Collection $data = [], int $status = 200)
     {
         return $this->response($data, 'success', $status);
     }

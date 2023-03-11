@@ -2,19 +2,29 @@
     "name": "laravel/laravel",
     "type": "project",
     "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "keywords": [
+        "framework",
+        "laravel"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
-        "guzzlehttp/guzzle": "^7.2",
+        "doctrine/dbal": "^3.6",
+        "guzzlehttp/guzzle": "^7.5",
+        "kreait/laravel-firebase": "^5.0",
         "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7"
+        "laravel/passport": "^11.6",
+        "laravel/sanctum": "^3.2",
+        "laravel/tinker": "^2.7",
+        "league/flysystem-aws-s3-v3": "^3.12",
+        "pion/laravel-chunk-upload": "^1.5"
     },
     "require-dev": {
+        "barryvdh/laravel-debugbar": "^3.8",
         "fakerphp/faker": "^1.9.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
+        "laravel/telescope": "^4.13",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
@@ -25,7 +35,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Utils/Helpers.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
@@ -49,7 +62,9 @@
     },
     "extra": {
         "laravel": {
-            "dont-discover": []
+            "dont-discover": [
+                "laravel/telescope"
+            ]
         }
     },
     "config": {
@@ -57,7 +72,8 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",

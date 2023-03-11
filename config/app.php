@@ -69,7 +69,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Ho_Chi_Minh',
 
     /*
     |--------------------------------------------------------------------------
@@ -186,6 +186,8 @@ return [
          * Package Service Providers...
          */
 
+        Kreait\Laravel\Firebase\ServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -194,6 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\TelescopeServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class
 
     ],
@@ -211,6 +214,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Information' => App\Constants\Information::class,
+        'Debugbar' => Barryvdh\Debugbar\Facade::class
     ])->toArray(),
 
 ];
