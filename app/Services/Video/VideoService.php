@@ -55,7 +55,8 @@ class VideoService implements IVideoService
      */
     public function index(int $countryTopicId)
     {
-        $data = $this->videoRepo->getVideos($countryTopicId);
+        $user = Auth::user();
+        $data = $this->videoRepo->getVideos($countryTopicId, $user->id);
 
         return $this->formatResponse('video', $data);
     }
@@ -88,7 +89,7 @@ class VideoService implements IVideoService
     }
     public function indexWeb(int $countryTopicId): mixed
     {
-        return $this->videoRepo->getVideos($countryTopicId);
+        return $this->videoRepo->getVideosAdmin($countryTopicId);
     }
 
     public function find(int $videoId): mixed
