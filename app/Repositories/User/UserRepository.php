@@ -49,6 +49,7 @@ class UserRepository extends BaseRepository implements IUserRepository
             ->selectRaw('MONTH(created_at) AS month, COUNT(*) AS user')
             ->whereRaw('YEAR(created_at) = ' . $year . '')
             ->groupByRaw('MONTH(created_at)')
+            ->where('role_id', '!=', Role::ADMIN_ROLE)
             ->get();
     }
 
