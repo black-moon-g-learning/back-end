@@ -54,13 +54,13 @@
             <div class="row py-5">
                 <div class="col-lg-5 py-5">
                     <h1>Download G - learning app </h1>
-                    <p class="my-4 text-muted">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                        eirmod.</p>
+                    <p class="my-4 text-muted">For children (5-12) to learn and explore geography.</p>
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item mb-2 mb-lg-0"><a class="btn btn-success btn-lg px-4" href="#!">
+                        <li class="list-inline-item mb-2 mb-lg-0"><a style="width:250px"
+                                class="btn btn-success btn-lg px-5" href="#!">
                                 <i class="fab fa-google-play me-3"></i>Install now</a></li>
-                        <li class="list-inline-item"><a class="btn btn-success btn-lg px-4" href="#!"> <i
-                                    class="fab fa-app-store me-3"></i>Comming soon!</a></li>
+                        <li class="list-inline-item"><a style="width:250px" class="btn btn-success btn-lg px-4"
+                                href="#!"><i class="fab fa-app-store me-3"></i>Comming soon!</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-6 ml-auto">
@@ -88,8 +88,8 @@
                                     <use xlink:href="#document-saved-1"> </use>
                                 </svg>
                                 <h3 class="h4 my-4">Watch video</h3>
-                                <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed do
-                                    eiusmod tempor incididunt ut labore.</p>
+                                <p class="text-sm text-muted mb-0">For children (5-12) to learn and explore geography.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -101,8 +101,8 @@
                                     <use xlink:href="#map-marker-1"> </use>
                                 </svg>
                                 <h3 class="h4 my-4">195 countries </h3>
-                                <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed
-                                    do eiusmod tempor incididunt ut labore.</p>
+                                <p class="text-sm text-muted mb-0">This App will help diversify the Geography knowledge
+                                    of countries around the world.</p>
                             </div>
                         </div>
                     </div>
@@ -114,8 +114,8 @@
                                     <use xlink:href="#arrow-target-1"> </use>
                                 </svg>
                                 <h3 class="h4 my-4">Free in 7 days</h3>
-                                <p class="text-sm text-muted mb-0">Lorem ipsum dolor amet consectetur adipisicing sed
-                                    do eiusmod tempor incididunt ut labore.</p>
+                                <p class="text-sm text-muted mb-0">For children (5-12) to learn and explore geography.
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -129,9 +129,8 @@
                             src="{{ asset('landing-page/img/objects.svg') }}" alt="">
                     </div>
                     <div class="col-lg-6">
-                        <h2>The Best Business Solutions Guide for You</h2>
-                        <p class="text-muted">Dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore
-                            dolore magna aliqua enim ad minim veniam quis nostrud exercitation.</p>
+                        <h2>App help diversify the Geography knowledge of countries</h2>
+                        <p class="text-muted">The App will provide relevant knowledge about socio-geography.</p>
                         <button class="btn btn-primary js-modal-btn" data-video-id={{ $Common::VIDEO_SURVEY }}><i
                                 class="fas fa-play-circle me-2"></i>Play video</button>
                     </div>
@@ -139,12 +138,12 @@
                 <div class="row align-items-center gy-5">
                     <div class="col-lg-6">
                         <h2>Make your own success as simple you clap</h2>
-                        <p class="text-muted">Dolor sit amet consectetur elit sed do eiusmod tempor incididunt labore
-                            dolore magna aliqua enim ad minim veniam quis nostrud exercitation.</p>
+                        <p class="text-muted"> Here there will be 7 dozen, 1 each continent will include the countries
+                            involved.</p>
                         <ul class="list-check">
-                            <li class="text-muted mb-2">Various Analysis Options</li>
+                            <li class="text-muted mb-2">Learn knowledge through videos</li>
                             <li class="text-muted mb-2">Page Load Details (time, size, number of requests)</li>
-                            <li class="text-muted mb-2">Waterfall, Video and Report History</li>
+                            <li class="text-muted mb-2">Play games to review knowledge</li>
                         </ul>
                         <button class="btn btn-primary js-modal-btn" data-video-id="{{ $Common::VIDEO_SURVEY }}"><i
                                 class="fas fa-play-circle me-2"></i>Play video</button>
@@ -159,8 +158,8 @@
                                             <use xlink:href="#document-saved-1"> </use>
                                         </svg>
                                         <h3 class="h5 my-3">Watch video</h3>
-                                        <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
-                                            adipisicing.</p>
+                                        <p class="text-sm mb-0 text-muted">For children (5-12) to learn and explore
+                                            geography.</p>
                                     </div>
                                 </div>
                             </div>
@@ -172,8 +171,8 @@
                                             <use xlink:href="#map-marker-1"> </use>
                                         </svg>
                                         <h3 class="h5 my-3">Track your move </h3>
-                                        <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
-                                            adipisicing.</p>
+                                        <p class="text-sm mb-0 text-muted">For children (5-12) to learn and explore
+                                            geography</p>
                                     </div>
                                 </div>
                             </div>
@@ -185,8 +184,8 @@
                                             <use xlink:href="#arrow-target-1"> </use>
                                         </svg>
                                         <h3 class="h5 my-3">Free in 7 days</h3>
-                                        <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
-                                            adipisicing.</p>
+                                        <p class="text-sm mb-0 text-muted">For children (5-12) to learn and explore
+                                            geography.</p>
                                     </div>
                                 </div>
                             </div>
@@ -198,8 +197,8 @@
                                             <use xlink:href="#sorting-1"> </use>
                                         </svg>
                                         <h3 class="h5 my-3">Full Settings</h3>
-                                        <p class="text-sm mb-0 text-muted">Lorem ipsum dolor amet consectetur
-                                            adipisicing.</p>
+                                        <p class="text-sm mb-0 text-muted">For children (5-12) to learn and explore
+                                            geography</p>
                                     </div>
                                 </div>
                             </div>
@@ -298,8 +297,7 @@
             <div class="row gy-4">
                 <div class="col-lg-3"><img class="mb-4" src="{{ asset('favicon.png') }}" alt=""
                         width="110">
-                    <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                        tempor incididunt ut labore et dolore.</p>
+                    <p class="text-muted">For children (5-12) to learn and explore geography.</p>
                 </div>
                 <div class="col-lg-2">
                     <h2 class="h5 mb-4">Quick Links</h2>
