@@ -20,6 +20,13 @@
     @include('components.left-side')
     <main class="main-content position-relative border-radius-lg ">
         @include('components.top')
+        @if (Session::has('errors'))
+            <div class="col-md-12 form-group">
+                <div class="alert alert-danger" role="alert">
+                    {{ Session::get('errors')['data'] }}
+                </div>
+            </div>
+        @endif
         <div class="container-fluid py-4">
             @yield('content')
         </div>

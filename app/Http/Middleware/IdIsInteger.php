@@ -18,9 +18,17 @@ class IdIsInteger
      */
     public function handle(Request $request, Closure $next)
     {
+
         if (is_numeric($request->id)) {
             return $next($request);
+        } elseif ($request->is('api/*')) {
+            return $this->responseError(403);
+        } else {
+            $errors = [
+                'status' => false,
+                'data' => 'Not found'
+            ];
+            return redirect()->back()->with('errors', $errors);
         }
-        return $this->responseError(403);
     }
 }

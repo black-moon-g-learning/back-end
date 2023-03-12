@@ -79,7 +79,7 @@ class QuestionController extends Controller
             if ($response['countryId']) {
                 return redirect()->route('web.questions', $response['countryId'])->with('response', $response);
             }
-            return redirect()->route('web.continents')->with('response', $response);
+            return  redirect()->back()->with('response', $response);
         }
         return redirect()->back()->with('errors', $response['data']);
     }

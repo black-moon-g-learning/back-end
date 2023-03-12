@@ -119,3 +119,14 @@ if (!function_exists('showStatusUser')) {
         return $status[$statusUser];
     }
 }
+
+if (!function_exists('getS3UrlVideo')) {
+    function getS3UrlVideo(null| string $url)
+    {
+        if (str_contains($url, 'videos/')) {
+            return Common::S3_ROOT . $url;
+        } else {
+            return $url;
+        }
+    }
+}
