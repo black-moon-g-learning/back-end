@@ -18,13 +18,14 @@ class CountryController extends Controller
     public function index(Request $request)
     {
         // Set default continent
-        $continentId = 1;
+        $continentId = null;
 
         if ($request->has('cont')) {
             $continentId = $request->get('cont');
+            $countries = $this->countrySer->getCountriesInContinent($continentId);
+        } else {
+            $countries = $this->countrySer->getAllCountries(30);
         }
-
-        $countries = $this->countrySer->getCountriesInContinent($continentId);
 
         return view('pages.countries', compact('countries', 'continentId'));
     }

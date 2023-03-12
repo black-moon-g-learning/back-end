@@ -57,7 +57,14 @@ class CountryService implements ICountryService
 
     public function getCountriesInContinent(int $continentId)
     {
-        return $this->countryRepo->getCountriesInContinent($continentId, $this->limit);
+        return $this
+            ->countryRepo
+            ->getCountriesInContinent($continentId, $this->limit);
+    }
+
+    public function getAllCountries(?int $paginate)
+    {
+        return $this->countryRepo->getAllCountries($paginate ?? $this->limit);
     }
 
     public function edit(int $id)
