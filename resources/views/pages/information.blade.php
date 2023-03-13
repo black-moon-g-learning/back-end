@@ -1,5 +1,6 @@
 @extends('layouts.master')
 @inject('Information', 'App\Constants\Information')
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -38,21 +39,20 @@
                         <table class="table align-items-center w-100 d-block d-md-table text-nowrap">
                             <thead>
                                 <tr>
-                                    <th style="width: 30%">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Title </th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Image</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Action</th>
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Country</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Owner</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Published in</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Status</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Content</th>
                                 </tr>
                             </thead>
@@ -101,31 +101,31 @@
                                             @endif
 
                                         </td>
-                                        <td class="justify-content-center">
-                                            <div class="d-flex px-2 py-1">
+                                        <td class="text-center justify-content-center">
+                                            <div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $info->country->name ?? 'Unknown' }}
+                                                    <h6>{{ $info->country->name ?? 'Unknown' }}
                                                     </h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="justify-content-center">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ getUsername($info->user) }}
+                                        <td class="text-center justify-content-center">
+                                            <div class="">
+                                                <div class=" flex-column justify-content-center">
+                                                    <h6>{{ getUsername($info->user) }}
                                                     </h6>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="justify-content-center">
-                                            <div class="d-flex px-2 py-1">
-                                                <div class="d-flex flex-column justify-content-center">
+                                        <td class="text-center justify-content-center">
+                                            <div class=" ">
+                                                <div class=" flex-column justify-content-center">
                                                     {{ $info->published_in ?? 'Unset' }}
                                                 </div>
                                             </div>
                                         </td>
                                         <td class="justify-content-center">
-                                            <div class="d-flex px-2 py-1">
+                                            <div class="    ">
                                                 <div class="d-flex flex-column justify-content-center">
                                                     @include('components.status-info.status', [
                                                         'data' => $info->status,

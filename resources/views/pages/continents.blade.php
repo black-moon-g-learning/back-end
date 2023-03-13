@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,15 +23,16 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
+                                        Image</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Continent</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Regions</th>
-                                    <th
-                                        class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Countries</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Action</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Description</th>
                                 </tr>
                             </thead>
@@ -44,28 +45,32 @@
                                                     <img src="{{ getS3Url($continent->image) }}" style="width:200px"
                                                         alt="user1">
                                                 </div>
-                                                <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">{{ $continent->name }}
-                                                    </h6>
-                                                </div>
                                             </div>
                                         </td>
-                                        <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                        <td class="text-center justify-content-center">
+                                            <div class="d-flex flex-column justify-content-center">
+                                                <h6>{{ $continent->name }}
+                                                </h6>
+                                            </div>
+                                        </td>
+                                        <td class="text-center justify-content-center">
+                                            <p class="font-weight-bold">
                                                 {{ $continent->quantity_regions }}</p>
                                         </td>
-                                        <td class="text-sm">
+                                        <td class="text-center justify-content-center">
                                             <span
                                                 class="badge badge-sm bg-gradient-success">{{ $continent->countries_count }}</span>
                                         </td>
-                                        <td class="align-middle">
-                                            <button class="btn bg-gradient-info" onClick="confirm({{ $continent->id }})"
-                                                id="click"> Edit</button>
-                                            <a href="{{ route('web.countries', ['cont' => $continent->id]) }}"
-                                                class="btn bg-gradient-info" id="click"> Countries</a>
+                                        <td class=" justify-content-center">
+                                            <button class="btn bg-gradient-info" style="width:100px"
+                                                onClick="confirm({{ $continent->id }})" id="click"> Edit</button>
+                                            <br />
+                                            <a style="width:100px"
+                                                href="{{ route('web.countries', ['cont' => $continent->id]) }}"
+                                                class="btn bg-gradient-success" id="click"> Countries</a>
                                         </td>
                                         <td class=" px-2">
-                                            {{ $continent->description }}
+                                            {{ handleLongText($continent->description ?? 'Unknown') }}
                                         </td>
                                     </tr>
                                 @endforeach

@@ -29,4 +29,6 @@ final class Common
     const UNCORRECTED_ANSWER = 0;
 
     const CONTINENT_ID_NULL = 0;
+
+    const DEFAULT_HEADER_STYLE = "text-uppercase text-center text-secondary font-weight-bolder";
 }

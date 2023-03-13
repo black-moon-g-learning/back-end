@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,13 +23,13 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Image</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Country</th>
 
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Action</th>
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Description</th>
                                 </tr>
                             </thead>
@@ -46,7 +46,7 @@
                                         </td>
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $country->name }}
+                                                <h6 > {{ $country->name }}
                                                 </h6>
                                             </div>
                                         </td>
