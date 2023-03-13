@@ -19,9 +19,6 @@ class ContinentController extends Controller
 
     protected ICountryRepository $countryRepo;
 
-    /**
-     * @param IContinentRepository $continentRepo
-     */
     public function __construct(
         IContinentRepository $continentRepo,
         ICountryRepository $countryRepo
