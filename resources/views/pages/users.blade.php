@@ -48,8 +48,8 @@
                                         <td>
                                             <img src="{{ getS3Url($user->image) }}" style="width: 200px" alt="user1">
                                         </td>
-                                        <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold">
+                                        <td class="text-center justify-content-center">
+                                            <p>
                                                 {{ getUsername($user) }}</p>
                                         </td>
                                         <td class="text-center justify-content-center">
