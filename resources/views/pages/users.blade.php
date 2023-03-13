@@ -1,5 +1,6 @@
 @inject('process', 'App\Constants\Process')
 @inject('constantUser', 'App\Constants\User')
+@inject('common', 'App\Constants\Common')
 @extends('layouts.master')
 
 @section('content')
@@ -26,18 +27,18 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Avatar</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Name</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Email</th>
-                                    <th class="text-secondary  opacity-7">Status</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Status</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Phone</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Expired</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Payment</th>
                                 </tr>
                             </thead>
@@ -48,35 +49,36 @@
                                             <img src="{{ getS3Url($user->image) }}" style="width: 200px" alt="user1">
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-xs font-weight-bold">
                                                 {{ getUsername($user) }}</p>
                                         </td>
-                                        <td class="justify-content-center">
+                                        <td class="text-center justify-content-center">
                                             <span
                                                 class="justify-content-center badge badge-sm bg-gradient-success">{{ $user->email }}</span>
                                         </td>
-                                        <td class="align-middle">
-                                            <form method='POST' action="{{ route('web.users.update-status', $user->id) }}">
+                                        <td class="align-middle text-center">
+                                            <form method='POST'
+                                                action="{{ route('web.users.update-status', $user->id) }}">
 
                                                 @csrf
                                                 @method('PUT')
 
                                                 <input name="status" value="{{ showStatusUser($user->status) }}"
                                                     type="hidden" />
-                                                <button
+                                                <button style="width:120px"
                                                     class="btn {{ showStatusUser($user->status) === 'ACTIVE' ? 'bg-gradient-info' : 'bg-gradient-warning' }}  update-user"
                                                     type="submit" id="click1">{{ showStatusUser($user->status) }}
                                                 </button>
 
                                             </form>
                                         </td>
-                                        <td class=" px-2">
-                                            {{ $user->phone }}
+                                        <td class="text-center px-2">
+                                            {{ $user->phone ?? 'Unknown' }}
                                         </td>
-                                        <td class=" px-2">
+                                        <td class="text-center px-2">
                                             {{ $user->expired ?? 'Payment successful' }}
                                         </td>
-                                        <td class=" px-2">
+                                        <td class="text-center px-2">
                                             @php
                                                 $isPaid = $user->payment->first();
                                             @endphp
@@ -109,8 +111,8 @@
         $('.update-user').click(function(e) {
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
-                title: 'Confirm Edit!',
-                content: 'Do you want to edit this row!',
+                title: 'Confirm block this user!',
+                content: 'Do you want to block this user!',
                 buttons: {
                     confirm: function() {
                         $(e.target).closest('form').submit();

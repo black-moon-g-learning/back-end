@@ -9,4 +9,6 @@ interface IUserPaymentRepository extends RepositoryInterface
     public function index();
 
     public function findPaymentByOrderId(string $orderId);
+
+    public function getUserPaySuccessful();
 }

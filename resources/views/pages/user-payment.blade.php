@@ -6,7 +6,7 @@
     ];
 @endphp
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -30,21 +30,20 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         User </th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Order id</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Process</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Price</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Service</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Payment</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Time</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,33 +51,32 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ getUsername($userPayment->user) }}
+                                                <h6 class="text-center"> {{ getUsername($userPayment->user) }}
                                                 </h6>
                                             </div>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $userPayment->order_id }} </p>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p
-                                                class="btn {{ $status[$userPayment->process] }} text-xs font-weight-bold mb-0">
+                                            <p class="btn {{ $status[$userPayment->process] }} text-center">
                                                 {{ $userPayment->process }} </p>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $userPayment->service->price }} Vnđ</p>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $userPayment->service->name }} </p>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $userPayment->payment }} </p>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $userPayment->created_at }} </p>
                                         </td>
                                     </tr>
