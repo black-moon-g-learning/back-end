@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @include('components.card')
     @include('components.chart')
@@ -22,39 +22,36 @@
                                     <table class="table align-items-center mb-0">
                                         <thead>
                                             <tr>
-                                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                                     Author</th>
-                                                <th
-                                                    class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                                     Total post</th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                                     Peding</th>
-                                                <th
-                                                    class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                                     Published</th>
-                                                <th class="text-secondary opacity-7">Future</th>
+                                                <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Future</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($response['usersContributed'] as $contribute)
                                                 <tr>
                                                     <td>
-                                                        <div class="d-flex px-2 py-1">
-                                                            <div class="d-flex flex-column justify-content-center">
-                                                                <h6 class="mb-0 text-sm"> {{ $contribute->first_name }}</h6>
+                                                        <div class=" px-2 py-1">
+                                                            <div class=" flex-column justify-content-center">
+                                                                <h6 class="text-center"> {{ $contribute->first_name }}</h6>
                                                             </div>
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <p class="text-xs font-weight-bold mb-0">{{ $contribute->totals }}</p>
+                                                        <p class="text-center">{{ $contribute->totals }}</p>
                                                     </td>
-                                                    <td class="align-middle text-center text-sm">
+                                                    <td class="align-middle text-center ">
                                                         <span
                                                             class="badge badge-sm bg-gradient-success">{{ $contribute->pending }}</span>
                                                     </td>
                                                     <td class="align-middle text-center">
-                                                          {{ $contribute->published }}
+                                                        {{ $contribute->published }}
                                                     </td>
                                                     <td class="align-middle  text-center">
                                                         {{ $contribute->future }}
