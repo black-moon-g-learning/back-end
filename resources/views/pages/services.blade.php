@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -23,12 +23,12 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Price</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Description</th>
                                 </tr>
                             </thead>
@@ -37,16 +37,16 @@
                                     <tr>
                                         <td>
                                             <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $service->name }}
+                                                <h6 class="text-center"> {{ $service->name }}
                                                 </h6>
                                             </div>
                                         </td>
                                         <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                            <p class="text-center">
                                                 {{ $service->price }} Vnđ</p>
                                         </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('web.services.edit', $service->id) }}"
+                                        <td>
+                                            <a style="width:100px" href="{{ route('web.services.edit', $service->id) }}"
                                                 class="btn bg-gradient-info" id="click"> Edit</a>
                                         </td>
                                         <td class=" px-2">

@@ -27,8 +27,7 @@
                                         Image</th>
                                     <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Country</th>
-
-                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Action</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
                                     <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Description</th>
                                 </tr>
@@ -37,7 +36,7 @@
                                 @foreach ($countries as $country)
                                     <tr>
                                         <td>
-                                            <div class="d-flex px-2 py-1">
+                                            <div>
                                                 <div>
                                                     <img style="width: 200px" src="{{ getS3Url($country->image) }}"
                                                         alt="user1">
@@ -45,27 +44,28 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 > {{ $country->name }}
+                                            <div class=" text-center justify-content-center">
+                                                <h6> {{ $country->name }}
                                                 </h6>
                                             </div>
                                         </td>
-                                        <td class="align-middle">
-                                            <a href="{{ route('web.countries.edit', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> Edit</a>
-                                            <a href="{{ route('web.countries-topics', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> List topics</a>
-                                            <a href="{{ route('web.countries.levels', $country->id) }}"
-                                                class="btn bg-gradient-info" id="click"> Level</a>
+                                        <td>
+                                            <div class="justify-content-center">
+                                                <a style="width:120px"
+                                                    href="{{ route('web.countries.edit', $country->id) }}"
+                                                    class=" btn bg-gradient-info" id="click"> Edit</a>
+                                                <br />
+                                                <a style="width:120px"
+                                                    href="{{ route('web.countries-topics', $country->id) }}"
+                                                    class="btn bg-gradient-success" id="click"> List topics</a>
+                                                <br />
+                                                <a style="width:120px"
+                                                    href="{{ route('web.countries.levels', $country->id) }}"
+                                                    class="btn bg-gradient-warning" id="click"> Level</a>
+                                            </div>
                                         </td>
-                                        <td class=" px-2">
-                                            {{-- {{ handleLongText($country->description) }}
-                                             --}}
-                                            <p class="text-truncate text-break text-center text-md-left"
-                                                style="max-width: 200px; font-size: 18px; color: #333;">Lorem ipsum dolor
-                                                sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                                labore et dolore magna aliqua.</p>
-
+                                        <td class="">
+                                            {{ handleLongText($country->description) }}
                                         </td>
                                     </tr>
                                 @endforeach

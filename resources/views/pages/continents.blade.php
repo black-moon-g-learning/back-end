@@ -31,7 +31,7 @@
                                         Regions</th>
                                     <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Countries</th>
-                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">Action</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
                                     <th class="{{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Description</th>
                                 </tr>

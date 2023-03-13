@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@inject('common', 'App\Constants\Common')
 
 @section('content')
     @if (Session::has('response'))
@@ -26,16 +27,16 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Image</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Name</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Videos</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }} ">
                                         Owner</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Time</th>
                                 </tr>
                             </thead>
@@ -58,18 +59,20 @@
                                                 allowfullscreen></iframe>
 
                                         </td>
-                                        <td class="text-sm">
-                                            <button class="btn bg-gradient-info">{{ getUserName($video->user) }}</button>
+                                        <td>
+                                            <button style="width:150px"
+                                                class="btn bg-gradient-success">{{ getUserName($video->user) }}</button>
                                         </td>
                                         <td class="align-middle">
-                                            <a href="{{ route('web.videos.edit', $video->id) }}"
+                                            <a style="width:100px" href="{{ route('web.videos.edit', $video->id) }}"
                                                 class="btn bg-gradient-info" id="click">
                                                 Edit</a>
-                                            <a href="{{ route('web.reviews', $video->id) }}" class="btn bg-gradient-info"
-                                                id="click">
+                                            <br />
+                                            <a style="width:100px" href="{{ route('web.reviews', $video->id) }}"
+                                                class="btn bg-gradient-warning" id="click">
                                                 Review</a>
                                         </td>
-                                        <td class=" px-2">
+                                        <td class="text-center px-2">
                                             {{ convertTimeFromDB($video->time) }}
                                         </td>
                                     </tr>
