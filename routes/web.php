@@ -91,47 +91,62 @@ Route::middleware(['auth', 'role'])->group(
             });
         });
 
+        Route::group(['prefix' => 'topics'], function () {
+            Route::get('/', [TopicController::class, 'index'])->name('web.topics');
+            Route::get('/create', [TopicController::class, 'create'])->name('web.topics.create');
+            Route::post('/store', [TopicController::class, 'store'])->name('web.topics.store');
+        });
 
-        Route::get('/topics', [TopicController::class, 'index'])->name('web.topics');
-        Route::get('/topic/create', [TopicController::class, 'create'])->name('web.topics.create');
-        Route::post('/topic/store', [TopicController::class, 'store'])->name('web.topics.store');
 
-        Route::delete('/countries-topics/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
+        Route::group(['prefix' => 'countries-topics', 'middleware' => 'idInteger'], function () {
+            Route::delete('/{id}/delete', [CountryTopicController::class, 'delete'])->name('web.countries-topics.delete');
+            Route::get('/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');
+        });
 
-        Route::get('/countries-topics/{id}/videos', [VideoController::class, 'index'])->name('web.countries-topics.videos');
 
-        Route::get('/videos/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
-        Route::put('/videos/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
-        Route::get('/videos/create', [VideoController::class, 'create'])->name('web.videos.create');
-        Route::post('/videos/store', [VideoController::class, 'store'])->name('web.videos.store');
+        Route::group(['prefix' => 'videos'], function () {
+            Route::get('/create', [VideoController::class, 'create'])->name('web.videos.create');
+            Route::post('/store', [VideoController::class, 'store'])->name('web.videos.store');
+            Route::post('/upload', [VideoController::class, 'uploadVideo'])->name('web.videos.upload');
 
-        Route::post('/videos/upload', [VideoController::class, 'uploadVideo'])->name('web.videos.upload');
+            Route::middleware('idInteger')->group(function () {
+                Route::get('/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
+                Route::put('/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
+                Route::get('/{id}/reviews', [QuestionController::class, 'indexReview'])->name('web.reviews');
+            });
+        });
 
-        Route::get('/levels', [LevelController::class, 'index'])->name('web.levels');
-        Route::get('/levels/create', [LevelController::class, 'create'])->name('web.levels.create');
-        Route::get('/levels/{id}/edit', [LevelController::class, 'edit'])->name('web.levels.edit');
-        Route::put('/levels/{id}/update', [LevelController::class, 'update'])->name('web.levels.update');
-        Route::post('/levels/store', [LevelController::class, 'store'])->name('web.levels.store');
-        Route::delete('/levels/{id}', [LevelController::class, 'delete'])->name('web.levels.delete');
+        Route::group(['prefix' => 'levels'], function () {
+            Route::get('/', [LevelController::class, 'index'])->name('web.levels');
+            Route::get('/create', [LevelController::class, 'create'])->name('web.levels.create');
+            Route::post('/store', [LevelController::class, 'store'])->name('web.levels.store');
 
-        Route::get('/questions/create', [QuestionController::class, 'create'])->name('web.questions.create');
-        Route::post('/questions/store', [QuestionController::class, 'store'])->name('web.questions.store');
-        Route::get('/questions/{id}/edit', [QuestionController::class, 'edit'])->name('web.questions.edit');
-        Route::put('/questions/{id}/update', [QuestionController::class, 'update'])->name('web.questions.update');
-        Route::delete('/questions/{id}', [QuestionController::class, 'delete'])->name('web.questions.delete');
+            Route::middleware('idInteger')->group(function () {
+                Route::get('/{id}/edit', [LevelController::class, 'edit'])->name('web.levels.edit');
+                Route::put('/{id}/update', [LevelController::class, 'update'])->name('web.levels.update');
+                Route::delete('/{id}', [LevelController::class, 'delete'])->name('web.levels.delete');
+            });
+        });
 
-        Route::get('/videos/{id}/reviews', [QuestionController::class, 'indexReview'])->name('web.reviews');
+        Route::group(['prefix' => 'questions'], function () {
+            Route::get('/create', [QuestionController::class, 'create'])->name('web.questions.create');
+            Route::post('/store', [QuestionController::class, 'store'])->name('web.questions.store');
+
+            Route::middleware('idInteger')->group(function () {
+                Route::get('/{id}/edit', [QuestionController::class, 'edit'])->name('web.questions.edit');
+                Route::put('/{id}/update', [QuestionController::class, 'update'])->name('web.questions.update');
+                Route::delete('/{id}', [QuestionController::class, 'delete'])->name('web.questions.delete');
+            });
+        });
 
         Route::get('/services', [PackageController::class, 'index'])->name('web.services');
-        Route::get('/services/{id}/edit', [PackageController::class, 'edit'])->name('web.services.edit');
-        Route::put('/services/{id}', [PackageController::class, 'update'])->name('web.services.update');
+        Route::group(['prefix' => 'services', 'middleware' => 'idInteger'], function () {
+            Route::get('/{id}/edit', [PackageController::class, 'edit'])->name('web.services.edit');
+            Route::put('/{id}', [PackageController::class, 'update'])->name('web.services.update');
+        });
 
-
-        
         Route::get('/users-payment', [HistoryPaymentController::class, 'index'])->name('web.users-payment');
-
         Route::get('/test-payment', [PaymentController::class, 'getUrlPaymentTest']);
-
         Route::get('/home', [NotificationController::class, 'index'])->name('notify-home');
         Route::post('/save-token', [NotificationController::class, 'saveToken'])->name('save-token');
     }
