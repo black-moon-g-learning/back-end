@@ -103,10 +103,13 @@
             <div class="row">
                 <div class="form-group col-1">
                     <label for="exampleFormControlSelect1">Correct Answer</label>
-                    <select class="form-control" id="correct">
+                    <select style="width:160px" class="form-control" id="correct">
                         @php
                             $index = 0;
                         @endphp
+                        <option selected="true" disabled="disabled">
+                            Choose answer
+                        </option>
                         @foreach ($formAnswers as $formAnswer)
                             @isset($question->answers)
                                 @php

@@ -24,7 +24,7 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Image</th>
                                     <th class=" {{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Level</th>
@@ -47,7 +47,7 @@
                                         </td>
                                         <td class="justify-content-center">
                                             @if (isset($countryId))
-                                                <a href="{{ route('web.questions', $countryId) }}"
+                                                <a style="width:100px" href="{{ route('web.questions', $countryId) }}"
                                                     class="btn bg-gradient-info" id="click">
                                                     List</a>
                                             @else

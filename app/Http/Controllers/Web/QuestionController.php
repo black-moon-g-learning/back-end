@@ -42,8 +42,10 @@ class QuestionController extends Controller
         if ($request->has('video-id')) {
             $videoId = $request->get('video-id');
             return view('forms.question', compact('question', 'videoId'));
+        } else {
+            $countryId = $request->get('country-id');
+            return view('forms.question', compact('question', 'countryId'));
         }
-        return view('forms.question', compact('question'));
     }
 
     public function create(Request $request)
