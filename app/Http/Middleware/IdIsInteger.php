@@ -28,7 +28,7 @@ class IdIsInteger
                 'status' => false,
                 'data' => 'Not found'
             ];
-            return redirect()->back()->with('errors', $errors);
+            return redirect()->route('web.dashboard')->with('errors_global', $errors);
         }
     }
 }
