@@ -4,23 +4,31 @@ namespace App\Services\Dashboard;
 
 use App\Repositories\Information\IInformationRepository;
 use App\Repositories\User\IUserRepository;
+use App\Repositories\UserPayment\IUserPaymentRepository;
 use App\Repositories\Video\IVideoRepository;
 
 class DashboardService implements IDashboardService
 {
 
     protected IUserRepository $userRepo;
+
     protected IVideoRepository $videoRepo;
+
     protected IInformationRepository $infoRepo;
+
+    protected IUserPaymentRepository $userPaymentRepo;
 
     public function __construct(
         IUserRepository $userRepo,
         IVideoRepository $videoRepo,
-        IInformationRepository $infoRepo
+        IInformationRepository $infoRepo,
+        IUserPaymentRepository $userPaymentRepo
+
     ) {
         $this->userRepo = $userRepo;
         $this->videoRepo = $videoRepo;
         $this->infoRepo = $infoRepo;
+        $this->userPaymentRepo = $userPaymentRepo;
 
         $this->loadComponents();
     }
@@ -68,6 +76,11 @@ class DashboardService implements IDashboardService
         return $this->infoRepo->getUserContribute();
     }
 
+    public function getUserPaymentSuccess()
+    {
+        return $this->userPaymentRepo->getUserPaySuccessful();
+    }
+
     public function loadComponents()
     {
 
@@ -76,12 +89,14 @@ class DashboardService implements IDashboardService
             $totalUsers = $this->totalUsers();
             $totalVideos = $this->totalVideos();
             $totalInfos = $this->totalInfos();
+            $money = $this->getUserPaymentSuccess();
 
 
             $view->with([
                 'totalUsers' => $totalUsers,
                 'totalVideos' => $totalVideos,
-                'totalInfos' => $totalInfos
+                'totalInfos' => $totalInfos,
+                'money' => $money
             ]);
         });
 
