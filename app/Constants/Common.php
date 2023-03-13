@@ -27,4 +27,6 @@ final class Common
     const CORRECTED_ANSWER = 1;
 
     const UNCORRECTED_ANSWER = 0;
+
+    const CONTINENT_ID_NULL = 0;
 }

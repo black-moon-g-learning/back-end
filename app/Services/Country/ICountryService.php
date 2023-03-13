@@ -14,6 +14,8 @@ interface ICountryService
 
     public function getAllCountries(?int $paginate);
 
+    public function searchCountries(string $textSearch);
+
     public function edit(int $id);
 
     public function update(Request $request, int $id);

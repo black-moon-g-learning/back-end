@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Country;
 
+use App\Constants\Common;
 use App\Models\Country;
 use App\Repositories\BaseRepository;
 
@@ -39,11 +40,14 @@ class CountryRepository extends BaseRepository implements ICountryRepository
         return $this->model->paginate($limit);
     }
 
-    public function searchCountries(int $continentId, string $textSearch)
+    public function searchCountries(int $continentId = Common::CONTINENT_ID_NULL, string $textSearch)
     {
-        return  $this->model
-            ->search($textSearch)
-            ->where('continent_id', $continentId)
-            ->get();
+        $query = $this->model->search($textSearch);
+
+        if (!($continentId === Common::CONTINENT_ID_NULL)) {
+            $query->where('continent_id', $continentId);
+        }
+
+        return $query->get();
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Services\Country;
 
+use App\Constants\Common;
+use App\Http\Resources\SearchedCountryResource;
 use App\Repositories\Country\ICountryRepository;
 use App\Repositories\GameHistory\IGameHistoryRepository;
 use App\Services\Storage\IStorageService;
@@ -125,5 +127,11 @@ class CountryService implements ICountryService
         $gameHistory['total_correct_answers'] = $request->get('total_correct_answers') ?? 0;
 
         return $gameHistory;
+    }
+
+    public function searchCountries(string $textSearch)
+    {
+        $response = SearchedCountryResource::collection($this->countryRepo->searchCountries(Common::CONTINENT_ID_NULL, $textSearch));
+        return collect($response)->toArray();
     }
 }
