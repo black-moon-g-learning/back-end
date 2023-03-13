@@ -71,6 +71,7 @@ class QuestionController extends Controller
             }
             return redirect()->route('web.continents')->with('response', $response);
         }
+        // dd($response['data']);
         return redirect()->back()->with('errors', $response['data']);
     }
 

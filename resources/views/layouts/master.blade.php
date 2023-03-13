@@ -20,10 +20,10 @@
     @include('components.left-side')
     <main class="main-content position-relative border-radius-lg ">
         @include('components.top')
-        @if (Session::has('errors'))
+        @if (Session::has('errors_global'))
             <div class="col-md-12 form-group">
                 <div class="alert alert-danger" role="alert">
-                    {{ Session::get('errors')['data'] }}
+                    {{ Session::get('errors_global')['data'] }}
                 </div>
             </div>
         @endif

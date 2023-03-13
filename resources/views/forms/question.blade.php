@@ -101,9 +101,14 @@
 
             </div>
             <div class="row">
-                <div class="form-group col-1">
+                <div class="form-group col-3">
                     <label for="exampleFormControlSelect1">Correct Answer</label>
-                    <select style="width:160px" class="form-control" id="correct">
+                    @if (isset(Session::get('errors')['correct_answer']))
+                        <div class=" form-group">
+                            @include('components.alert', $data = Session::get('errors')['correct_answer'])
+                        </div>
+                    @endif
+                    <select class="form-control col-4" id="correct">
                         @php
                             $index = 0;
                         @endphp
