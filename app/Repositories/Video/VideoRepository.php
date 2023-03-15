@@ -20,6 +20,7 @@ class VideoRepository extends BaseRepository implements IVideoRepository
             ->with(['user', 'watched' => function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             }])
+            ->latest('videos.id')
             ->get();
     }
 
