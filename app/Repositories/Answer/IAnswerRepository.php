@@ -6,4 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface IAnswerRepository extends RepositoryInterface
 {
+    public function findIdCorrectAnswer(int $questionId);
 }
