@@ -69,8 +69,15 @@
                                                 Edit</a>
                                             <br />
                                             <a style="width:100px" href="{{ route('web.reviews', $video->id) }}"
-                                                class="btn bg-gradient-warning" id="click">
+                                                class="btn bg-gradient-success" id="click">
                                                 Review</a>
+                                            <form action="{{ route('web.videos.delete', $video->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button style="width:100px" class="btn bg-gradient-warning delete-video"
+                                                    id="click">
+                                                    Delete</button>
+                                            </form>
                                         </td>
                                         <td class="text-center px-2">
                                             {{ convertTimeFromDB($video->time) }}
@@ -85,4 +92,29 @@
         </div>
     </div>
     @include('components.footer')
+@endsection
+@section('customCss')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+@endsection
+
+@section('customJs')
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script>
+        $('.delete-video').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm delete video!',
+                content: 'Do you want to delete this video!',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
+    </script>
 @endsection

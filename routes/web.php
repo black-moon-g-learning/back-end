@@ -113,6 +113,7 @@ Route::middleware(['auth', 'role'])->group(
                 Route::get('/{id}/edit', [VideoController::class, 'edit'])->name('web.videos.edit');
                 Route::put('/{id}/update', [VideoController::class, 'update'])->name('web.videos.update');
                 Route::get('/{id}/reviews', [QuestionController::class, 'indexReview'])->name('web.reviews');
+                Route::delete('/{id}', [VideoController::class, 'delete'])->name('web.videos.delete');
             });
         });
 

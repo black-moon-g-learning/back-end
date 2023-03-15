@@ -21,4 +21,6 @@ interface IVideoService
     public function store(Request $request): array;
 
     public function uploadVideo(Request $request): array;
+
+    public function delete(int $id);
 }
