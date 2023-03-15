@@ -311,6 +311,7 @@ class QuestionService implements IQuestionService
 
         if ($updatedCorrectAnswer === 0) {
 
+            $answer =  array();
             $answer['is_correct'] = Common::CORRECTED_ANSWER;
             $uncorrectedAnswer['is_correct'] = Common::UNCORRECTED_ANSWER;
 
@@ -318,7 +319,6 @@ class QuestionService implements IQuestionService
 
             $this->answerRepo->update($correctedId, $uncorrectedAnswer);
             $this->answerRepo->update($correctAnswerId, $answer);
-            
         }
         return true;
     }
