@@ -2,6 +2,7 @@
 
 namespace App\Services\Question;
 
+use App\Constants\Common;
 use App\Repositories\Answer\IAnswerRepository;
 use App\Repositories\Question\IQuestionRepository;
 use App\Services\Storage\IStorageService;
@@ -259,7 +260,7 @@ class QuestionService implements IQuestionService
             $correctAnswerId = $validated['data']['correct_answer'];
 
             $updatedQuestion = $this->questionRepo->update($id, $question);
-            $updatedAnswer =  $this->updateForAnswerReview($request, $correctAnswerId);
+            $updatedAnswer =  $this->updateForAnswerReview($request, $correctAnswerId, $id);
             if ($updatedQuestion &&  $updatedAnswer) {
                 return [
                     'status' => true,
@@ -275,32 +276,49 @@ class QuestionService implements IQuestionService
         return $validated;
     }
 
-    public function updateForAnswerReview(Request $request, int $correctAnswerId)
+    public function updateForAnswerReview(Request $request, int $correctAnswerId, int $questionId)
     {
 
-        foreach ($request->file('answers') as $id => $file) {
+        $updatedCorrectAnswer = 0;
+        if ($request->file('answers') !== null) {
 
-            $answerDB = $this->answerRepo->find($id);
+            foreach ($request->file('answers') as $id => $file) {
 
-            $this->storeSer->delete($answerDB->image);
+                $answerDB = $this->answerRepo->find($id);
 
-            $uploaded = $this->storeSer->upload($file, 'reviews');
+                $this->storeSer->delete($answerDB->image);
 
-            if ($uploaded['status']) {
-                $answer['image'] = $uploaded['url'];
+                $uploaded = $this->storeSer->upload($file, 'reviews');
 
-                if ($id == $correctAnswerId) {
-                    $answer['is_correct'] = 1;
+                if ($uploaded['status']) {
+                    $answer['image'] = $uploaded['url'];
+
+                    if ($id == $correctAnswerId) {
+                        $answer['is_correct'] = Common::CORRECTED_ANSWER;
+                        $updatedCorrectAnswer++;
+                    } else {
+                        $answer['is_correct'] = Common::UNCORRECTED_ANSWER;
+                    }
+
+                    if (!$this->answerRepo->update($id, $answer)) {
+                        return false;
+                    };
                 } else {
-                    $answer['is_correct'] = 0;
-                }
-
-                if (!$this->answerRepo->update($id, $answer)) {
                     return false;
-                };
-            } else {
-                return false;
+                }
             }
+        }
+
+        if ($updatedCorrectAnswer === 0) {
+
+            $answer =  array();
+            $answer['is_correct'] = Common::CORRECTED_ANSWER;
+            $uncorrectedAnswer['is_correct'] = Common::UNCORRECTED_ANSWER;
+
+            $correctedId = $this->answerRepo->findIdCorrectAnswer($questionId);
+
+            $this->answerRepo->update($correctedId, $uncorrectedAnswer);
+            $this->answerRepo->update($correctAnswerId, $answer);
         }
         return true;
     }
