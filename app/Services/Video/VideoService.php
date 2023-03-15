@@ -189,4 +189,18 @@ class VideoService implements IVideoService
             'path' =>  null,
         ];
     }
+
+    public function delete(int $id)
+    {
+        $videoDB = $this->videoRepo->find($id);
+
+        $this->storeSer->delete($videoDB->url);
+        $this->storeSer->delete($videoDB->image);
+        $this->videoRepo->delete($id);
+
+        return [
+            'status' => true,
+            'data' => "Delete Video successful"
+        ];
+    }
 }
