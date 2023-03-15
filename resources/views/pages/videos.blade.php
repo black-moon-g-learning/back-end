@@ -104,8 +104,8 @@
         $('.delete-video').click(function(e) {
             e.preventDefault() // Don't post the form, unless confirmed
             $.confirm({
-                title: 'Confirm block this user!',
-                content: 'Do you want to block this user!',
+                title: 'Confirm delete video!',
+                content: 'Do you want to delete this video!',
                 buttons: {
                     confirm: function() {
                         $(e.target).closest('form').submit();
