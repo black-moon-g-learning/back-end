@@ -61,10 +61,16 @@ Route::middleware(['auth', 'role'])->group(
             });
         });
 
-        Route::middleware('idInteger')->group(function () {
-            Route::get('/topics/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
-            Route::put('/topics/{id}', [TopicController::class, 'update'])->name('web.topics.update');
-            Route::delete('topics/{id}', [TopicController::class, 'delete'])->name('web.topics.delete');
+        Route::group(['prefix' => 'topics'], function () {
+            Route::get('/', [TopicController::class, 'index'])->name('web.topics');
+            Route::get('/create', [TopicController::class, 'create'])->name('web.topics.create');
+            Route::post('/store', [TopicController::class, 'store'])->name('web.topics.store');
+
+            Route::middleware('idInteger')->group(function () {
+                Route::get('/{id}', [TopicController::class, 'edit'])->name('web.topics.edit');
+                Route::put('/{id}', [TopicController::class, 'update'])->name('web.topics.update');
+                Route::delete('{id}', [TopicController::class, 'delete'])->name('web.topics.delete');
+            });
         });
 
         Route::get('/countries', [CountryController::class, 'index'])->name('web.countries');
@@ -91,11 +97,6 @@ Route::middleware(['auth', 'role'])->group(
             });
         });
 
-        Route::group(['prefix' => 'topics'], function () {
-            Route::get('/', [TopicController::class, 'index'])->name('web.topics');
-            Route::get('/create', [TopicController::class, 'create'])->name('web.topics.create');
-            Route::post('/store', [TopicController::class, 'store'])->name('web.topics.store');
-        });
 
 
         Route::group(['prefix' => 'countries-topics', 'middleware' => 'idInteger'], function () {
