@@ -12,31 +12,42 @@
                             <div role="form text-left">
                                 <div class="modal-content">
                                     @if (!empty($remainTopics->toArray()['data']))
-                                        <div class="modal-header">
-                                            <h6 class="modal-title" id="modal-title-default">Topic</h6>
-                                            <h6 class="modal-title" id="modal-title-default">Image</h6>
-                                            <h6 class="modal-title" id="modal-title-default">Action</h6>
+                                        <table class="table align-items-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th>Topic</th>
+                                                    <th>Image</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach ($remainTopics->toArray()['data'] as $remainTopic)
+                                                    <tr>
+                                                        <td>
+                                                            <h6 class="modal-title" id="modal-title-default">
+                                                                {{ $remainTopic['name'] }}</h6>
+                                                        </td>
+                                                        <td>
+                                                            <img class="modal-title" style="width:150px"
+                                                                src={{ getS3Url($remainTopic['image']) }}
+                                                                id="modal-title-default" />
+                                                        </td>
+                                                        <td>
+                                                            <form method="POST"
+                                                                action="{{ route('web.countries-topics.store', $country->id) }}">
+                                                                @csrf
+                                                                <input type="hidden" name='topic_id'
+                                                                    value="{{ $remainTopic['id'] }}" />
+                                                                <button class="modal-title create-topic btn btn-primary"
+                                                                    id="modal-title-default">
+                                                                    Add</button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
 
-                                        </div>
-
-                                        @foreach ($remainTopics->toArray()['data'] as $remainTopic)
-                                            <div class="modal-header">
-                                                <h6 class="modal-title" id="modal-title-default">
-                                                    {{ $remainTopic['name'] }}</h6>
-                                                <img class="modal-title" style="width:150px"
-                                                    src={{ getS3Url($remainTopic['image']) }}
-                                                    id="modal-title-default" />
-                                                <form method="POST"
-                                                    action="{{ route('web.countries-topics.store', $country->id) }}">
-                                                    @csrf
-                                                    <input type="hidden" name='topic_id'
-                                                        value="{{ $remainTopic['id'] }}" />
-                                                    <button class="modal-title btn btn-primary"
-                                                        id="modal-title-default">
-                                                        Add</button>
-                                                </form>
-                                            </div>
-                                        @endforeach
                                     @endif
                                 </div>
                             </div>

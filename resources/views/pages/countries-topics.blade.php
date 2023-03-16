@@ -138,4 +138,21 @@
             })
         });
     </script>
+    <script>
+        $('.create-topic').click(function(e) {
+            e.preventDefault() // Don't post the form, unless confirmed
+            $.confirm({
+                title: 'Confirm Add new!',
+                content: 'Do you want to add new topic !',
+                buttons: {
+                    confirm: function() {
+                        $(e.target).closest('form').submit();
+                    },
+                    cancel: function() {
+                        $.alert('Canceled!');
+                    }
+                }
+            })
+        });
+    </script>
 @endsection
