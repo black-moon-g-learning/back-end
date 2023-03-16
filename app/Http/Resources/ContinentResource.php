@@ -19,7 +19,7 @@ class ContinentResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => getS3Url($this->image),
             'countries' => $this->countries_count,
             'regions' => $this->quantity_regions,
         ];

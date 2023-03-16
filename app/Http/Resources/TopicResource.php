@@ -19,7 +19,7 @@ class TopicResource extends JsonResource
             'topicId' => $this->topic_id,
             'name' => $this->name,
             'description' => $this->description,
-            'image' => $this->image,
+            'image' => getS3Url($this->image),
         ];
     }
 }

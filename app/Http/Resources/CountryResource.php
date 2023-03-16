@@ -19,7 +19,7 @@ class CountryResource extends JsonResource
             'name' => $this['name'],
             'description' => $this['description'],
             'place' => $this['place'],
-            'image' => $this['image']
+            'image' =>  getS3Url($this['image'])
         ];
     }
 }

@@ -17,7 +17,7 @@ class SearchedCountryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'image' => $this->image
+            'image' => getS3Url($this->image)
         ];
     }
 }
