@@ -20,7 +20,7 @@ class VideoHistoryResource extends JsonResource
             'created_at' => $this->created_at,
             'video' => new VideoResource($this->video),
             'url' => $this->url,
-            'image' => $this->image,
+            'image' => getS3Url($this->image),
             'time' => convertTimeFromDB($this->time),
             'author' => getUsername($this->user)
         ];
