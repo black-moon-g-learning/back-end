@@ -44,6 +44,9 @@ class CountryService implements ICountryService
             $percent = calPercent($correct, $total);
 
             $item->setField($percent);
+
+            $item->image = getS3Url($item->image);
+            
             return $item;
         }));
         return $countries;
