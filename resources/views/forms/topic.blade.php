@@ -21,20 +21,6 @@
                     @include('components.alert', $data = Session::get('errors')['name'])
                 </div>
             @endif
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="example-search-input" class="form-control-label">Total video</label>
-                        <input class="form-control" type="number" name="total video"
-                            value="{{ isset($topic) ? $topic->videos_count : '' }}" id="example-search-input">
-                    </div>
-                    @if (isset(Session::get('errors')['regions']))
-                        <div class="form-group">
-                            @include('components.alert', $data = Session::get('errors')['total video'])
-                        </div>
-                    @endif
-                </div>
-            </div>
             <div class="form-group">
                 <label for="example-url-input" class="form-control-label">Description</label>
                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ isset($topic) ? $topic->description : '' }}</textarea>
