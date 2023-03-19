@@ -20,4 +20,9 @@ class Answer extends Model
         'created_at',
         'updated_at',
     ];
+
+    public function getImageAttribute($image)
+    {
+        return getS3Url($image);
+    }
 }
