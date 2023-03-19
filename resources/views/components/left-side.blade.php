@@ -9,7 +9,7 @@
             'route' => route('web.continents'),
         ],
         [
-            'name' => 'Have you know?',
+            'name' => 'Have you heard before?',
             'route' => route('web.information'),
         ],
         [
