@@ -12,8 +12,11 @@ interface ICountryService
 
     public function getCountriesInContinent(int $continentId);
 
+    public function getAllCountries(?int $paginate);
+
+    public function searchCountries(string $textSearch);
+
     public function edit(int $id);
 
     public function update(Request $request, int $id);
-
 }

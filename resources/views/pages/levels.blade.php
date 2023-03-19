@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -24,13 +24,13 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Image</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }} ">
                                         Level</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }} ">
                                         Action</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Description</th>
                                 </tr>
                             </thead>
@@ -42,22 +42,23 @@
                                                 alt="user1">
                                         </td>
                                         <td>
-                                            <h6 class="mb-0 text-sm">{{ $level->name }}
+                                            <h6 class="mb-0 text-center">{{ $level->name }}
                                             </h6>
                                         </td>
                                         <td class="justify-content-center">
                                             @if (isset($countryId))
-                                                <a href="{{ route('web.questions', $countryId) }}"
+                                                <a style="width:100px" href="{{ route('web.questions', $countryId) }}"
                                                     class="btn bg-gradient-info" id="click">
                                                     List</a>
                                             @else
-                                                <a href="{{ route('web.levels.edit', $level->id) }}"
+                                                <a style="width:100px" href="{{ route('web.levels.edit', $level->id) }}"
                                                     class="btn bg-gradient-info" id="click">
                                                     Edit</a>
                                                 <form method="POST" action="{{ route('web.levels.delete', $level->id) }}">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn bg-gradient-info delete-level">
+                                                    <button type="submit" style="width:100px"
+                                                        class="btn bg-gradient-warning delete-level">
                                                         Delete</button>
                                                 </form>
                                             @endif

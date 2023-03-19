@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -16,7 +16,7 @@
         <div class="col-12">
             <div class=" row card mb-4">
                 <div class=" col-6 card-header pb-0">
-                    <h6>questions table</h6>
+                    <h6>Questions table</h6>
                 </div>
                 <div class="col-6 card-header pb-0">
                     <a href="{{ isset($countryId)
@@ -30,11 +30,11 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Question</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Answer</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Action</th>
 
                                 </tr>
@@ -50,14 +50,17 @@
                                             </td>
                                             <td>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    {{ handleLongText($question->answers->first()->content ?? 'No correct answer') }}
+                                                    {{ handleLongText($question->correctAnswer()->content ?? 'Answer by image') }}
                                                 </div>
                                             </td>
                                             <td class="align-middle">
-                                                <a href="{{ route(
-                                                    'web.questions.edit',
-                                                    isset($videoId) ? ['id' => $question->id, 'video-id' => $videoId] : $question->id,
-                                                ) }}"
+                                                <a style="width:120px"
+                                                    href="{{ route(
+                                                        'web.questions.edit',
+                                                        isset($videoId)
+                                                            ? ['id' => $question->id, 'video-id' => $videoId]
+                                                            : ['country-id' => $countryId, 'id' => $question->id],
+                                                    ) }}"
                                                     class="btn bg-gradient-info" id="click"> Edit</a>
 
                                                 <form method="POST"
@@ -66,8 +69,8 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button class="btn bg-gradient-info delete-question" type="submit"
-                                                        id="click1"> Delete</button>
+                                                    <button style="width:120px" class="btn bg-gradient-warning delete-question"
+                                                        type="submit" id="click1"> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>

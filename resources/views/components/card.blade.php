@@ -9,10 +9,6 @@
                               <h5 class="font-weight-bolder">
                                   {{ $totalUsers }}
                               </h5>
-                              <p class="mb-0">
-                                  <span class="text-success text-sm font-weight-bolder">+55%</span>
-                                  since yesterday
-                              </p>
                           </div>
                       </div>
                       <div class="col-4 text-end">
@@ -34,15 +30,11 @@
                               <h5 class="font-weight-bolder">
                                   {{ $totalVideos }}
                               </h5>
-                              <p class="mb-0">
-                                  <span class="text-success text-sm font-weight-bolder">+3%</span>
-                                  since last week
-                              </p>
                           </div>
                       </div>
                       <div class="col-4 text-end">
                           <div class="icon icon-shape bg-gradient-danger shadow-danger text-center rounded-circle">
-                              <i class="ni ni-world text-lg opacity-10" aria-hidden="true"></i>
+                              <i class="fa fa-world text-lg opacity-10" aria-hidden="true"></i>
                           </div>
                       </div>
                   </div>
@@ -55,19 +47,15 @@
                   <div class="row">
                       <div class="col-8">
                           <div class="numbers">
-                              <p class="text-sm mb-0 text-uppercase font-weight-bold">Contribute published</p>
+                              <p class="text-sm mb-0 text-uppercase font-weight-bold">Published</p>
                               <h5 class="font-weight-bolder">
                                   {{ $totalInfos }}
                               </h5>
-                              <p class="mb-0">
-                                  <span class="text-danger text-sm font-weight-bolder">-2%</span>
-                                  since last quarter
-                              </p>
                           </div>
                       </div>
                       <div class="col-4 text-end">
                           <div class="icon icon-shape bg-gradient-success shadow-success text-center rounded-circle">
-                              <i class="ni ni-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
+                              <i class="fa fa-paper-diploma text-lg opacity-10" aria-hidden="true"></i>
                           </div>
                       </div>
                   </div>
@@ -82,12 +70,12 @@
                           <div class="numbers">
                               <p class="text-sm mb-0 text-uppercase font-weight-bold">Sales</p>
                               <h5 class="font-weight-bolder">
-                                  $103,430
+                                  ${{ $money }}
                               </h5>
-                              <p class="mb-0">
+                              {{-- <p class="mb-0">
                                   <span class="text-success text-sm font-weight-bolder">+5%</span> than last
                                   month
-                              </p>
+                              </p> --}}
                           </div>
                       </div>
                       <div class="col-4 text-end">

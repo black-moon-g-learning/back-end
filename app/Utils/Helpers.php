@@ -3,6 +3,7 @@
 use App\Constants\Common;
 use App\Constants\User as ConstantsUser;
 use App\Models\User;
+use Carbon\Carbon;
 
 if (!function_exists('getUsername')) {
 
@@ -18,25 +19,24 @@ if (!function_exists('getUsername')) {
 if (!function_exists('getTime')) {
     function getTime($date)
     {
-        $d1 = new DateTime($date);
-        $d2 = new DateTime(now()->format("Y-m-d h:i:s"));
+        $d1 = Carbon::parse($date);
+        $d2 = Carbon::now();
 
-        $interval = $d1->diff($d2);
-        $diffInMinutes = $interval->i; //23
-        $diffInHours   = $interval->h; //8
-        $diffInDays    = $interval->d; //21
-        $diffInMonths  = $interval->m; //4
-        $diffInYears   = $interval->y; //1
+        $diffInMinutes = $d1->diffInMinutes($d2); //23
+        $diffInHours   = $d1->diffInHours($d2); //8
+        $diffInDays    = $d1->diffInDays($d2); //21
+        $diffInMonths  = $d1->diffInMonths($d2); //4
+        $diffInYears   = $d1->diffInYears($d2); //1
 
         if ($diffInYears >= 1) {
             return addSIfMany($diffInYears, 'year');
-        } else if ($diffInMonths > 1) {
+        } else if ($diffInMonths >= 1) {
             return addSIfMany($diffInMonths, 'month');
-        } else if ($diffInDays > 1) {
+        } else if ($diffInDays >= 1) {
             return addSIfMany($diffInDays, 'day');
-        } else if ($diffInHours > 1) {
+        } else if ($diffInHours >= 1) {
             return addSIfMany($diffInHours, 'hour');
-        } else if ($diffInMinutes > 1) {
+        } else if ($diffInMinutes >= 1) {
             return addSIfMany($diffInMinutes, 'minute');
         } else {
             return 'now';
@@ -117,5 +117,16 @@ if (!function_exists('showStatusUser')) {
             null => ConstantsUser::ACTIVE_STATUS
         ];
         return $status[$statusUser];
+    }
+}
+
+if (!function_exists('getS3UrlVideo')) {
+    function getS3UrlVideo(null| string $url)
+    {
+        if (str_contains($url, 'videos/')) {
+            return Common::S3_ROOT . $url;
+        } else {
+            return $url;
+        }
     }
 }

@@ -59,4 +59,10 @@ class VideoController extends Controller
     {
         return $this->videoSer->uploadVideo($request);
     }
+
+    public function delete(int $id)
+    {
+        $response = $this->videoSer->delete($id);
+        return redirect()->back()->with('response', $response);
+    }
 }

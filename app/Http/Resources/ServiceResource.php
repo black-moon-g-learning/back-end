@@ -17,10 +17,10 @@ class ServiceResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->image,
+            'description' => $this->description,
             'price' => $this->price,
             'unit' => 'VND',
-            'image' => $this->image
+            'image' => getS3Url($this->image)
         ];
     }
 }

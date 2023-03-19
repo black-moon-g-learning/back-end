@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('common', 'App\Constants\Common')
 @section('content')
     @if (Session::has('response'))
         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -27,14 +27,14 @@
                         <table class="table align-items-center mb-0">
                             <thead>
                                 <tr>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Image</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Topic</th>
-                                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Total videos</th>
-                                    <th class="text-secondary  opacity-7">Action</th>
-                                    <th class=" text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
+                                    <th class=" {{ $common::DEFAULT_HEADER_STYLE }}">
                                         Description</th>
                                 </tr>
                             </thead>
@@ -50,27 +50,27 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="d-flex flex-column justify-content-center">
-                                                <h6 class="mb-0 text-sm"> {{ $topic->name }}
+                                            <div class="text-center flex-column justify-content-center">
+                                                <h6 class=""> {{ $topic->name }}
                                                 </h6>
                                             </div>
                                         </td>
-                                        <td class="justify-content-center">
-                                            <p class="text-xs font-weight-bold mb-0">
+                                        <td class="text-center justify-content-center">
+                                            <p class=" font-weight-bold ">
                                                 {{ $topic->videos_count }}</p>
                                         </td>
 
                                         <td class="align-middle">
-                                            <a href="{{ route('web.topics.edit', $topic->id) }}"
-                                                class="btn bg-gradient-info" id="click"> Edit</a>
+                                            <a style="width:100px" href="{{ route('web.topics.edit', $topic->id) }}"
+                                                class="btn bg-gradient-info text-center" id="click"> Edit</a>
 
                                             <form method="POST" action={{ route('web.topics.delete', $topic->id) }}>
 
                                                 @csrf
                                                 @method('DELETE')
 
-                                                <button class="btn bg-gradient-info delete-topic" type="submit"
-                                                    id="click1"> Delete</button>
+                                                <button style="width:100px" class="btn bg-gradient-warning delete-topic"
+                                                    type="submit" id="click1"> Delete</button>
                                             </form>
                                         </td>
                                         <td class=" px-2">

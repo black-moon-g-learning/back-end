@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class InformationResource extends JsonResource
+class SearchedCountryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,8 @@ class InformationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'description' => $this->description,
-            'image' => getS3Url($this->image),
-            'country' => $this->country->name ?? 'Unknown',
-            'author' => getUsername($this->user),
-            'public' => getTime($this->created_at)
+            'name' => $this->name,
+            'image' => getS3Url($this->image)
         ];
     }
 }

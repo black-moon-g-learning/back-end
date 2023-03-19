@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Country;
 
+use App\Constants\Common;
 use App\Repositories\RepositoryInterface;
 
 interface ICountryRepository extends RepositoryInterface
@@ -12,5 +13,7 @@ interface ICountryRepository extends RepositoryInterface
 
     public function getCountriesInContinent(int $continentId, int $limit = 10);
 
-    public function searchCountries(int $continentId, string $textSearch);
+    public function getAllCountries(int $limit);
+
+    public function searchCountries(int $continentId = Common::CONTINENT_ID_NULL, string $textSearch);
 }

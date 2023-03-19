@@ -38,7 +38,7 @@
                     <div class="form-group">
                         <label for="example-search-input" class="form-control-label">Author</label>
                         <input readonly class="form-control" type="text" name="total video"
-                            value="{{ (isset($video) ? getUsername($video->user) : isset($user)) ? getUsername($user) : '' }}"
+                            value="{{ isset($video) ? getUsername($video->user) : (isset($user) ? getUsername($user) : '') }}"
                             id="example-search-input">
                     </div>
                     @if (isset(Session::get('errors')['regions']))

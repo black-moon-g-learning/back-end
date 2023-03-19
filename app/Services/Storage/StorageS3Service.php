@@ -27,9 +27,12 @@ class StorageS3Service implements IStorageService
         return false;
     }
 
-    public function delete(string $file): bool
+    public function delete(string|null $file): bool
     {
-        return Storage::disk('s3')->delete($file);
+        if ($file !== null && $this->exists($file)) {
+            return Storage::disk('s3')->delete($file);
+        };
+        return false;
     }
 
 

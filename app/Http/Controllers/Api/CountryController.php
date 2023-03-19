@@ -20,6 +20,9 @@ class CountryController extends Controller
     {
         if ($request->has('attribute')) {
             return $this->countrySer->getAttributeCountries($request->get('attribute'));
+        } elseif ($request->has('s')) {
+            $response =  $this->countrySer->searchCountries($request->get('s'));
+            return $this->responseSuccessWithData($response);
         }
         return $this->countrySer->index();
     }

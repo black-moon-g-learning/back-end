@@ -58,7 +58,7 @@
                         <select name="status" class="form-control">
                             @foreach ($infoStatus as $key => $values)
                                 <option value={{ $key }}
-                                    {{ isset($infor) && $key == $info->status ? 'selected' : ' ' }}>
+                                    {{ isset($info) && $key == $info->status ? 'selected' : ' ' }}>
                                     {{ $values['status'] }}
                                 </option>
                             @endforeach

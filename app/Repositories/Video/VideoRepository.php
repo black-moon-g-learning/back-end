@@ -12,12 +12,15 @@ class VideoRepository extends BaseRepository implements IVideoRepository
         return Video::class;
     }
 
-    public function getVideos(int $countryTopicId)
+    public function getVideos(int $countryTopicId, int $userId)
     {
         return $this
             ->model
             ->where('country_topic_id', '=', $countryTopicId)
-            ->with(['user', 'watched'])
+            ->with(['user', 'watched' => function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            }])
+            ->latest('videos.id')
             ->get();
     }
 
@@ -36,11 +39,21 @@ class VideoRepository extends BaseRepository implements IVideoRepository
             ->join('watched', 'watched.video_id', '=', 'videos.id')
             ->where('watched.user_id', $userId)
             ->with(['user', 'watched'])
+            ->latest('watched.created_at')
             ->get(['videos.*']);
     }
 
     public function countVideos()
     {
         return $this->model->count();
+    }
+
+    public function getVideosAdmin(int $countryTopicId)
+    {
+        return $this
+            ->model
+            ->where('country_topic_id', '=', $countryTopicId)
+            ->with(['user'])
+            ->get();
     }
 }

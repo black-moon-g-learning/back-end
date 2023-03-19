@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Resources\ContinentResource;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CountryResource;
+use App\Http\Resources\SearchedCountryResource;
 use App\Repositories\Continent\IContinentRepository;
 use App\Repositories\Country\ICountryRepository;
 use App\Utils\Response;
@@ -18,9 +19,6 @@ class ContinentController extends Controller
 
     protected ICountryRepository $countryRepo;
 
-    /**
-     * @param IContinentRepository $continentRepo
-     */
     public function __construct(
         IContinentRepository $continentRepo,
         ICountryRepository $countryRepo
@@ -46,9 +44,8 @@ class ContinentController extends Controller
         if ($request->has('s')) {
 
             $countriesSearched = $this->countryRepo->searchCountries($id, $request->get('s'));
-            $response = collect(CountryResource::collection($countriesSearched))->toArray();
+            $response = collect(SearchedCountryResource::collection($countriesSearched))->toArray();
             return $this->responseSuccessWithData($response, 200);
-            
         }
         $countries = $this->continentRepo->getCountries($id);
 
