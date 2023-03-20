@@ -9,14 +9,6 @@
             'route' => route('web.continents'),
         ],
         [
-            'name' => 'Have you heard before?',
-            'route' => route('web.information'),
-        ],
-        [
-            'name' => 'Users',
-            'route' => route('web.users'),
-        ],
-        [
             'name' => 'Countries',
             'route' => route('web.countries'),
         ],
@@ -33,8 +25,16 @@
             'route' => route('web.services'),
         ],
         [
+            'name' => 'Users',
+            'route' => route('web.users'),
+        ],
+        [
             'name' => 'Payment history',
             'route' => route('web.users-payment'),
+        ],
+        [
+            'name' => 'Have you heard before?',
+            'route' => route('web.information'),
         ],
     ];
 @endphp
