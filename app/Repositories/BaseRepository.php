@@ -97,4 +97,9 @@ abstract class BaseRepository implements RepositoryInterface
     {
         return $this->model->paginate($limit);
     }
+
+    public function first()
+    {
+        return $this->model->first();
+    }
 }
