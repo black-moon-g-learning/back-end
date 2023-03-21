@@ -56,9 +56,10 @@
                     <h1>Download G - learning app </h1>
                     <p class="my-4 text-muted">For children (5-12) to learn and explore geography.</p>
                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item mb-2 mb-lg-0"><a style="width:250px"
-                                class="btn btn-success btn-lg px-5" href="#!">
-                                <i class="fab fa-google-play me-3"></i>Install now</a></li>
+                        <li class="list-inline-item mb-2 mb-lg-0"><a href="{{ $Common::LINK_APK }}" download
+                                style="width:250px" class="btn btn-success btn-lg px-5" href="#!">
+                                <i class="fab fa-google-play me-3"></i>Install
+                                now</a></li>
                         <li class="list-inline-item"><a style="width:250px" class="btn btn-success btn-lg px-4"
                                 href="#!"><i class="fab fa-app-store me-3"></i>Comming soon!</a></li>
                     </ul>

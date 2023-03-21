@@ -31,4 +31,5 @@ final class Common
     const DEFAULT_HEADER_STYLE = "text-uppercase text-center text-secondary font-weight-bolder";
     const DEFAULT_HEADER_STYLE_NOT_CENTER = "text-uppercase  text-secondary font-weight-bolder";
 
+    const LINK_APK = "https://g-learning-v1.s3.ap-southeast-1.amazonaws.com/release/app-release.apk";
 }
