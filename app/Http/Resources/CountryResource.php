@@ -19,7 +19,8 @@ class CountryResource extends JsonResource
             'name' => $this['name'],
             'description' => $this['description'],
             'place' => $this['place'],
-            'image' =>  getS3Url($this['image'])
+            'image' =>  getS3Url($this['image']),
+            'is_blocked' => $this['is_blocked']
         ];
     }
 }
