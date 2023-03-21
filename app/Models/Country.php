@@ -19,7 +19,8 @@ class Country extends Model
         'name',
         'description',
         'continent_id',
-        'image'
+        'image',
+        'is_blocked'
     ];
 
     protected $hidden = [

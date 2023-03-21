@@ -1,5 +1,5 @@
 @extends('layouts.master')
-
+@inject('countryStatus', 'App\Constants\Country')
 @section('content')
     <div class="p-4 bg bg-secondary">
         <form enctype="multipart/form-data" action="{{ route('web.countries.update', $country->id) }}" method="POST">
@@ -21,9 +21,23 @@
                 <label for="example-url-input" class="form-control-label">Description</label>
                 <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{ isset($country) ? $country->description : '' }}</textarea>
             </div>
-            <div class="form-group">
-                <label for="example-tel-input" class="form-control-label">File</label>
-                <input class="form-control" name="file" type="file" onchange="changeImage(event)">
+            <div class="row">
+                <div class="col-6" class="form-group">
+                    <label for="example-tel-input" class="form-control-label">File</label>
+                    <input class="form-control" name="file" type="file" onchange="changeImage(event)">
+                </div>
+                <div class="col-6" class="form-group">
+                    <label for="example-tel-input" class="form-control-label">This countris is block for free
+                        account</label>
+                    <select name="is_blocked" class="form-control">
+                        @foreach ($countryStatus::STATUS_BLOCK as $item)
+                            <option value="{{ $item['status'] }}"
+                                {{ isset($country) && $country->is_blocked == $item['status'] ? 'selected' : ' ' }}>
+                                {{ $item['text'] }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
 
             @if (isset(Session::get('errors')['file']))
