@@ -46,4 +46,11 @@ interface RepositoryInterface
      * @return mixed
      */
     public function getDataWithPaginate(int $limit = 10);
+
+    /**
+     * first
+     *
+     * @return mixed
+     */
+    public function first();
 }

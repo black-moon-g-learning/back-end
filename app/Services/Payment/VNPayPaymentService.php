@@ -9,6 +9,7 @@ use App\Repositories\Package\IPackageRepository;
 use App\Repositories\User\IUserRepository;
 use App\Services\User\IUserService;
 use App\Services\UserPayment\IUserPaymentService;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -147,9 +148,13 @@ class VNPayPaymentService implements IPaymentService
                         //
 
                         if ($Status == 1) {
-                            DB::transaction(function () use ($orderDB) {
+
+                            $expiredMonths = $this->packageRepo->first()->pluck('time');
+                            $convertExpiredMonths = Carbon::now()->addMonths($expiredMonths[0])->toDateTimeString();
+
+                            DB::transaction(function () use ($orderDB,  $convertExpiredMonths) {
                                 $this->userPaymentSer->updateStatus(Process::SUCCESS, $orderDB->id);
-                                $this->userRepo->update($orderDB->user_id, ['expired' => null]);
+                                $this->userRepo->update($orderDB->user_id, ['expired' =>  $convertExpiredMonths]);
                             });
 
                             if (isset($orderDB->user) && $orderDB->user->email !== null) {
