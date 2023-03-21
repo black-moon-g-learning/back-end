@@ -1,9 +1,12 @@
 <?php
 
 use App\Constants\Common;
+use App\Constants\Process;
 use App\Constants\User as ConstantsUser;
 use App\Models\User;
+use App\Models\UserPayment;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 if (!function_exists('getUsername')) {
 
@@ -128,5 +131,21 @@ if (!function_exists('getS3UrlVideo')) {
         } else {
             return $url;
         }
+    }
+}
+
+if (!function_exists('isUserPayment')) {
+    function isUserPayment(): bool
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+
+        $payed = UserPayment::where('user_id', $userId)
+            ->where('process', Process::SUCCESS)
+            ->first();
+        if ($payed) {
+            return true;
+        }
+        return false;
     }
 }

@@ -28,6 +28,16 @@ class ContinentRepository extends BaseRepository implements IContinentRepository
         $popularCountries = array_slice($countries, 0, 5);
         $otherCountries = array_slice($countries, 5);
 
+        if (isUserPayment()) {
+            foreach ($popularCountries as $key => $country) {
+                $popularCountries[$key]['is_blocked'] = 0;
+            }
+            foreach ($otherCountries as $key => $country) {
+                $otherCountries[$key]['is_blocked'] = 0;
+            }
+        }
+
+
         $response['popular'] = collect(
             CountryResource::collection(collect($popularCountries))
         )->toArray();
