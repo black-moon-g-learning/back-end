@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Utils\FullTextSearch;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Video extends Model
 {
-    use HasFactory;
+    use HasFactory, FullTextSearch;
     /**
      * @var string[]
      */
@@ -16,11 +17,25 @@ class Video extends Model
         'description',
         'country_topic_id',
         'url',
-        'owner_id'
+        'owner_id',
+        'image',
+        'time'
+    ];
+
+    /**
+     * The columns of the full text index
+     */
+    protected $searchable = [
+        'name'
     ];
 
     public function user()
     {
         return $this->belongsTo(User::class, 'owner_id', 'id');
+    }
+
+    public function watched()
+    {
+        return $this->hasOne(Watched::class);
     }
 }

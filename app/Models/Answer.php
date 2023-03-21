@@ -15,4 +15,14 @@ class Answer extends Model
         'question_id',
         'is_correct'
     ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
+    public function getImageAttribute($image)
+    {
+        return getS3Url($image);
+    }
 }

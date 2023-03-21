@@ -38,4 +38,12 @@ interface RepositoryInterface
      * @return mixed
      */
     public function delete($id);
+
+    /**
+     * getDataWithPaginate
+     *
+     * @param  int $limit
+     * @return mixed
+     */
+    public function getDataWithPaginate(int $limit = 10);
 }

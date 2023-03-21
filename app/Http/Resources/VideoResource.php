@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Constants\Common;
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class VideoResource extends JsonResource
@@ -18,10 +20,13 @@ class VideoResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'url' => $this->url,
+            'url' => getS3UrlVideo($this->url),
             'author' => getUsername($this->user),
             'publish' => getTime($this->created_at),
-            'time' => convertTimeFromDB($this->time)
+            'time' => convertTimeFromDB($this->time),
+            'image' => getS3Url($this->image),
+            'watched' => $this->watched ? Common::WATCHED_VIDEO : Common::UNWATCHED_VIDEO,
+            'watched_at' => $this->watched ? Carbon::parse($this->watched->created_at)->toDateTimeString() : null
         ];
     }
 }
