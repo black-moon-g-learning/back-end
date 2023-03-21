@@ -27,6 +27,8 @@
                                         Name</th>
                                     <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
                                         Price</th>
+                                    <th class="{{ $common::DEFAULT_HEADER_STYLE }}">
+                                        Time</th>
                                     <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">Action</th>
                                     <th class="{{ $common::DEFAULT_HEADER_STYLE_NOT_CENTER }}">
                                         Description</th>
@@ -44,6 +46,10 @@
                                         <td class="justify-content-center">
                                             <p class="text-center">
                                                 {{ $service->price }} Vnđ</p>
+                                        </td>
+                                        <td class="justify-content-center">
+                                            <p class="text-center">
+                                                {{ $service->time }} Months</p>
                                         </td>
                                         <td>
                                             <a style="width:100px" href="{{ route('web.services.edit', $service->id) }}"

@@ -10,7 +10,8 @@ class PackageValidateService extends ValidateService implements IValidateService
         return [
             'name' => 'required',
             'price' =>   'required',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'time' => 'nullable|integer'
         ];
     }
 }

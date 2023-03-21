@@ -30,6 +30,18 @@
                         </div>
                     @endif
                 </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="input-time" class="form-control-label">Time (Months)</label>
+                        <input class="form-control" type="number" name="time" min=1
+                            value="{{ isset($service) ? $service->time : '' }}" id="input-time">
+                    </div>
+                    @if (isset(Session::get('errors')['time']))
+                        <div class="form-group">
+                            @include('components.alert', $data = Session::get('errors')['time'])
+                        </div>
+                    @endif
+                </div>
             </div>
             <div class="form-group">
                 <label for="example-url-input" class="form-control-label">Description</label>
