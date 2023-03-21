@@ -35,8 +35,13 @@ class CountryService implements ICountryService
     {
         $user = Auth::user();
 
+        if (isUserPayment()) {
+            $payed = true;
+        } else {
+            $payed = false;
+        }
         $countries = $this->countryRepo->getCountries($user->id);
-        $countries->setCollection($countries->getCollection()->transform(function ($item) {
+        $countries->setCollection($countries->getCollection()->transform(function ($item) use ($payed) {
 
             $total = $item->usersPlayGame->total_questions ?? 1;
             $correct = $item->usersPlayGame->total_correct_answers ?? 0;
@@ -46,6 +51,9 @@ class CountryService implements ICountryService
             $item->setField($percent);
 
             $item->image = getS3Url($item->image);
+            if ($payed) {
+                $item->is_blocked = 0;
+            }
 
             return $item;
         }));
