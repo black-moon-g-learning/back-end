@@ -212,8 +212,8 @@
     <section class="p-0" id="testimonials"
         style="background: url({{ asset('landing-page/img/testimonials-bg.png') }}) no-repeat; background-size: 40% 100%; background-position: left center">
         <div class="container text-center">
-            <p class="h6 text-uppercase text-primary">Testimonials</p>
-            <h2 class="mb-5">What Our Users Says?</h2>
+            <p class="h6 text-uppercase text-primary">Services</p>
+            <h2 class="mb-5">What Is Our Services?</h2>
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="swiper testimonials-slider">
@@ -224,18 +224,18 @@
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
                                         <div class="card-body index-forward pt-5 rounded-lg">
                                             <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="{{ asset('landing-page/img/avatar-1.jpg') }}" alt=""
+                                                    src="{{ asset('favicon.png') }}" alt=""
                                                     width="100" /></div>
-                                            <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua. Ut enim ad minim veniam.</p>
-                                            <h5 class="mb-0">Sarah Hudson</h5>
-                                            <p class="text-primary mb-0 text-sm">Tech Developer</p>
+                                            <p class="lead text-muted mb-5">
+                                                {{ isset($package) ? $package->description : '' }}</p>
+                                            <h5 class="mb-0">{{ isset($package) ? $package->name : '' }}</h5>
+                                            <p class="text-primary mb-0 text-sm">
+                                                {{ isset($package) ? $package->price : '' }} vnĐ</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="swiper-slide h-auto">
+                            {{-- <div class="swiper-slide h-auto">
                                 <div class="mx-3 mx-lg-5 my-5 pt-3">
                                     <div
                                         class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
@@ -251,24 +251,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="swiper-slide h-auto">
-                                <div class="mx-3 mx-lg-5 my-5 pt-3">
-                                    <div
-                                        class="card shadow rounded-lg px-4 py-5 px-lg-5 with-pattern bg-white border-0">
-                                        <div class="card-body index-forward pt-5 rounded-lg">
-                                            <div class="testimonial-img"><img class="rounded-circle"
-                                                    src="{{ asset('landing-page/img/avatar-1.jpg') }}" alt=""
-                                                    width="100" /></div>
-                                            <p class="lead text-muted mb-5">Lorem ipsum dolor sit amet, consectetur
-                                                adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-                                                magna aliqua. Ut enim ad minim veniam.</p>
-                                            <h5 class="mb-0">Sarah Hudson</h5>
-                                            <p class="text-primary mb-0 text-sm">Tech Developer</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> --}}
                             <div class="swiper-slide h-auto">
                                 <div class="mx-3 mx-lg-5 my-5 pt-3">
                                     <div
