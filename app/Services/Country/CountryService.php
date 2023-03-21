@@ -46,7 +46,7 @@ class CountryService implements ICountryService
             $item->setField($percent);
 
             $item->image = getS3Url($item->image);
-            
+
             return $item;
         }));
         return $countries;
@@ -79,12 +79,13 @@ class CountryService implements ICountryService
 
     public function update(Request $request, int $id)
     {
+
         $validator = Validator::make($request->all(), [
             'file' => 'nullable|mimes:jpeg,png,jpg,gif|max:8129|file',
             'name' => 'required',
-            'description' => 'nullable'
+            'description' => 'nullable',
+            'is_blocked' => 'nullable'
         ]);
-
         if ($validator->fails()) {
             return [
                 "status" => false,

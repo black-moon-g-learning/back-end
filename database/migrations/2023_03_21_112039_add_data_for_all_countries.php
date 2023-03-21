@@ -14,7 +14,7 @@ return new class extends Migration
      */
     public function up()
     {
-        DB::table('countries')->update(array('is_blocked' => true));
+        DB::table('countries')->update(array('is_blocked' => 1));
     }
 
     /**
