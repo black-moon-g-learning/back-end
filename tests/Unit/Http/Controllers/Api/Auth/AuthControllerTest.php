@@ -28,5 +28,15 @@ class AuthControllerTest extends TestCase
         $this->assertAuthenticated();
     }
 
+    public function test_get_countries()
+    {
+        $this->get(route('countries'), $this->authentication)
+            ->assertJsonIsObject()
+            ->assertStatus(200)
+            ->assertJsonStructure(["current_page", "data" => [['id',"name"]], "total", "prev_page_url"]);
+        $this->assertAuthenticated();
+    }
+
     
+
 }
