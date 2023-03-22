@@ -38,7 +38,7 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::middleware(['auth:api', 'blocked'])->group(function () {
 
     Route::group(['prefix' => '/profile'], function () {
-        Route::get('/', [UserController::class, 'getProfile']);
+        Route::get('/', [UserController::class, 'getProfile'])->name('profile');
         Route::put('/', [UserController::class, 'update']);
         Route::patch('/', [UserController::class, 'update']);
     });
