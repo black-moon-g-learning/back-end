@@ -38,14 +38,14 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::middleware(['auth:api', 'blocked'])->group(function () {
 
     Route::group(['prefix' => '/profile'], function () {
-        Route::get('/', [UserController::class, 'getProfile']);
+        Route::get('/', [UserController::class, 'getProfile'])->name('profile');
         Route::put('/', [UserController::class, 'update']);
         Route::patch('/', [UserController::class, 'update']);
     });
 
     Route::middleware(['expiredTrial'])->group(function () {
-        Route::get('/countries', [CountryController::class, 'index']);
-        Route::get('/continents', [ContinentController::class, 'index']);
+        Route::get('/countries', [CountryController::class, 'index'])->name('countries');
+        Route::get('/continents', [ContinentController::class, 'index'])->name('continent');
 
         Route::middleware(['idInteger'])->group(function () {
             Route::get('/continents/{id}', [ContinentController::class, 'getCountries']);
