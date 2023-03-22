@@ -3,6 +3,7 @@
 namespace App\Repositories\UserPayment;
 
 use App\Constants\Process;
+use App\Models\Service;
 use App\Models\UserPayment;
 use App\Repositories\BaseRepository;
 
@@ -28,9 +29,11 @@ class UserPaymentRepository extends BaseRepository implements IUserPaymentReposi
 
     public function getUserPaySuccessful()
     {
+        $service = Service::first();
+        
         return $this
             ->model
             ->where('process', Process::SUCCESS)
-            ->count();
+            ->count() * $service->price;
     }
 }
