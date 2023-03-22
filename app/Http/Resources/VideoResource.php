@@ -20,7 +20,7 @@ class VideoResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'url' => getS3UrlVideo($this->url),
+            'url' => handleShowVideoLink($this->url),
             'author' => getUsername($this->user),
             'publish' => getTime($this->created_at),
             'time' => convertTimeFromDB($this->time),
