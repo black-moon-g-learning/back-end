@@ -53,7 +53,9 @@ class InformationService implements IInformationService
 
         if ($uploaded['status']) {
 
+            $user = Auth::user();
             $attribute['image'] = $uploaded['url'];
+            $attribute['owner_id'] = $user->id;
 
             $this->informationRepo->create($attribute);
 
