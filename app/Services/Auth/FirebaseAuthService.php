@@ -39,7 +39,6 @@ class FirebaseAuthService implements IAuthService
             $uid = $verifiedToken->claims()->get('sub');
             $userInfoFireBase = $auth->getUser($uid);
 
-            dd($userInfoFireBase->providerData[0]);
             $existUser = $this->userRepo->findByFirebaseUid($uid);
 
             if ($existUser) {
