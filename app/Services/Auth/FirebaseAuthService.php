@@ -51,7 +51,7 @@ class FirebaseAuthService implements IAuthService
                 $userInfo['provider_id'] = SocialMediaProvider::GOOGLE;
                 $userInfo['image'] = $userInfoFireBase->photoUrl;
                 $userInfo['gender'] = Gender::OTHER;
-                $userInfo['email'] = $userInfoFireBase->email;
+                $userInfo['email'] = $userInfoFireBase->providerData[0]->email ?? null;
                 $userInfo['first_name'] =  $userInfoFireBase->displayName;
                 $userInfo['firebase_uid'] =  $uid;
                 $userInfo['expired'] = Carbon::now()->addDays(7)->toDateTimeString();
