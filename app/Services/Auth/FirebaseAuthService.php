@@ -46,7 +46,7 @@ class FirebaseAuthService implements IAuthService
                 $authStatus = AuthStatus::LOGIN;
             } else {
 
-                $userInfo['username'] = $userInfoFireBase->email ?? $userInfoFireBase->uid;
+                $userInfo['username'] =  $userInfoFireBase->uid;
                 $userInfo['role_id'] = Role::USER_ROLE;
                 $userInfo['provider_id'] = SocialMediaProvider::GOOGLE;
                 $userInfo['image'] = $userInfoFireBase->photoUrl;
