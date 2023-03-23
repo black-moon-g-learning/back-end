@@ -39,6 +39,7 @@ class FirebaseAuthService implements IAuthService
             $uid = $verifiedToken->claims()->get('sub');
             $userInfoFireBase = $auth->getUser($uid);
 
+            dd($userInfoFireBase->providerData[0]);
             $existUser = $this->userRepo->findByFirebaseUid($uid);
 
             if ($existUser) {
@@ -51,7 +52,7 @@ class FirebaseAuthService implements IAuthService
                 $userInfo['provider_id'] = SocialMediaProvider::GOOGLE;
                 $userInfo['image'] = $userInfoFireBase->photoUrl;
                 $userInfo['gender'] = Gender::OTHER;
-                $userInfo['email'] = $userInfoFireBase->providerData[0]->email ?? null;
+                $userInfo['email'] =  $userInfoFireBase->providerData[0]->providerId === "facebook.com" ? null : $userInfoFireBase->providerData[0]->email;
                 $userInfo['first_name'] =  $userInfoFireBase->displayName;
                 $userInfo['firebase_uid'] =  $uid;
                 $userInfo['expired'] = Carbon::now()->addDays(7)->toDateTimeString();
